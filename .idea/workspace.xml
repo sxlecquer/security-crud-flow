@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fc62264-a8e9-4faf-b1c2-d879091c441b" name="Changes" comment="Creating new project and adding client module">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="0fc62264-a8e9-4faf-b1c2-d879091c441b" name="Changes" comment="Creating class Parent&#10;&#10;*OneToOne relationship between Parent and Student&#10;*Adding a database connection">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299/storage_v2/_src_/database/universitydb.jIu4XA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299/storage_v2/_src_/database/universitydb.jIu4XA/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299/storage_v2/_src_/database/universitydb.jIu4XA/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299/storage_v2/_src_/database/universitydb.jIu4XA/schema/public.abK9xQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Parent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Student.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,8 +52,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/User/IdeaProjects/spring-mvc-app2",
+    "last_opened_file_path": "C:/Users/User/IdeaProjects/security-crud-flow",
     "spring.configuration.checksum": "62608e08adc29a8d6dbc9754e659f125"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="RunManager">
@@ -68,7 +79,8 @@
       <option name="presentableId" value="Default" />
       <updated>1691188505509</updated>
       <workItem from="1691188508936" duration="1301000" />
-      <workItem from="1691251988543" duration="6427000" />
+      <workItem from="1691251988543" duration="6645000" />
+      <workItem from="1691346003029" duration="6870000" />
     </task>
     <task id="LOCAL-00001" summary="Creating new project and adding client module">
       <created>1691189717672</created>
@@ -77,7 +89,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691189717672</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Creating main classes&#10;&#10;*Student and StudentModel realization&#10;*Adding hibernate validator dependency in pom.xml&#10;*Configuring application.yml">
+      <created>1691262473058</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1691262473058</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -96,6 +115,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Creating new project and adding client module" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating new project and adding client module" />
+    <MESSAGE value="Creating main classes&#10;&#10;*Student and StudentModel realization&#10;*Adding hibernate validator dependency in pom.xml&#10;*Configuring application.yml" />
+    <MESSAGE value="Creating class Parent&#10;&#10;*OneToOne relationship between Parent and Student&#10;*Adding a database connection" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating class Parent&#10;&#10;*OneToOne relationship between Parent and Student&#10;*Adding a database connection" />
   </component>
 </project>

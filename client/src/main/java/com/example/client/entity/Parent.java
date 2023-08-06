@@ -1,25 +1,24 @@
 package com.example.client.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
 @Data
-public class Student {
+public class Parent {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "student_seq"
+            generator = "parent_seq"
     )
     @SequenceGenerator(
-            name = "student_seq",
-            sequenceName = "STUDENT_SEQ",
+            name = "parent_seq",
+            sequenceName = "PARENT_SEQ",
             allocationSize = 1
     )
-    private Long studentId;
+    private Long parentId;
 
     @Size(min = 2, max = 15, message = "first name is too long or too short!")
     @NotEmpty(message = "first name should not be empty!")
@@ -28,21 +27,9 @@ public class Student {
     @Size(min = 2, max = 20, message = "last name is too long or too short!")
     @NotEmpty(message = "last name should not be empty!")
     private String lastName;
+    private String phoneNumber;
+    private String role = "GUEST";
 
-    @Email(message = "email address is incorrect!")
-    @NotEmpty(message = "email should not be empty!")
-    private String email;
-    private String password;
-    private String role = "USER";
-    private boolean enabled = false;
-
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            optional = false
-    )
-    @JoinColumn(
-            name = "parent_id",
-            referencedColumnName = "parentId"
-    )
-    private Parent parent;
+    @OneToOne(mappedBy = "parent")
+    private Student student;
 }

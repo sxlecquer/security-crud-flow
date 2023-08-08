@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 public class Student {
@@ -52,4 +55,18 @@ public class Student {
             referencedColumnName = "curatorId"
     )
     private Curator curator;
+
+    @ManyToMany
+    @JoinTable(
+            name = "student_lecturer",
+            joinColumns = @JoinColumn(
+                    name = "student_id",
+                    referencedColumnName = "studentId"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "lecturer_id",
+                    referencedColumnName = "lecturerId"
+            )
+    )
+    private List<Lecturer> lecturers = new ArrayList<>();
 }

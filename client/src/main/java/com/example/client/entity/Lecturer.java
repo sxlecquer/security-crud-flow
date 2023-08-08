@@ -11,18 +11,18 @@ import java.util.List;
 
 @Entity
 @Data
-public class Curator {
+public class Lecturer {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "curator_seq"
+            generator = "lecturer_seq"
     )
     @SequenceGenerator(
-            name = "curator_seq",
-            sequenceName = "CURATOR_SEQ",
+            name = "lecturer_seq",
+            sequenceName = "LECTURER_SEQ",
             allocationSize = 1
     )
-    private Long curatorId;
+    private Long lecturerId;
 
     @Size(min = 2, max = 15, message = "first name is too long or too short!")
     @NotEmpty(message = "first name should not be empty!")
@@ -36,8 +36,8 @@ public class Curator {
     @NotEmpty(message = "email should not be empty!")
     private String email;
     private String password;
-    private String role = "MODERATOR";
+    private String role = "ADMIN";
 
-    @OneToMany(mappedBy = "curator")
+    @ManyToMany(mappedBy = "lecturers")
     private List<Student> students = new ArrayList<>();
 }

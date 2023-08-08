@@ -6,20 +6,22 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.Set;
+
 @Entity
 @Data
-public class Student {
+public class Curator {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "student_seq"
+            generator = "curator_seq"
     )
     @SequenceGenerator(
-            name = "student_seq",
-            sequenceName = "STUDENT_SEQ",
+            name = "curator_seq",
+            sequenceName = "CURATOR_SEQ",
             allocationSize = 1
     )
-    private Long studentId;
+    private Long curatorId;
 
     @Size(min = 2, max = 15, message = "first name is too long or too short!")
     @NotEmpty(message = "first name should not be empty!")
@@ -33,23 +35,8 @@ public class Student {
     @NotEmpty(message = "email should not be empty!")
     private String email;
     private String password;
-    private String role = "USER";
-    private boolean enabled = false;
+    private String role = "MODERATOR";
 
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            optional = false
-    )
-    @JoinColumn(
-            name = "parent_id",
-            referencedColumnName = "parentId"
-    )
-    private Parent parent;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(
-            name = "curator_id",
-            referencedColumnName = "curatorId"
-    )
-    private Curator curator;
+    @OneToMany(mappedBy = "curator")
+    private Set<Student> student;
 }

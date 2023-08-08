@@ -27,8 +27,9 @@ public class Parent {
     @Size(min = 2, max = 20, message = "last name is too long or too short!")
     @NotEmpty(message = "last name should not be empty!")
     private String lastName;
+
+    @Column(name = "phone")
     private String phoneNumber;
-    private String role = "GUEST";
 
     @OneToOne(mappedBy = "parent")
     private Student student;

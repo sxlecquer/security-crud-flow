@@ -24,17 +24,20 @@ public class Curator {
     )
     private Long curatorId;
 
-    @Size(min = 2, max = 15, message = "first name is too long or too short!")
-    @NotEmpty(message = "first name should not be empty!")
+    @Size(min = 2, max = 15, message = "First name is too long or too short")
+    @NotEmpty(message = "First name should not be empty")
     private String firstName;
 
-    @Size(min = 2, max = 20, message = "last name is too long or too short!")
-    @NotEmpty(message = "last name should not be empty!")
+    @Size(min = 2, max = 20, message = "Last name is too long or too short")
+    @NotEmpty(message = "Last name should not be empty")
     private String lastName;
 
-    @Email(message = "email address is incorrect!")
-    @NotEmpty(message = "email should not be empty!")
+    @Email(message = "Email address is incorrect")
+    @NotEmpty(message = "Email should not be empty")
     private String email;
+
+    @NotEmpty(message = "Password should not be empty")
+    @Size(min = 6, message = "Password is too simple")
     private String password;
     private String role = "MODERATOR";
 

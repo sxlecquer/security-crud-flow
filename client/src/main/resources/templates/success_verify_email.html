@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Success</title>
+    <style>
+        h3 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        input[type=submit] {
+            margin-top: 10px;
+            align-content: center;
+            height: 27px;
+            width: 55px;
+            background-color: royalblue;
+            color: white;
+            font-size: 10px;
+            border-radius: 3px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .success {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .success-img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .success-text {
+            padding-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Email verified</h3>
+    <hr>
+    <form th:method="get" th:action="@{/home}">
+        <div class="success">
+            <img class="success-img" src="../static/images/tick.png" th:src="@{/images/tick.png}" alt="successfully verified"
+                 title="success">
+            <div class="success-text">
+                <b style="font-size: 18px; line-height: 25px;">Thank you</b>
+                <br>
+                <span style="color: gray; font-size: 14px">Your email was verified successfully</span>
+            </div>
+            <input type="submit" value="Continue"/>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <style>
+        h3 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        table {
+            margin-left: 40px;
+            font-size: 12px;
+        }
+
+        span {
+            font-size: 14px;
+            margin-left: 5px;
+        }
+
+        sup {
+            color: red;
+            font-size: 10px;
+        }
+
+        input[type=text] {
+            height: 12px;
+            background-color: whitesmoke;
+            border: 1px solid royalblue;
+            border-radius: 3px;
+        }
+
+        input[type=tel] {
+            height: 12px;
+            background-color: whitesmoke;
+            border: 1px solid royalblue;
+            border-radius: 3px;
+        }
+
+        input[type=password] {
+            height: 12px;
+            background-color: whitesmoke;
+            border: 1px solid royalblue;
+            border-radius: 3px;
+        }
+
+        .warn-img {
+            margin-left: 7px;
+            width: 36px;
+            height: 36px;
+        }
+
+        .warning {
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        .warn-text {
+            padding-left: 7px;
+            font-size: 16px;
+        }
+    </style>
+    <script>
+        function home() {
+            window.location.href = "http://localhost:8080/home";
+        }
+    </script>
+</head>
+<body>
+    <h3>Creating a new account</h3>
+
+    <div class="warning" th:if="${needForStaff}">
+            <img class="warn-img" src="../static/images/warning.png" th:src="@{/images/warning.png}" alt="warning!"
+                 title="warn">
+            <div class="warn-text"><b>Can't create an account!<br>Currently, the university doesn't have enough staff to serve new students.</b></div>
+    </div>
+
+<!--/*@thymesVar id="student" type="com.example.client.model.StudentModel"*/-->
+    <form th:method="${needForStaff} ? get : post" th:action="${needForStaff} ? @{/home} : @{/register}" th:object="${student}">
+        <span>Bio<sup title="Required fields">*</sup></span>
+        <hr>
+
+        <table>
+            <tr>
+                <td><label for="first" th:for="${#ids.next('firstName')}">First Name:</label></td>
+            </tr>
+            <tr>
+                <td><input type="text" th:field="*{firstName}" id="first" th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'" /></td>
+            </tr>
+            <tr style="margin-bottom: 5px">
+                <td style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></td>
+            </tr>
+            <tr>
+                <td><label for="last" th:for="${#ids.next('lastName')}">Last Name:</label></td>
+            </tr>
+            <tr>
+                <td><input type="text" th:field="*{lastName}" id="last" th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'" /></td>
+            </tr>
+            <tr>
+                <td style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></td>
+            </tr>
+        </table>
+
+        <br>
+        <span>Parent Data<sup title="Required fields">*</sup></span>
+        <hr>
+
+        <table>
+            <tr>
+                <td><label for="p_first" th:for="${#ids.next('p_firstName')}">First Name:</label></td>
+            </tr>
+            <tr>
+                <td><input type="text" th:field="*{parentFirst}" id="p_first" th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'"/></td>
+            </tr>
+            <tr style="margin-bottom: 5px">
+                <td style="color: red" th:if="${#fields.hasErrors('parentFirst')}" th:errors="*{parentFirst}"></td>
+            </tr>
+            <tr>
+                <td><label for="p_last" th:for="${#ids.next('p_lastName')}">Last Name:</label></td>
+            </tr>
+            <tr>
+                <td><input type="text" th:field="*{parentLast}" id="p_last" th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'"/></td>
+            </tr>
+            <tr style="margin-bottom: 5px">
+                <td style="color: red" th:if="${#fields.hasErrors('parentLast')}" th:errors="*{parentLast}"></td>
+            </tr>
+            <tr>
+                <td><label for="p_phone" th:for="${#ids.next('p_phoneNumber')}">Phone Number:</label></td>
+            </tr>
+            <tr>
+                <td><input type="tel" th:field="*{parentMobile}" id="p_phone" placeholder="+48-321-654-987"
+                           th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'" /></td>
+                           <!-- pattern="\+[0-9]{1,4}-[0-9]{3}-[0-9]{3}-[0-9]{2,}" -->
+                <td style="font-size: 10px; padding-left: 8px">Format: +XXX-XXX-XXX-XX...,<br>where X – digit of your phone number</td>
+            </tr>
+            <tr>
+                <td style="color: red" th:if="${#fields.hasErrors('parentMobile')}" th:errors="*{parentMobile}"></td>
+            </tr>
+        </table>
+
+        <br>
+        <span>Account Data<sup title="Required fields">*</sup></span>
+        <hr>
+
+        <table>
+            <tr>
+                <td><label for="email" th:for="${#ids.next('email')}">Email Address:</label></td>
+            </tr>
+            <tr>
+                <td><input type="text" th:field="*{email}" id="email" th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'"/></td>
+            </tr>
+            <tr style="margin-bottom: 5px">
+                <td style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
+            </tr>
+            <tr>
+                <td><label for="password" th:for="${#ids.next('password')}">Password:</label></td>
+            </tr>
+            <tr>
+                <td><input type="password" th:field="*{password}" id="password" th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'"/></td>
+            </tr>
+            <tr>
+                <td style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
+            </tr>
+            <tr>
+                <td><label for="confirmPassword" th:for="${#ids.next('confirmPassword')}">Confirm password:</label></td>
+            </tr>
+            <tr>
+                <td><input type="password" th:field="*{confirmPassword}" id="confirmPassword" th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'"/></td>
+            </tr>
+            <tr>
+                <td style="color: red" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></td>
+            </tr>
+        </table>
+
+        <div class="warning" th:if="${userExists}">
+            <img class="warn-img" src="../static/images/warning.png" th:src="@{/images/warning.png}" alt="warning!"
+                 title="warn">
+            <div class="warn-text"><b>You have already an account with such credentials!<br>Please <a href="/login" th:href="@{/login(email=*{email})}">Log In</a></b></div>
+        </div>
+
+        <input type="submit" value="Sign Up" th:disabled="${needForStaff}"
+               th:style="${needForStaff} ? 'margin-top: 10px; margin-left: 7px; height: 27px; width: 55px; background-color: gray;' +
+               'color: white; font-size: 10px; border-radius: 3px; text-align: center; border: none; cursor: not-allowed'
+               : 'margin-top: 10px; margin-left: 7px; height: 27px; width: 55px; background-color: royalblue;' +
+               'color: white; font-size: 10px; border-radius: 3px; text-align: center; border: none; cursor: pointer;'"/>
+        <input type="submit" value="Home" th:if="${needForStaff}" style="margin-top: 10px; margin-left: 7px; height: 27px; width: 55px; background-color: royalblue;
+               color: white; font-size: 10px; border-radius: 3px; text-align: center; border: none; cursor: pointer;" />
+        <!--<label for="first" th:for="${#ids.next('firstName')}">First Name:</label> <br>
+        <input type="text" th:field="*{firstName}" id="first" /> <br>
+        <label for="last" th:for="${#ids.next('lastName')}">Last Name:</label> <br>
+        <input type="text" th:field="*{lastName}" id="last" /> <br>-->
+    </form>
+
+</body>
+
+</html>

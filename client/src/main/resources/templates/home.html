@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>University</title>
+    <style>
+        h3 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .staff {
+            font-size: 16px;
+            border: 2px dashed dodgerblue;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h3 th:text="#{home.welcome}">Welcome to our University Home Page!</h3>
+    <hr style="size: 6px">
+    <div class="staff" th:if="${needForStaff}">Our university will hire a person for the position of curator.<br>
+        If this is interesting for you, and you have all the necessary skills, please contact us:<br>
+        <a href="mailto:admission@univ.com">admission@univ.com</a>
+    </div>
+    <br>
+    <a href="register.html" th:href="@{/register}">Register</a>
+</body>
+</html>

@@ -35,6 +35,9 @@ public class Student {
     @Email(message = "email address is incorrect!")
     @NotEmpty(message = "email should not be empty!")
     private String email;
+
+    @NotEmpty(message = "Password should not be empty")
+    @Size(min = 6, message = "Password is too simple")
     private String password;
     private String role = "USER";
     private boolean enabled = false;
@@ -69,4 +72,10 @@ public class Student {
             )
     )
     private List<Lecturer> lecturers = new ArrayList<>();
+
+    @OneToOne(
+            mappedBy = "student",
+            cascade = CascadeType.ALL
+    )
+    private VerificationToken verificationToken;
 }

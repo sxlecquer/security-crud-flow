@@ -5,10 +5,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Data
 public class Lecturer {
@@ -35,9 +31,9 @@ public class Lecturer {
     @Email(message = "email address is incorrect!")
     @NotEmpty(message = "email should not be empty!")
     private String email;
+
+    @NotEmpty(message = "Password should not be empty")
+    @Size(min = 6, message = "Password is too simple")
     private String password;
     private String role = "ADMIN";
-
-    @ManyToMany(mappedBy = "lecturers")
-    private List<Student> students = new ArrayList<>();
 }

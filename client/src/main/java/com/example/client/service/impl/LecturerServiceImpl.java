@@ -28,12 +28,6 @@ public class LecturerServiceImpl implements LecturerService {
         return lecturerRepository.findAll();
     }
 
-    /*@Override
-    public void addStudent(Student student) {
-        for(Lecturer lecturer : findAll())
-            lecturer.getStudents().add(student);
-    }*/
-
     @Override
     public void fillLecturerTable() {
         Lecturer lecturer1 = new Lecturer();
@@ -67,5 +61,10 @@ public class LecturerServiceImpl implements LecturerService {
         lecturer5.setPassword(passwordEncoder.encode("Campbell123"));
 
         lecturerRepository.saveAll(List.of(lecturer1, lecturer2, lecturer3, lecturer4, lecturer5));
+    }
+
+    @Override
+    public boolean checkIfCredentialsCorrect(String email, String password) {
+        return lecturerRepository.existsByEmailAndPassword(email, password);
     }
 }

@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface LecturerRepository extends JpaRepository<Lecturer, Long> {
     @Query("select l.password from Lecturer l where l.email=?1")
     String findPasswordByEmail(String email);
+
+    boolean existsByEmailAndPassword(String email, String password);
 }

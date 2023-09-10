@@ -4,30 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fc62264-a8e9-4faf-b1c2-d879091c441b" name="Changes" comment="Adding Thymeleaf Configuration&#10;&#10;*Creating ThymeleafConfig class&#10;*Adding thymeleaf-starter dependency">
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/config/WebSecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/VerificationToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/event/RegistrationCompleteEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/event/listener/RegistrationCompleteEventListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/VerificationTokenModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/VerificationTokenRepository.java" afterDir="false" />
+    <list default="true" id="0fc62264-a8e9-4faf-b1c2-d879091c441b" name="Changes" comment="Realizing user registration functionality with email verification&#10;&#10;*Mappings: /home(home.html), /register(register.html), /verifyEmail(verify_email.html, success_verify_email.html), /resendVerificationCode(verify_email.html)&#10;*Adding messages on home page&#10;*Adding email verification functionality after registration (publish event in RegistrationCompleteEventListener to save verification token)&#10;*Adding WebSecurityConfig to permit all requests to server and to encode passwords&#10;*Adding FieldsValueMatchValidator to check if user enters the same password twice&#10;*Adding NotEmptyField and CorrectInfo interfaces to order error output in frontend">
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/UserModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299/storage_v2/_src_/database/universitydb.jIu4XA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299/storage_v2/_src_/database/universitydb.jIu4XA/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_08_2023_22_10_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_08_2023_22_10__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_08_2023_2_20__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_08_2023_2_20__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/controller/UniversityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/controller/UniversityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Curator.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Curator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Lecturer.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Lecturer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Parent.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Parent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/StudentModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/StudentModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/VerificationTokenModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/VerificationTokenModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/CuratorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/CuratorRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/LecturerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/LecturerRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/StudentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/CuratorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/CuratorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/LecturerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/LecturerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/CuratorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/CuratorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/LecturerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/LecturerServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/StudentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,10 +33,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="AnnotationType" />
-        <option value="HTML File" />
         <option value="Class" />
-        <option value="Interface" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -70,34 +64,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/IdeaProjects/security-crud-flow&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;62608e08adc29a8d6dbc9754e659f125&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/User/IdeaProjects/spring-security-demo",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "spring.configuration.checksum": "62608e08adc29a8d6dbc9754e659f125"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.example.client.annotation" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\User\IdeaProjects\security-crud-flow\client\src\main\resources\templates\token" />
-      <recent name="C:\Users\User\IdeaProjects\security-crud-flow\client\src\main\resources\static\images" />
-      <recent name="C:\Users\User\IdeaProjects\security-crud-flow\client\src\main\resources\templates" />
-      <recent name="C:\Users\User\IdeaProjects\security-crud-flow\client\src\main\resources\templates\" />
-      <recent name="C:\Users\User\IdeaProjects\security-crud-flow\client\src\main\resources\templates\university" />
-    </key>
-  </component>
+}]]></component>
   <component name="RunManager">
     <configuration name="ClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="client" />
@@ -116,46 +98,8 @@
       <option name="presentableId" value="Default" />
       <updated>1691188505509</updated>
       <workItem from="1691188508936" duration="1068000" />
-      <workItem from="1692134891233" duration="9518000" />
-      <workItem from="1692734094475" duration="6570000" />
-      <workItem from="1692800751208" duration="12603000" />
-      <workItem from="1692979225076" duration="20621000" />
-      <workItem from="1693077740530" duration="11082000" />
-      <workItem from="1693089966381" duration="649000" />
-      <workItem from="1693246315661" duration="15720000" />
-      <workItem from="1693335485421" duration="10935000" />
-      <workItem from="1693412092639" duration="18101000" />
-      <workItem from="1693509490377" duration="15746000" />
-      <workItem from="1693580910049" duration="18037000" />
-      <workItem from="1693758255377" duration="19867000" />
-      <workItem from="1693855864631" duration="11231000" />
-      <workItem from="1693943174230" duration="11416000" />
-      <workItem from="1694023105688" duration="2622000" />
-      <workItem from="1694027894257" duration="12719000" />
-      <workItem from="1694115521937" duration="7068000" />
+      <workItem from="1694276249430" duration="10907000" />
     </task>
-    <task id="LOCAL-00001" summary="Adding Thymeleaf Configuration&#10;&#10;*Creating ThymeleafConfig class&#10;*Adding thymeleaf-starter dependency">
-      <created>1691953927499</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1691953927499</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Adding Thymeleaf Configuration&#10;&#10;*Creating ThymeleafConfig class&#10;*Adding thymeleaf-starter dependency">
-      <created>1691960402832</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1691960402832</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Adding Thymeleaf Configuration&#10;&#10;*Creating ThymeleafConfig class&#10;*Adding thymeleaf-starter dependency">
-      <created>1691970345881</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1691970345881</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,11 +115,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adding Web Configuration&#10;&#10;*Creating WebConfig class(th config + localeResolver)&#10;*Adding thymeleaf-starter dependency" />
-    <MESSAGE value="Adding Web Configuration&#10;&#10;*Creating WebConfig class(th config + localeResolver)&#10;*Adding thymeleaf-starter dependency" />
-    <MESSAGE value="Adding Thymeleaf Configuration&#10;&#10;*Creating ThymeleafConfig class&#10;*Adding thymeleaf-starter dependency" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding Thymeleaf Configuration&#10;&#10;*Creating ThymeleafConfig class&#10;*Adding thymeleaf-starter dependency" />
   </component>
 </project>

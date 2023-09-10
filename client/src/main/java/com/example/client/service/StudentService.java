@@ -22,4 +22,6 @@ public interface StudentService {
     VerificationToken findVerificationTokenByStudent(Student student);
 
     void deleteById(int i);
+
+    boolean checkIfCredentialsCorrect(String email, String password);
 }

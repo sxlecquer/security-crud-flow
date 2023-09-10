@@ -162,7 +162,7 @@
             <tr>
                 <td><input type="password" th:field="*{password}" id="password" th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'"/></td>
             </tr>
-            <tr>
+            <tr style="margin-bottom: 5px">
                 <td style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
             </tr>
             <tr>

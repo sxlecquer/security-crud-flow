@@ -14,4 +14,6 @@ public interface CuratorService {
     Curator assignCurator(Student student);
 
     void fillCuratorTable();
+
+    boolean checkIfCredentialsCorrect(String email, String password);
 }

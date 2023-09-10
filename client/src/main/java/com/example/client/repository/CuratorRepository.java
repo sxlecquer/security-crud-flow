@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface CuratorRepository extends JpaRepository<Curator, Long> {
     @Query("select c.password from Curator c where c.email=?1")
     String findPasswordByEmail(String email);
+
+    boolean existsByEmailAndPassword(String email, String password);
 }

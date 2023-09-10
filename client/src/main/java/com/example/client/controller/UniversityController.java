@@ -4,11 +4,11 @@ import com.example.client.annotation.FieldsValueMatch;
 import com.example.client.entity.Student;
 import com.example.client.event.RegistrationCompleteEvent;
 import com.example.client.model.StudentModel;
+import com.example.client.model.UserModel;
 import com.example.client.model.VerificationTokenModel;
 import com.example.client.service.CuratorService;
 import com.example.client.service.LecturerService;
 import com.example.client.service.StudentService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,9 @@ import java.util.Objects;
 @SessionAttributes({"studentEmail", "verifyToken"})
 public class UniversityController {
     // TODO:
-    //  add login functionality
+    //  fix login functionality(password check in db),
+    //  fix login view(forgot password),
+    //  realize "forgot password" func
 
     @Autowired
     private StudentService studentService;
@@ -111,13 +113,13 @@ public class UniversityController {
             fieldError = new FieldError("verificationTokenModel",
                     "userToken", "Verification code is incorrect");
             bindingResult.addError(fieldError);
+            return "verify_email";
         } else if(response.equalsIgnoreCase("expired")) {
             fieldError = new FieldError("verificationTokenModel",
                     "userToken", "Verification code is expired.\n\nRequest a new one using the link above");
             bindingResult.addError(fieldError);
-        }
-        if(bindingResult.hasErrors())
             return "verify_email";
+        }
         return "success_verify_email";
     }
 
@@ -129,6 +131,28 @@ public class UniversityController {
         redirectAttributes.addFlashAttribute("studentEmail", email);
         redirectAttributes.addFlashAttribute("verifyToken", studentService.sendNewVerificationToken(oldToken));
         return "redirect:/verifyEmail";
+    }
+
+    @GetMapping("/login")
+    public String login(@ModelAttribute("user") UserModel userModel, Model model,
+                        @RequestParam(value = "email", required = false) String email) {
+        model.addAttribute("email", email);
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(@Valid @ModelAttribute("user") UserModel userModel, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "login";
+        }
+        if(!(studentService.checkIfCredentialsCorrect(userModel.getEmail(), userModel.getPassword())
+                || curatorService.checkIfCredentialsCorrect(userModel.getEmail(), userModel.getPassword())
+                || lecturerService.checkIfCredentialsCorrect(userModel.getEmail(), userModel.getPassword()))) {
+            FieldError fieldError = new FieldError("userModel", "password", "Incorrect email address or password");
+            bindingResult.addError(fieldError);
+            return "login";
+        }
+        return "redirect:/home";
     }
 
     @ModelAttribute("needForStaff")

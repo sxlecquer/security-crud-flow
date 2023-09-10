@@ -13,4 +13,6 @@ public interface LecturerService {
 //    void addStudent(Student student);
 
     void fillLecturerTable();
+
+    boolean checkIfCredentialsCorrect(String email, String password);
 }

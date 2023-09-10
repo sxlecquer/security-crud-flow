@@ -69,4 +69,9 @@ public class CuratorServiceImpl implements CuratorService {
         curator2.setPassword(passwordEncoder.encode("Flores123"));
         curatorRepository.save(curator2);*/
     }
+
+    @Override
+    public boolean checkIfCredentialsCorrect(String email, String password) {
+        return curatorRepository.existsByEmailAndPassword(email, password);
+    }
 }

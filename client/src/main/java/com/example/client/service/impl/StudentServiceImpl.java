@@ -108,4 +108,9 @@ public class StudentServiceImpl implements StudentService {
     public void deleteById(int i) {
         studentRepository.deleteById((long) i);
     }
+
+    @Override
+    public boolean checkIfCredentialsCorrect(String email, String password) {
+        return studentRepository.existsByEmailAndPassword(email, password);
+    }
 }

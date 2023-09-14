@@ -11,3 +11,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true

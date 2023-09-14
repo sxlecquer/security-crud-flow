@@ -7,15 +7,13 @@ import com.example.client.repository.VerificationTokenRepository;
 import com.example.client.service.CuratorService;
 import com.example.client.service.LecturerService;
 import com.example.client.service.StudentService;
+import com.example.client.token.TokenState;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -70,18 +68,18 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public String validateVerificationToken(String token) {
+    public TokenState validateVerificationToken(String token) {
         VerificationToken verificationToken = verificationTokenRepository.findByToken(token);
         if(verificationToken == null)
-            return "wrong";
+            return TokenState.WRONG;
         if(verificationToken.getExpirationTime().getTime() <= new Date().getTime()) {
-            verificationTokenRepository.delete(verificationToken);
-            return "expired";
+//            verificationTokenRepository.delete(verificationToken);
+            return TokenState.EXPIRED;
         }
         Student student = verificationToken.getStudent();
         student.setEnabled(true);
         studentRepository.save(student);
-        return "valid";
+        return TokenState.VALID;
     }
 
     @Override
@@ -110,7 +108,19 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public boolean checkIfCredentialsCorrect(String email, String password) {
-        return studentRepository.existsByEmailAndPassword(email, password);
+    public Student findByEmail(String email) {
+        return studentRepository.findByEmail(email);
+    }
+
+    @Override
+    public Student findById(int id) {
+        Optional<Student> student = studentRepository.findById((long) id);
+        return student.orElse(null);
+    }
+
+    @Override
+    public void changePassword(Student student, String newPassword) {
+        student.setPassword(passwordEncoder.encode(newPassword));
+        studentRepository.save(student);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.client.service;
 
 import com.example.client.entity.Lecturer;
-import com.example.client.entity.Student;
 
 import java.util.List;
 
@@ -10,9 +9,11 @@ public interface LecturerService {
 
     List<Lecturer> findAll();
 
-//    void addStudent(Student student);
-
     void fillLecturerTable();
 
-    boolean checkIfCredentialsCorrect(String email, String password);
+    Lecturer findByEmail(String email);
+
+    Lecturer findById(int id);
+
+    void changePassword(Lecturer lecturer, String newPassword);
 }

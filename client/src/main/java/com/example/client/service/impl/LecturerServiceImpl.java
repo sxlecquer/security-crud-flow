@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 @Service
 public class LecturerServiceImpl implements LecturerService {
@@ -64,7 +65,19 @@ public class LecturerServiceImpl implements LecturerService {
     }
 
     @Override
-    public boolean checkIfCredentialsCorrect(String email, String password) {
-        return lecturerRepository.existsByEmailAndPassword(email, password);
+    public Lecturer findByEmail(String email) {
+        return lecturerRepository.findByEmail(email);
+    }
+
+    @Override
+    public Lecturer findById(int id) {
+        Optional<Lecturer> lecturer = lecturerRepository.findById((long) id);
+        return lecturer.orElse(null);
+    }
+
+    @Override
+    public void changePassword(Lecturer lecturer, String newPassword) {
+        lecturer.setPassword(passwordEncoder.encode(newPassword));
+        lecturerRepository.save(lecturer);
     }
 }

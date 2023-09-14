@@ -1,17 +1,16 @@
 package com.example.client.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
-public class Curator {
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class Curator extends User {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -23,24 +22,18 @@ public class Curator {
             allocationSize = 1
     )
     private Long curatorId;
-
-    @Size(min = 2, max = 15, message = "First name is too long or too short")
-    @NotEmpty(message = "First name should not be empty")
     private String firstName;
-
-    @Size(min = 2, max = 20, message = "Last name is too long or too short")
-    @NotEmpty(message = "Last name should not be empty")
     private String lastName;
-
-    @Email(message = "Email address is incorrect")
-    @NotEmpty(message = "Email should not be empty")
+    @Getter(AccessLevel.NONE)
     private String email;
-
-    @NotEmpty(message = "Password should not be empty")
-    @Size(min = 6, message = "Password is too simple")
     private String password;
     private String role = "MODERATOR";
 
     @OneToMany(mappedBy = "curator")
     private List<Student> students = new ArrayList<>();
+
+    @Override
+    public String getEmail() {
+        return email;
+    }
 }

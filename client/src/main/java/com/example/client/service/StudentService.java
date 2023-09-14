@@ -3,6 +3,7 @@ package com.example.client.service;
 import com.example.client.entity.Student;
 import com.example.client.entity.VerificationToken;
 import com.example.client.model.StudentModel;
+import com.example.client.token.TokenState;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface StudentService {
 
     void saveVerificationToken(Student student, String token);
 
-    String validateVerificationToken(String token);
+    TokenState validateVerificationToken(String token);
 
     String sendNewVerificationToken(String oldToken);
 
@@ -23,5 +24,9 @@ public interface StudentService {
 
     void deleteById(int i);
 
-    boolean checkIfCredentialsCorrect(String email, String password);
+    Student findByEmail(String email);
+
+    Student findById(int id);
+
+    void changePassword(Student student, String newPassword);
 }

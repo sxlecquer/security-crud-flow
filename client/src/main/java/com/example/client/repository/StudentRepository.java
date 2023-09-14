@@ -10,5 +10,5 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query("select s.password from Student s where s.email=?1")
     String findPasswordByEmail(String email);
 
-    boolean existsByEmailAndPassword(String email, String password);
+    Student findByEmail(String email);
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fail</title>
+</head>
+<style>
+    .expired {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .expired-img {
+        width: 80px;
+        height: 80px;
+    }
+</style>
+<body>
+    <div class="expired">
+        <img class="expired-img" src="../../static/images/error.png" th:src="@{/images/error.png}" alt="password reset failed"
+            title="fail">
+        <div>
+            <span style="font-size: 18px; line-height: 33px;">Link expired!</span>
+            <br>
+            <span style="color: gray; font-size: 14px">
+                To reset your password, return to the <a th:href="@{/login}">login page</a><br>
+                <span style="line-height: 22px">and select "Forgot password?" to send a new email.</span>
+            </span>
+        </div>
+    </div>
+</body>
+</html>

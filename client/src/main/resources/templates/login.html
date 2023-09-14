@@ -16,15 +16,8 @@
         font-size: 12px;
     }
 
-    input[type=text] {
-        height: 12px;
-        background-color: whitesmoke;
-        border: 1px solid royalblue;
-        border-radius: 3px;
-    }
-
-    input[type=password] {
-        height: 12px;
+    input[type=text], input[type=password] {
+        height: 17px;
         background-color: whitesmoke;
         border: 1px solid royalblue;
         border-radius: 3px;
@@ -47,6 +40,10 @@
     .login {
         text-align: center;
     }
+
+    .password {
+        word-spacing: 40px;
+    }
 </style>
 <body>
     <h3>Log in to your account</h3>
@@ -60,12 +57,15 @@
             <tr>
                 <td><input type="text" th:field="*{email}" id="email"/></td>
             </tr>
-            <tr style="margin-bottom: 5px">
+            <tr>
                 <td style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
             </tr>
+            <tr><td style="line-height: 5px">&nbsp;</td></tr>
             <tr>
-                <td><label for="password" th:for="${#ids.next('password')}">Password:</label></td>
-                <td><a style="font-size: 10px" th:href="@{/resendPasswordToken}">Forgot password?</a></td>
+                <td class="password">
+                    <label for="password" th:for="${#ids.next('password')}">Password:</label>
+                    <a style="font-size: 10px; word-spacing: initial" th:href="@{/resetPassword}">Forgot password?</a>
+                </td>
             </tr>
             <tr>
                 <td><input type="password" th:field="*{password}" id="password"/></td>

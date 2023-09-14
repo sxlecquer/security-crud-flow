@@ -24,22 +24,8 @@
             font-size: 10px;
         }
 
-        input[type=text] {
-            height: 12px;
-            background-color: whitesmoke;
-            border: 1px solid royalblue;
-            border-radius: 3px;
-        }
-
-        input[type=tel] {
-            height: 12px;
-            background-color: whitesmoke;
-            border: 1px solid royalblue;
-            border-radius: 3px;
-        }
-
-        input[type=password] {
-            height: 12px;
+        input[type=text], input[type=tel], input[type=password] {
+            height: 17px;
             background-color: whitesmoke;
             border: 1px solid royalblue;
             border-radius: 3px;
@@ -71,7 +57,7 @@
     </script>
 </head>
 <body>
-    <h3>Creating a new account</h3>
+    <h3>Create a new account</h3>
 
     <div class="warning" th:if="${needForStaff}">
             <img class="warn-img" src="../static/images/warning.png" th:src="@{/images/warning.png}" alt="warning!"
@@ -91,7 +77,7 @@
             <tr>
                 <td><input type="text" th:field="*{firstName}" id="first" th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'" /></td>
             </tr>
-            <tr style="margin-bottom: 5px">
+            <tr>
                 <td style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></td>
             </tr>
             <tr>
@@ -116,7 +102,7 @@
             <tr>
                 <td><input type="text" th:field="*{parentFirst}" id="p_first" th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'"/></td>
             </tr>
-            <tr style="margin-bottom: 5px">
+            <tr>
                 <td style="color: red" th:if="${#fields.hasErrors('parentFirst')}" th:errors="*{parentFirst}"></td>
             </tr>
             <tr>
@@ -125,7 +111,7 @@
             <tr>
                 <td><input type="text" th:field="*{parentLast}" id="p_last" th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'"/></td>
             </tr>
-            <tr style="margin-bottom: 5px">
+            <tr>
                 <td style="color: red" th:if="${#fields.hasErrors('parentLast')}" th:errors="*{parentLast}"></td>
             </tr>
             <tr>
@@ -153,7 +139,7 @@
             <tr>
                 <td><input type="text" th:field="*{email}" id="email" th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'"/></td>
             </tr>
-            <tr style="margin-bottom: 5px">
+            <tr>
                 <td style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
             </tr>
             <tr>
@@ -162,7 +148,7 @@
             <tr>
                 <td><input type="password" th:field="*{password}" id="password" th:disabled="${needForStaff}" th:style="${needForStaff} ? 'cursor: not-allowed'"/></td>
             </tr>
-            <tr style="margin-bottom: 5px">
+            <tr>
                 <td style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
             </tr>
             <tr>

@@ -1,13 +1,13 @@
 package com.example.client.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.*;
+
 @Entity
 @Data
-public class Lecturer {
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class Lecturer extends User {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -19,21 +19,15 @@ public class Lecturer {
             allocationSize = 1
     )
     private Long lecturerId;
-
-    @Size(min = 2, max = 15, message = "first name is too long or too short!")
-    @NotEmpty(message = "first name should not be empty!")
     private String firstName;
-
-    @Size(min = 2, max = 20, message = "last name is too long or too short!")
-    @NotEmpty(message = "last name should not be empty!")
     private String lastName;
-
-    @Email(message = "email address is incorrect!")
-    @NotEmpty(message = "email should not be empty!")
+    @Getter(AccessLevel.NONE)
     private String email;
-
-    @NotEmpty(message = "Password should not be empty")
-    @Size(min = 6, message = "Password is too simple")
     private String password;
     private String role = "ADMIN";
+
+    @Override
+    public String getEmail() {
+        return email;
+    }
 }

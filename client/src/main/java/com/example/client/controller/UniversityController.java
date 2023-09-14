@@ -1,14 +1,15 @@
 package com.example.client.controller;
 
 import com.example.client.annotation.FieldsValueMatch;
-import com.example.client.entity.Student;
+import com.example.client.entity.*;
 import com.example.client.event.RegistrationCompleteEvent;
-import com.example.client.model.StudentModel;
-import com.example.client.model.UserModel;
-import com.example.client.model.VerificationTokenModel;
+import com.example.client.model.*;
 import com.example.client.service.CuratorService;
 import com.example.client.service.LecturerService;
 import com.example.client.service.StudentService;
+import com.example.client.service.UserService;
+import com.example.client.token.TokenState;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +23,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Controller
 @Slf4j
 @ControllerAdvice
-@SessionAttributes({"studentEmail", "verifyToken"})
+@SessionAttributes({"studentEmail", "verifyToken", "userEmail", "currentUser"})
 public class UniversityController {
     // TODO:
-    //  fix login functionality(password check in db),
-    //  fix login view(forgot password),
-    //  realize "forgot password" func
+    //  realize "reset password" func:
+    //  *impl send it again func(reset_password.html)
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private StudentService studentService;
@@ -108,15 +112,15 @@ public class UniversityController {
         if(bindingResult.hasErrors())
             return "verify_email";
         FieldError fieldError;
-        String response = studentService.validateVerificationToken(verificationTokenModel.getUserToken());
-        if(response.equalsIgnoreCase("wrong")) {
-            fieldError = new FieldError("verificationTokenModel",
-                    "userToken", "Verification code is incorrect");
+        TokenState response = studentService.validateVerificationToken(verificationTokenModel.getUserToken());
+        if(response == TokenState.WRONG) {
+            fieldError = new FieldError("verificationTokenModel", "userToken", verificationTokenModel.getUserToken(),
+                    false, null, null, "Verification code is incorrect");
             bindingResult.addError(fieldError);
             return "verify_email";
-        } else if(response.equalsIgnoreCase("expired")) {
-            fieldError = new FieldError("verificationTokenModel",
-                    "userToken", "Verification code is expired.\n\nRequest a new one using the link above");
+        } else if(response == TokenState.EXPIRED) {
+            fieldError = new FieldError("verificationTokenModel", "userToken", verificationTokenModel.getUserToken(),
+                    false, null, null, "Verification code is expired. Request a new one using the link above");
             bindingResult.addError(fieldError);
             return "verify_email";
         }
@@ -145,16 +149,97 @@ public class UniversityController {
         if(bindingResult.hasErrors()) {
             return "login";
         }
-        if(!(studentService.checkIfCredentialsCorrect(userModel.getEmail(), userModel.getPassword())
-                || curatorService.checkIfCredentialsCorrect(userModel.getEmail(), userModel.getPassword())
-                || lecturerService.checkIfCredentialsCorrect(userModel.getEmail(), userModel.getPassword()))) {
-            FieldError fieldError = new FieldError("userModel", "password", "Incorrect email address or password");
+        if(!checkIfCredentialsCorrect(userModel.getEmail(), userModel.getPassword())) {
+            FieldError fieldError = new FieldError("userModel", "password", userModel.getPassword(),
+                    false, null, null, "Incorrect email address or password");
             bindingResult.addError(fieldError);
             return "login";
         }
         return "redirect:/home";
     }
 
+    @GetMapping("/resetPassword")
+    public String resetPassword(@ModelAttribute("emailModel") EmailModel emailModel) {
+        return "reset_password";
+    }
+
+    @PostMapping("/resetPassword")
+    public String resetPassword(@Valid @ModelAttribute("emailModel") EmailModel emailModel,
+                                BindingResult bindingResult,
+                                final HttpServletRequest httpServletRequest,
+                                Model model) {
+        if(bindingResult.hasErrors()) {
+            return "reset_password";
+        }
+        String email = emailModel.getEmail();
+        User user = studentService.findByEmail(email);
+        if(user == null) {
+            user = curatorService.findByEmail(email);
+            if (user == null) {
+                user = lecturerService.findByEmail(email);
+            }
+        }
+        if(user != null) {
+            String token = UUID.randomUUID().toString();
+            userService.savePasswordToken(user, token);
+            sendResetPasswordMail(applicationUrl(httpServletRequest), token);
+            model.addAttribute("linkSent", true);
+        } else {
+            FieldError fieldError = new FieldError("passwordModel", "email", emailModel.getEmail(),
+                    false, null, null, "User with such email doesn't exist");
+            bindingResult.addError(fieldError);
+            return "reset_password";
+        }
+        return "reset_password";
+    }
+
+    @GetMapping("/savePassword")
+    public String savePassword(@RequestParam(value = "token") String token,
+                               RedirectAttributes redirectAttributes) {
+        TokenState response = userService.validatePasswordToken(token);
+        if(response == TokenState.WRONG) {
+            return "password_token/wrong";
+        } else if(response == TokenState.EXPIRED) {
+            return "password_token/expired";
+        }
+        User user = userService.getUserByPasswordToken(userService.findPasswordToken(token));
+        redirectAttributes.addFlashAttribute("userEmail",
+                user.getEmail());
+        redirectAttributes.addFlashAttribute("currentUser", user);
+        return "redirect:/save";
+    }
+
+    @GetMapping("/save")
+    public String save(@ModelAttribute("resetPasswordModel") ResetPasswordModel resetPasswordModel,
+                        @ModelAttribute("userEmail") String email,
+                        @ModelAttribute("currentUser") User user,
+                        RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("userEmail", email);
+        redirectAttributes.addFlashAttribute("currentUser", user);
+        return "new_password";
+    }
+
+    @PatchMapping("/savePassword")
+    public String savePassword(@Valid @ModelAttribute("resetPasswordModel") ResetPasswordModel resetPasswordModel,
+                               BindingResult bindingResult,
+                               @ModelAttribute("userEmail") String email,
+                               @ModelAttribute("currentUser") User user,
+                               RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("userEmail", email);
+        redirectAttributes.addFlashAttribute("currentUser", user);
+        if(!Objects.equals(resetPasswordModel.getNewPassword(), resetPasswordModel.getConfirmNewPassword())) {
+            Class<? extends ResetPasswordModel> clazz = resetPasswordModel.getClass();
+            FieldsValueMatch fieldsValueMatch = clazz.getAnnotation(FieldsValueMatch.class);
+            FieldError fieldError = new FieldError("resetPasswordModel", "confirmNewPassword", fieldsValueMatch.message());
+            bindingResult.addError(fieldError);
+            return "new_password";
+        }
+        if(bindingResult.hasErrors()) {
+            return "new_password";
+        }
+        userService.changePassword(user, resetPasswordModel.getNewPassword());
+        return "success_change_password";
+    }
     @ModelAttribute("needForStaff")
     public boolean isNeedForStaff() {
         return studentService.findAll().size() >= curatorService.STUDENT_LIMIT * curatorService.findAll().size();
@@ -170,6 +255,21 @@ public class UniversityController {
         return "";
     }
 
+    @ModelAttribute("userEmail")
+    public String assignUserCurrentEmail() {
+        return "";
+    }
+
+    @ModelAttribute("currentUser")
+    public User assignCurrentUser() {
+        return null;
+    }
+
+    private void sendResetPasswordMail(String applicationUrl, String token) {
+        String url = applicationUrl + "/savePassword?token=" + token;
+        log.info("Click the link to reset your password: {}", url);
+    }
+
     private boolean isUserExists(String email, String password) {
         String curatorPassword = curatorService.findPasswordByEmail(email);
         if(curatorPassword != null && passwordEncoder.matches(password, curatorPassword))
@@ -179,5 +279,14 @@ public class UniversityController {
             return true;
         String studentPassword = studentService.findPasswordByEmail(email);
         return studentPassword != null && passwordEncoder.matches(password, studentPassword);
+    }
+
+    private boolean checkIfCredentialsCorrect(String email, String password) {
+        return isUserExists(email, password);
+    }
+
+    private String applicationUrl(HttpServletRequest request) {
+        return request.getScheme() + "://" + request.getServerName() + ":"
+                + request.getServerPort() + request.getContextPath();
     }
 }

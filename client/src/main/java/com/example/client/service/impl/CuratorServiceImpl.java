@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 @Service
 public class CuratorServiceImpl implements CuratorService {
@@ -67,11 +68,30 @@ public class CuratorServiceImpl implements CuratorService {
         curator2.setLastName("Flores");
         curator2.setEmail(curator2.getFirstName().toLowerCase(Locale.ROOT) + "." + curator2.getLastName().toLowerCase(Locale.ROOT) + "@univ.cur.com");
         curator2.setPassword(passwordEncoder.encode("Flores123"));
-        curatorRepository.save(curator2);*/
+        curatorRepository.save(curator2);
+
+        Curator curator3 = new Curator();
+        curator3.setFirstName("Jennifer");
+        curator3.setLastName("White");
+        curator3.setEmail(curator3.getFirstName().toLowerCase(Locale.ROOT) + "." + curator3.getLastName().toLowerCase(Locale.ROOT) + "@univ.cur.com");
+        curator3.setPassword(passwordEncoder.encode("White123"));
+        curatorRepository.save(curator3);*/
     }
 
     @Override
-    public boolean checkIfCredentialsCorrect(String email, String password) {
-        return curatorRepository.existsByEmailAndPassword(email, password);
+    public Curator findByEmail(String email) {
+        return curatorRepository.findByEmail(email);
+    }
+
+    @Override
+    public Curator findById(int id) {
+        Optional<Curator> curator = curatorRepository.findById((long) id);
+        return curator.orElse(null);
+    }
+
+    @Override
+    public void changePassword(Curator curator, String newPassword) {
+        curator.setPassword(passwordEncoder.encode(newPassword));
+        curatorRepository.save(curator);
     }
 }

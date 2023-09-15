@@ -7,12 +7,15 @@ import com.example.client.service.LecturerService;
 import com.example.client.service.StudentService;
 import com.example.client.service.UserService;
 import com.example.client.token.TokenState;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordTokenRepository passwordTokenRepository;
@@ -38,10 +41,24 @@ public class UserServiceImpl implements UserService {
         if(passwordToken == null) {
             return TokenState.WRONG;
         } else if(passwordToken.getExpirationTime().getTime() <= new Date().getTime()) {
-            passwordTokenRepository.delete(passwordToken); // MAY CAUSE ERRORS DURING RESENDING PASSWORD TOKEN
+//            passwordTokenRepository.delete(passwordToken);
             return TokenState.EXPIRED;
         }
         return TokenState.VALID;
+    }
+
+    @Override
+    public String sendNewPasswordToken(String oldToken) {
+        PasswordToken passwordToken = passwordTokenRepository.findByToken(oldToken);
+        if(passwordToken != null) {
+            String newToken = UUID.randomUUID().toString();
+            passwordToken.setToken(newToken);
+            passwordToken.setExpirationTime(passwordToken.calculateExpirationTime());
+            passwordTokenRepository.save(passwordToken);
+        } else {
+            log.warn("Can't resend password token because there is no old token ({}) in password token repository", oldToken);
+        }
+        return passwordToken != null ? passwordToken.getToken() : "";
     }
 
     @Override

@@ -31,8 +31,10 @@ import java.util.UUID;
 @SessionAttributes({"studentEmail", "verifyToken", "userEmail", "currentUser"})
 public class UniversityController {
     // TODO:
-    //  realize "reset password" func:
-    //  *impl send it again func(reset_password.html)
+    //  realize:
+    //      "change password" func,
+    //      mappings for each entity role,
+    //      auth-server and login using OAuth2.0....
 
     @Autowired
     private UserService userService;
@@ -88,10 +90,10 @@ public class UniversityController {
         publisher.publishEvent(new RegistrationCompleteEvent(student));
         redirectAttributes.addFlashAttribute("studentEmail", student.getEmail());
         redirectAttributes.addFlashAttribute("verifyToken", studentService.findVerificationTokenByStudent(student).getToken());
-        return "redirect:/verifyEmail";
+        return "redirect:/verify-email";
     }
 
-    @GetMapping("/verifyEmail")
+    @GetMapping("/verify-email")
     public String verifyUser(@ModelAttribute("verificationToken") VerificationTokenModel verificationTokenModel,
                              @ModelAttribute("studentEmail") String email,
                              @ModelAttribute("verifyToken") String token,
@@ -101,7 +103,7 @@ public class UniversityController {
         return "verify_email";
     }
 
-    @PostMapping("/verifyEmail")
+    @PostMapping("/verify-email")
     public String verifyEmail(@Valid @ModelAttribute("verificationToken") VerificationTokenModel verificationTokenModel,
                                     BindingResult bindingResult,
                                     @ModelAttribute("studentEmail") String email,
@@ -127,14 +129,13 @@ public class UniversityController {
         return "success_verify_email";
     }
 
-    @GetMapping("/resendVerificationCode")
-    public String resendVerificationCode(@ModelAttribute("verificationToken") VerificationTokenModel verificationToken,
-                                         @RequestParam("email") String email,
+    @GetMapping("/resend-verification-code")
+    public String resendVerificationCode(@RequestParam("email") String email,
                                          @RequestParam("token") String oldToken,
                                          RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("studentEmail", email);
         redirectAttributes.addFlashAttribute("verifyToken", studentService.sendNewVerificationToken(oldToken));
-        return "redirect:/verifyEmail";
+        return "redirect:/verify-email";
     }
 
     @GetMapping("/login")
@@ -158,16 +159,17 @@ public class UniversityController {
         return "redirect:/home";
     }
 
-    @GetMapping("/resetPassword")
+    @GetMapping("/reset-password")
     public String resetPassword(@ModelAttribute("emailModel") EmailModel emailModel) {
         return "reset_password";
     }
 
-    @PostMapping("/resetPassword")
+    @PostMapping("/reset-password")
     public String resetPassword(@Valid @ModelAttribute("emailModel") EmailModel emailModel,
                                 BindingResult bindingResult,
                                 final HttpServletRequest httpServletRequest,
-                                Model model) {
+                                Model model
+    ) {
         if(bindingResult.hasErrors()) {
             return "reset_password";
         }
@@ -181,6 +183,7 @@ public class UniversityController {
         }
         if(user != null) {
             String token = UUID.randomUUID().toString();
+            model.addAttribute("passwordToken", token);
             userService.savePasswordToken(user, token);
             sendResetPasswordMail(applicationUrl(httpServletRequest), token);
             model.addAttribute("linkSent", true);
@@ -193,8 +196,21 @@ public class UniversityController {
         return "reset_password";
     }
 
-    @GetMapping("/savePassword")
-    public String savePassword(@RequestParam(value = "token") String token,
+    @GetMapping("/resend-password-token")
+    public String resendPasswordToken(@ModelAttribute("emailModel") EmailModel emailModel,
+                                      @RequestParam("token") String oldToken,
+                                      final HttpServletRequest httpServletRequest,
+                                      Model model) {
+        String newToken = userService.sendNewPasswordToken(oldToken);
+        model.addAttribute("passwordToken", newToken);
+        if(!newToken.isEmpty())
+            sendResetPasswordMail(applicationUrl(httpServletRequest), newToken);
+        model.addAttribute("linkSent", !newToken.isEmpty());
+        return "reset_password";
+    }
+
+    @GetMapping("/save-password")
+    public String savePassword(@RequestParam("token") String token,
                                RedirectAttributes redirectAttributes) {
         TokenState response = userService.validatePasswordToken(token);
         if(response == TokenState.WRONG) {
@@ -219,7 +235,7 @@ public class UniversityController {
         return "new_password";
     }
 
-    @PatchMapping("/savePassword")
+    @PatchMapping("/save-password")
     public String savePassword(@Valid @ModelAttribute("resetPasswordModel") ResetPasswordModel resetPasswordModel,
                                BindingResult bindingResult,
                                @ModelAttribute("userEmail") String email,
@@ -240,11 +256,14 @@ public class UniversityController {
         userService.changePassword(user, resetPasswordModel.getNewPassword());
         return "success_change_password";
     }
+
+    // ---------------Model attributes---------------
     @ModelAttribute("needForStaff")
     public boolean isNeedForStaff() {
         return studentService.findAll().size() >= curatorService.STUDENT_LIMIT * curatorService.findAll().size();
     }
 
+    // ---------------Session attributes---------------
     @ModelAttribute("studentEmail")
     public String assignStudentCurrentEmail() {
         return "";
@@ -265,8 +284,9 @@ public class UniversityController {
         return null;
     }
 
+    // ---------------Private methods---------------
     private void sendResetPasswordMail(String applicationUrl, String token) {
-        String url = applicationUrl + "/savePassword?token=" + token;
+        String url = applicationUrl + "/save-password?token=" + token;
         log.info("Click the link to reset your password: {}", url);
     }
 

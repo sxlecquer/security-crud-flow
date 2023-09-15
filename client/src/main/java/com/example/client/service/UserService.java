@@ -14,4 +14,6 @@ public interface UserService {
     User getUserByPasswordToken(PasswordToken passwordToken);
 
     void changePassword(User user, String newPassword);
+
+    String sendNewPasswordToken(String oldToken);
 }

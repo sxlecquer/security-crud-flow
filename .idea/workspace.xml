@@ -4,45 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fc62264-a8e9-4faf-b1c2-d879091c441b" name="Changes" comment="Taking some steps to implement login functionality&#10;&#10;*Mappings: /login(login.html)&#10;*Adding UserModel with email and password&#10;*Improving code clarity and readability">
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/PasswordToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/EmailModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/ResetPasswordModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/PasswordTokenRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/static/images/error.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/static/images/reset.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/templates/new_password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/templates/password_token/expired.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/templates/password_token/wrong.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/templates/reset_password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/templates/success_change_password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299/storage_v2/_src_/database/universitydb.jIu4XA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299/storage_v2/_src_/database/universitydb.jIu4XA/schema/public.abK9xQ.meta" afterDir="false" />
+    <list default="true" id="0fc62264-a8e9-4faf-b1c2-d879091c441b" name="Changes" comment="Realizing login functionality and &quot;Forgot password?&quot; feature&#10;&#10;*Mappings: /login(login.html), /resetPassword(reset_password.html), /savePassword(new_password.html)&#10;*Adding password token error pages: wrong.html, expired.html&#10;*Adding superclass(User) to user entities(Student, Curator, Lecturer)&#10;*Adding images for view: error.png, reset.png, tick.png(changed)&#10;*Enabling HiddenHttpMethodFilter for creating hidden input implicitly(value=&quot;patch&quot;) in application.yml&#10;*Replacing token validation string-response from service layer to enum-response(TokenState class)">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/controller/UniversityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/controller/UniversityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Curator.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Curator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Lecturer.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Lecturer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/UserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/UserModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/CuratorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/CuratorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/LecturerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/LecturerRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/StudentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/CuratorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/CuratorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/LecturerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/LecturerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/CuratorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/CuratorServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/LecturerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/LecturerServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/StudentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/static/images/tick.png" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/static/images/tick.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/new_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/new_password.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/success_verify_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/success_verify_email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/reset_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/reset_password.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/verify_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/verify_email.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -125,7 +97,8 @@
       <workItem from="1694457900250" duration="15773000" />
       <workItem from="1694542904999" duration="18328000" />
       <workItem from="1694625675713" duration="17967000" />
-      <workItem from="1694701913762" duration="19405000" />
+      <workItem from="1694701913762" duration="20487000" />
+      <workItem from="1694799514284" duration="17261000" />
     </task>
     <task id="LOCAL-00001" summary="Taking some steps to implement login functionality&#10;&#10;*Mappings: /login(login.html)&#10;*Adding UserModel with email and password&#10;*Improving code clarity and readability">
       <created>1694304613099</created>
@@ -134,7 +107,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694304613099</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Realizing login functionality and &quot;Forgot password?&quot; feature&#10;&#10;*Mappings: /login(login.html), /resetPassword(reset_password.html), /savePassword(new_password.html)&#10;*Adding password token error pages: wrong.html, expired.html&#10;*Adding superclass(User) to user entities(Student, Curator, Lecturer)&#10;*Adding images for view: error.png, reset.png, tick.png(changed)&#10;*Enabling HiddenHttpMethodFilter for creating hidden input implicitly(value=&quot;patch&quot;) in application.yml&#10;*Replacing token validation string-response from service layer to enum-response(TokenState class)">
+      <created>1694729218963</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1694729218963</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,6 +144,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Taking some steps to implement login functionality&#10;&#10;*Mappings: /login(login.html)&#10;*Adding UserModel with email and password&#10;*Improving code clarity and readability" />
-    <option name="LAST_COMMIT_MESSAGE" value="Taking some steps to implement login functionality&#10;&#10;*Mappings: /login(login.html)&#10;*Adding UserModel with email and password&#10;*Improving code clarity and readability" />
+    <MESSAGE value="Realizing login functionality and &quot;Forgot password?&quot; feature&#10;&#10;*Mappings: /login(login.html), /resetPassword(reset_password.html), /savePassword(new_password.html)&#10;*Adding password token error pages: wrong.html, expired.html&#10;*Adding superclass(User) to user entities(Student, Curator, Lecturer)&#10;*Adding images for view: error.png, reset.png, tick.png(changed)&#10;*Enabling HiddenHttpMethodFilter for creating hidden input implicitly(value=&quot;patch&quot;) in application.yml&#10;*Replacing token validation string-response from service layer to enum-response(TokenState class)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Realizing login functionality and &quot;Forgot password?&quot; feature&#10;&#10;*Mappings: /login(login.html), /resetPassword(reset_password.html), /savePassword(new_password.html)&#10;*Adding password token error pages: wrong.html, expired.html&#10;*Adding superclass(User) to user entities(Student, Curator, Lecturer)&#10;*Adding images for view: error.png, reset.png, tick.png(changed)&#10;*Enabling HiddenHttpMethodFilter for creating hidden input implicitly(value=&quot;patch&quot;) in application.yml&#10;*Replacing token validation string-response from service layer to enum-response(TokenState class)" />
   </component>
 </project>

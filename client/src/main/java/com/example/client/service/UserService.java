@@ -11,9 +11,11 @@ public interface UserService {
 
     PasswordToken findPasswordToken(String token);
 
-    User getUserByPasswordToken(PasswordToken passwordToken);
+    User findUserByPasswordToken(PasswordToken passwordToken);
 
     void changePassword(User user, String newPassword);
 
     String sendNewPasswordToken(String oldToken);
+
+    User findUserByEmailAndPassword(String email, String password);
 }

@@ -32,7 +32,6 @@ import java.util.UUID;
 public class UniversityController {
     // TODO:
     //  realize:
-    //      "change password" func,
     //      mappings for each entity role,
     //      auth-server and login using OAuth2.0....
 
@@ -53,6 +52,8 @@ public class UniversityController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    private User currentUser;
 
     @GetMapping("/home")
     public String homePage() {
@@ -156,6 +157,7 @@ public class UniversityController {
             bindingResult.addError(fieldError);
             return "login";
         }
+        currentUser = userService.findUserByEmailAndPassword(userModel.getEmail(), userModel.getPassword());
         return "redirect:/home";
     }
 
@@ -218,7 +220,7 @@ public class UniversityController {
         } else if(response == TokenState.EXPIRED) {
             return "password_token/expired";
         }
-        User user = userService.getUserByPasswordToken(userService.findPasswordToken(token));
+        User user = userService.findUserByPasswordToken(userService.findPasswordToken(token));
         redirectAttributes.addFlashAttribute("userEmail",
                 user.getEmail());
         redirectAttributes.addFlashAttribute("currentUser", user);
@@ -254,6 +256,34 @@ public class UniversityController {
             return "new_password";
         }
         userService.changePassword(user, resetPasswordModel.getNewPassword());
+        return "success_change_password";
+    }
+
+    @GetMapping("/change-password")
+    public String changePassword(@ModelAttribute("changePasswordModel") ChangePasswordModel changePasswordModel) {
+        return "change_password";
+    }
+
+    @PatchMapping("/change-password")
+    public String changePassword(@Valid @ModelAttribute("changePasswordModel") ChangePasswordModel changePasswordModel,
+                                 BindingResult bindingResult) {
+        if(!Objects.equals(changePasswordModel.getNewPassword(), changePasswordModel.getConfirmNewPassword())) {
+            Class<? extends ChangePasswordModel> clazz = changePasswordModel.getClass();
+            FieldsValueMatch fieldsValueMatch = clazz.getAnnotation(FieldsValueMatch.class);
+            FieldError fieldError = new FieldError("changePasswordModel", "confirmNewPassword", fieldsValueMatch.message());
+            bindingResult.addError(fieldError);
+            return "change_password";
+        }
+        if(bindingResult.hasErrors()) {
+            return "change_password";
+        }
+        if(userService.findUserByEmailAndPassword(currentUser.getEmail(), changePasswordModel.getOldPassword()) == null) {
+            FieldError fieldError = new FieldError("changePasswordModel", "oldPassword",
+                    changePasswordModel.getOldPassword(), false, null, null, "Old password is incorrect");
+            bindingResult.addError(fieldError);
+            return "change_password";
+        }
+        userService.changePassword(currentUser, changePasswordModel.getNewPassword());
         return "success_change_password";
     }
 

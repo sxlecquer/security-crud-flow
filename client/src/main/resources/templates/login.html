@@ -60,7 +60,9 @@
             <tr>
                 <td style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
             </tr>
+
             <tr><td style="line-height: 5px">&nbsp;</td></tr>
+
             <tr>
                 <td class="password">
                     <label for="password" th:for="${#ids.next('password')}">Password:</label>

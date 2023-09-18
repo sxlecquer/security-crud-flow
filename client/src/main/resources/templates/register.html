@@ -54,6 +54,12 @@
             padding-left: 7px;
             font-size: 16px;
         }
+
+        .password-require {
+            font-size: 11px;
+            color: gray;
+            padding-top: 7px;
+        }
     </style>
     <script>
         function home() {
@@ -164,6 +170,13 @@
             </tr>
             <tr>
                 <td style="color: red" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="password-require">
+                        Password must contain at least 6 characters including<br>one uppercase letter, one lowercase letter and one number.
+                    </div>
+                </td>
             </tr>
         </table>
 

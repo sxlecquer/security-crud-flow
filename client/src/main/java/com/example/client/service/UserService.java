@@ -2,6 +2,7 @@ package com.example.client.service;
 
 import com.example.client.entity.PasswordToken;
 import com.example.client.entity.User;
+import com.example.client.model.BasicInformationModel;
 import com.example.client.token.TokenState;
 
 public interface UserService {
@@ -18,4 +19,6 @@ public interface UserService {
     String sendNewPasswordToken(String oldToken);
 
     User findUserByEmailAndPassword(String email, String password);
+
+    void saveUserChanges(User user, BasicInformationModel basicInformationModel);
 }

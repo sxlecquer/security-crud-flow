@@ -1,7 +1,10 @@
 package com.example.client.service;
 
 import com.example.client.entity.Student;
+import com.example.client.entity.User;
 import com.example.client.entity.VerificationToken;
+import com.example.client.model.BasicInformationModel;
+import com.example.client.model.ParentInformationModel;
 import com.example.client.model.StudentModel;
 import com.example.client.token.TokenState;
 
@@ -29,4 +32,8 @@ public interface StudentService {
     Student findById(int id);
 
     void changePassword(Student student, String newPassword);
+
+    void saveStudentChanges(Student student, BasicInformationModel basicInformationModel);
+
+    void saveParentChanges(Student student, ParentInformationModel parentInformationModel);
 }

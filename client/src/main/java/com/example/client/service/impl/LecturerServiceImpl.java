@@ -1,6 +1,8 @@
 package com.example.client.service.impl;
 
+import com.example.client.entity.Curator;
 import com.example.client.entity.Lecturer;
+import com.example.client.model.BasicInformationModel;
 import com.example.client.repository.LecturerRepository;
 import com.example.client.service.LecturerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +80,13 @@ public class LecturerServiceImpl implements LecturerService {
     @Override
     public void changePassword(Lecturer lecturer, String newPassword) {
         lecturer.setPassword(passwordEncoder.encode(newPassword));
+        lecturerRepository.save(lecturer);
+    }
+
+    @Override
+    public void saveLecturerChanges(Lecturer lecturer, BasicInformationModel basicInformationModel) {
+        lecturer.setFirstName(basicInformationModel.getFirstName());
+        lecturer.setLastName(basicInformationModel.getLastName());
         lecturerRepository.save(lecturer);
     }
 }

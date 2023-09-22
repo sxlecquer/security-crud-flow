@@ -1,6 +1,7 @@
 package com.example.client.service.impl;
 
 import com.example.client.entity.*;
+import com.example.client.model.BasicInformationModel;
 import com.example.client.repository.PasswordTokenRepository;
 import com.example.client.service.CuratorService;
 import com.example.client.service.LecturerService;
@@ -107,5 +108,16 @@ public class UserServiceImpl implements UserService {
         if(lecturer != null && passwordEncoder.matches(password, lecturer.getPassword()))
             return lecturer;
         return null;
+    }
+
+    @Override
+    public void saveUserChanges(User user, BasicInformationModel basicInformationModel) {
+        if(user instanceof Student) {
+            studentService.saveStudentChanges((Student) user, basicInformationModel);
+        } else if(user instanceof Curator) {
+            curatorService.saveCuratorChanges((Curator) user, basicInformationModel);
+        } else if(user instanceof Lecturer) {
+            lecturerService.saveLecturerChanges((Lecturer) user, basicInformationModel);
+        }
     }
 }

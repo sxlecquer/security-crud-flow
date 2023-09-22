@@ -24,7 +24,6 @@ public class Student extends User {
     private Long studentId;
     private String firstName;
     private String lastName;
-    @Getter(AccessLevel.NONE)
     private String email;
     private String password;
     private String role = "USER";
@@ -66,9 +65,4 @@ public class Student extends User {
             cascade = CascadeType.ALL
     )
     private VerificationToken verificationToken;
-
-    @Override
-    public String getEmail() {
-        return email;
-    }
 }

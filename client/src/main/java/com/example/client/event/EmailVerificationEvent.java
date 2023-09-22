@@ -7,9 +7,9 @@ import org.springframework.context.ApplicationEvent;
 
 @Getter
 @Setter
-public class RegistrationCompleteEvent extends ApplicationEvent {
+public class EmailVerificationEvent extends ApplicationEvent {
     private Student student;
-    public RegistrationCompleteEvent(Student student) {
+    public EmailVerificationEvent(Student student) {
         super(student);
         this.student = student;
     }

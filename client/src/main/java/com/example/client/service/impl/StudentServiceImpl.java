@@ -1,6 +1,8 @@
 package com.example.client.service.impl;
 
 import com.example.client.entity.*;
+import com.example.client.model.BasicInformationModel;
+import com.example.client.model.ParentInformationModel;
 import com.example.client.model.StudentModel;
 import com.example.client.repository.StudentRepository;
 import com.example.client.repository.VerificationTokenRepository;
@@ -43,7 +45,6 @@ public class StudentServiceImpl implements StudentService {
         student.setPassword(passwordEncoder.encode(studentModel.getPassword()));
 
         student.setLecturers(lecturerService.findAll());
-//        lecturerService.addStudent(student);
         student.setCurator(curatorService.assignCurator(student));
         parent.setStudent(student);
 
@@ -121,6 +122,25 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void changePassword(Student student, String newPassword) {
         student.setPassword(passwordEncoder.encode(newPassword));
+        studentRepository.save(student);
+    }
+
+    @Override
+    public void saveStudentChanges(Student student, BasicInformationModel basicInformationModel) {
+        student.setFirstName(basicInformationModel.getFirstName());
+        student.setLastName(basicInformationModel.getLastName());
+        if(!student.getEmail().equals(basicInformationModel.getEmail())) {
+            student.setEmail(basicInformationModel.getEmail());
+            student.setEnabled(false);
+        }
+        studentRepository.save(student);
+    }
+
+    @Override
+    public void saveParentChanges(Student student, ParentInformationModel parentInformationModel) {
+        student.getParent().setFirstName(parentInformationModel.getParentFirst());
+        student.getParent().setLastName(parentInformationModel.getParentLast());
+        student.getParent().setPhoneNumber(parentInformationModel.getParentMobile());
         studentRepository.save(student);
     }
 }

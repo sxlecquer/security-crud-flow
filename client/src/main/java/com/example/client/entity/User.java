@@ -9,8 +9,4 @@ public abstract class User {
     protected String email;
     protected String password;
     protected String role;
-
-    public String getEmail() {
-        return email;
-    }
 }

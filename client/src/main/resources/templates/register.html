@@ -29,6 +29,7 @@
             background-color: whitesmoke;
             border: 1px solid royalblue;
             border-radius: 3px;
+            cursor: text;
         }
 
         input[type=tel]::placeholder {
@@ -53,6 +54,12 @@
         .warn-text {
             padding-left: 7px;
             font-size: 16px;
+        }
+
+        .password-require {
+            font-size: 11px;
+            color: gray;
+            padding-top: 7px;
         }
     </style>
     <script>
@@ -165,6 +172,13 @@
             <tr>
                 <td style="color: red" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></td>
             </tr>
+            <tr>
+                <td>
+                    <div class="password-require">
+                        Password must contain at least 6 characters including<br>one uppercase letter, one lowercase letter and one number.
+                    </div>
+                </td>
+            </tr>
         </table>
 
         <div class="warning" th:if="${userExists}">
@@ -180,12 +194,6 @@
                'color: white; font-size: 10px; border-radius: 3px; text-align: center; border: none; cursor: pointer;'"/>
         <input type="submit" value="Home" th:if="${needForStaff}" style="margin-top: 10px; margin-left: 7px; height: 27px; width: 55px; background-color: royalblue;
                color: white; font-size: 10px; border-radius: 3px; text-align: center; border: none; cursor: pointer;" />
-        <!--<label for="first" th:for="${#ids.next('firstName')}">First Name:</label> <br>
-        <input type="text" th:field="*{firstName}" id="first" /> <br>
-        <label for="last" th:for="${#ids.next('lastName')}">Last Name:</label> <br>
-        <input type="text" th:field="*{lastName}" id="last" /> <br>-->
     </form>
-
 </body>
-
 </html>

@@ -2,7 +2,7 @@ package com.example.client.controller;
 
 import com.example.client.annotation.FieldsValueMatch;
 import com.example.client.entity.*;
-import com.example.client.event.RegistrationCompleteEvent;
+import com.example.client.event.EmailVerificationEvent;
 import com.example.client.model.*;
 import com.example.client.service.CuratorService;
 import com.example.client.service.LecturerService;
@@ -31,8 +31,10 @@ import java.util.UUID;
 @SessionAttributes({"studentEmail", "verifyToken", "userEmail", "currentUser"})
 public class UniversityController {
     // TODO:
+    //  fix in profile:
+    //      add profile ref on home page,
+    //      implement proper email sending :)
     //  realize:
-    //      "change password" func,
     //      mappings for each entity role,
     //      auth-server and login using OAuth2.0....
 
@@ -53,6 +55,8 @@ public class UniversityController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    private User currentUser;
 
     @GetMapping("/home")
     public String homePage() {
@@ -87,7 +91,7 @@ public class UniversityController {
             return "register";
         }
         Student student = studentService.register(studentModel);
-        publisher.publishEvent(new RegistrationCompleteEvent(student));
+        publisher.publishEvent(new EmailVerificationEvent(student));
         redirectAttributes.addFlashAttribute("studentEmail", student.getEmail());
         redirectAttributes.addFlashAttribute("verifyToken", studentService.findVerificationTokenByStudent(student).getToken());
         return "redirect:/verify-email";
@@ -156,11 +160,20 @@ public class UniversityController {
             bindingResult.addError(fieldError);
             return "login";
         }
+        currentUser = userService.findUserByEmailAndPassword(userModel.getEmail(), userModel.getPassword());
         return "redirect:/home";
     }
 
     @GetMapping("/reset-password")
-    public String resetPassword(@ModelAttribute("emailModel") EmailModel emailModel) {
+    public String resetPassword(@ModelAttribute("emailModel") EmailModel emailModel,
+                                final HttpServletRequest httpServletRequest,
+                                Model model) {
+        if(currentUser != null) {
+            emailModel.setEmail(currentUser.getEmail());
+            String token = generatePasswordTokenAndSendMail(currentUser, httpServletRequest);
+            model.addAttribute("passwordToken", token);
+            model.addAttribute("linkSent", true);
+        }
         return "reset_password";
     }
 
@@ -168,8 +181,7 @@ public class UniversityController {
     public String resetPassword(@Valid @ModelAttribute("emailModel") EmailModel emailModel,
                                 BindingResult bindingResult,
                                 final HttpServletRequest httpServletRequest,
-                                Model model
-    ) {
+                                Model model) {
         if(bindingResult.hasErrors()) {
             return "reset_password";
         }
@@ -182,10 +194,8 @@ public class UniversityController {
             }
         }
         if(user != null) {
-            String token = UUID.randomUUID().toString();
+            String token = generatePasswordTokenAndSendMail(user, httpServletRequest);
             model.addAttribute("passwordToken", token);
-            userService.savePasswordToken(user, token);
-            sendResetPasswordMail(applicationUrl(httpServletRequest), token);
             model.addAttribute("linkSent", true);
         } else {
             FieldError fieldError = new FieldError("passwordModel", "email", emailModel.getEmail(),
@@ -218,7 +228,7 @@ public class UniversityController {
         } else if(response == TokenState.EXPIRED) {
             return "password_token/expired";
         }
-        User user = userService.getUserByPasswordToken(userService.findPasswordToken(token));
+        User user = userService.findUserByPasswordToken(userService.findPasswordToken(token));
         redirectAttributes.addFlashAttribute("userEmail",
                 user.getEmail());
         redirectAttributes.addFlashAttribute("currentUser", user);
@@ -254,7 +264,84 @@ public class UniversityController {
             return "new_password";
         }
         userService.changePassword(user, resetPasswordModel.getNewPassword());
+        currentUser = user;
         return "success_change_password";
+    }
+
+    @GetMapping("/change-password")
+    public String changePassword(@ModelAttribute("changePasswordModel") ChangePasswordModel changePasswordModel) {
+        return "change_password";
+    }
+
+    @PatchMapping("/change-password")
+    public String changePassword(@Valid @ModelAttribute("changePasswordModel") ChangePasswordModel changePasswordModel,
+                                 BindingResult bindingResult) {
+        if(!Objects.equals(changePasswordModel.getNewPassword(), changePasswordModel.getConfirmNewPassword())) {
+            Class<? extends ChangePasswordModel> clazz = changePasswordModel.getClass();
+            FieldsValueMatch fieldsValueMatch = clazz.getAnnotation(FieldsValueMatch.class);
+            FieldError fieldError = new FieldError("changePasswordModel", "confirmNewPassword", fieldsValueMatch.message());
+            bindingResult.addError(fieldError);
+            return "change_password";
+        }
+        if(bindingResult.hasErrors()) {
+            return "change_password";
+        }
+        if(userService.findUserByEmailAndPassword(currentUser.getEmail(), changePasswordModel.getOldPassword()) == null) {
+            FieldError fieldError = new FieldError("changePasswordModel", "oldPassword",
+                    changePasswordModel.getOldPassword(), false, null, null, "Old password is incorrect");
+            bindingResult.addError(fieldError);
+            return "change_password";
+        }
+        userService.changePassword(currentUser, changePasswordModel.getNewPassword());
+        return "success_change_password";
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(@ModelAttribute("basicInformation") BasicInformationModel basicInformationModel) {
+        basicInformationModel.setFirstName(currentUser.getFirstName());
+        basicInformationModel.setLastName(currentUser.getLastName());
+        basicInformationModel.setEmail(currentUser.getEmail());
+        basicInformationModel.setRole(currentUser.getRole());
+        return "profile";
+    }
+
+    @PatchMapping("/profile")
+    public String showProfile(@Valid @ModelAttribute("basicInformation") BasicInformationModel basicInformationModel,
+                              BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes) {
+        basicInformationModel.setRole(currentUser.getRole());
+        if(bindingResult.hasErrors()) {
+            return "profile";
+        }
+        Student tempStudent = new Student();
+        tempStudent.setEmail(currentUser.getEmail());
+        userService.saveUserChanges(currentUser, basicInformationModel);
+        if(!tempStudent.getEmail().equals(basicInformationModel.getEmail())) {
+            publisher.publishEvent(new EmailVerificationEvent((Student) currentUser));
+            redirectAttributes.addFlashAttribute("studentEmail", currentUser.getEmail());
+            redirectAttributes.addFlashAttribute("verifyToken", studentService.findVerificationTokenByStudent((Student) currentUser).getToken());
+            return "redirect:/verify-email";
+        }
+        return "success_change_profile";
+    }
+
+    @GetMapping("/parent-data")
+    public String showParentData(@ModelAttribute("parentInformation") ParentInformationModel parentInformationModel) {
+        Student currentStudent = (Student) currentUser;
+        parentInformationModel.setParentFirst(currentStudent.getParent().getFirstName());
+        parentInformationModel.setParentLast(currentStudent.getParent().getLastName());
+        parentInformationModel.setParentMobile(currentStudent.getParent().getPhoneNumber());
+        return "parent_data";
+    }
+
+    @PatchMapping("/parent-data")
+    public String showParentData(@Valid @ModelAttribute("parentInformation") ParentInformationModel parentInformationModel,
+                                 BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "parent_data";
+        }
+        studentService.saveParentChanges((Student) currentUser, parentInformationModel);
+        return "success_change_profile";
     }
 
     // ---------------Model attributes---------------
@@ -308,5 +395,12 @@ public class UniversityController {
     private String applicationUrl(HttpServletRequest request) {
         return request.getScheme() + "://" + request.getServerName() + ":"
                 + request.getServerPort() + request.getContextPath();
+    }
+
+    private String generatePasswordTokenAndSendMail(User user, HttpServletRequest request) {
+        String token = UUID.randomUUID().toString();
+        userService.savePasswordToken(user, token);
+        sendResetPasswordMail(applicationUrl(request), token);
+        return token;
     }
 }

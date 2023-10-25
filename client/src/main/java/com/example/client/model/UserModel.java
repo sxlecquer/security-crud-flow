@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserModel {
-    @NotEmpty(message = "Email should not be empty")
+    @NotEmpty(message = "Fill in this field")
     private String email;
 
-    @NotEmpty(message = "Password should not be empty")
+    @NotEmpty(message = "Fill in this field")
     private String password;
 }

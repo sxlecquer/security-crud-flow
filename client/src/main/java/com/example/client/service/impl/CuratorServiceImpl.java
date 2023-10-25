@@ -2,6 +2,7 @@ package com.example.client.service.impl;
 
 import com.example.client.entity.Curator;
 import com.example.client.entity.Student;
+import com.example.client.model.BasicInformationModel;
 import com.example.client.repository.CuratorRepository;
 import com.example.client.service.CuratorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +93,13 @@ public class CuratorServiceImpl implements CuratorService {
     @Override
     public void changePassword(Curator curator, String newPassword) {
         curator.setPassword(passwordEncoder.encode(newPassword));
+        curatorRepository.save(curator);
+    }
+
+    @Override
+    public void saveCuratorChanges(Curator curator, BasicInformationModel basicInformationModel) {
+        curator.setFirstName(basicInformationModel.getFirstName());
+        curator.setLastName(basicInformationModel.getLastName());
         curatorRepository.save(curator);
     }
 }

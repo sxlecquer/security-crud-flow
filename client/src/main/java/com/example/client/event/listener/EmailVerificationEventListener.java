@@ -1,7 +1,7 @@
 package com.example.client.event.listener;
 
 import com.example.client.entity.Student;
-import com.example.client.event.RegistrationCompleteEvent;
+import com.example.client.event.EmailVerificationEvent;
 import com.example.client.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +13,12 @@ import java.util.Random;
 
 @Component
 @Slf4j
-public class RegistrationCompleteEventListener implements ApplicationListener<RegistrationCompleteEvent> {
+public class EmailVerificationEventListener implements ApplicationListener<EmailVerificationEvent> {
     @Autowired
     private StudentService studentService;
 
     @Override
-    public void onApplicationEvent(RegistrationCompleteEvent event) {
+    public void onApplicationEvent(EmailVerificationEvent event) {
         Student student = event.getStudent();
         Random random = new Random();
         String token = String.format(Locale.ROOT, "%06d", random.nextInt(1000000));

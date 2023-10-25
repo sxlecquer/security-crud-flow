@@ -1,6 +1,7 @@
 package com.example.client.service.impl;
 
 import com.example.client.entity.*;
+import com.example.client.model.BasicInformationModel;
 import com.example.client.repository.PasswordTokenRepository;
 import com.example.client.service.CuratorService;
 import com.example.client.service.LecturerService;
@@ -9,6 +10,7 @@ import com.example.client.service.UserService;
 import com.example.client.token.TokenState;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -28,6 +30,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private LecturerService lecturerService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void savePasswordToken(User user, String token) {
@@ -62,12 +67,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void changePassword(User user, String newPassword) {
+        if(user instanceof Student) {
+            studentService.changePassword((Student) user, newPassword);
+        } else if(user instanceof Curator) {
+            curatorService.changePassword((Curator) user, newPassword);
+        } else if(user instanceof Lecturer) {
+            lecturerService.changePassword((Lecturer) user, newPassword);
+        }
+    }
+
+    @Override
     public PasswordToken findPasswordToken(String token) {
         return passwordTokenRepository.findByToken(token);
     }
 
     @Override
-    public User getUserByPasswordToken(PasswordToken passwordToken) {
+    public User findUserByPasswordToken(PasswordToken passwordToken) {
         String userAndId = passwordToken.getUserAndId();
         String[] array = userAndId.split(" ");
         String user = array[0];
@@ -81,13 +97,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(User user, String newPassword) {
+    public User findUserByEmailAndPassword(String email, String password) {
+        Student student = studentService.findByEmail(email);
+        if(student != null && passwordEncoder.matches(password, student.getPassword()))
+            return student;
+        Curator curator = curatorService.findByEmail(email);
+        if(curator != null && passwordEncoder.matches(password, curator.getPassword()))
+            return curator;
+        Lecturer lecturer = lecturerService.findByEmail(email);
+        if(lecturer != null && passwordEncoder.matches(password, lecturer.getPassword()))
+            return lecturer;
+        return null;
+    }
+
+    @Override
+    public void saveUserChanges(User user, BasicInformationModel basicInformationModel) {
         if(user instanceof Student) {
-            studentService.changePassword((Student) user, newPassword);
+            studentService.saveStudentChanges((Student) user, basicInformationModel);
         } else if(user instanceof Curator) {
-            curatorService.changePassword((Curator) user, newPassword);
+            curatorService.saveCuratorChanges((Curator) user, basicInformationModel);
         } else if(user instanceof Lecturer) {
-            lecturerService.changePassword((Lecturer) user, newPassword);
+            lecturerService.saveLecturerChanges((Lecturer) user, basicInformationModel);
         }
     }
 }

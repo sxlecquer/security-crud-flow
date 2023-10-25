@@ -24,16 +24,10 @@ public class Curator extends User {
     private Long curatorId;
     private String firstName;
     private String lastName;
-    @Getter(AccessLevel.NONE)
     private String email;
     private String password;
     private String role = "MODERATOR";
 
     @OneToMany(mappedBy = "curator")
     private List<Student> students = new ArrayList<>();
-
-    @Override
-    public String getEmail() {
-        return email;
-    }
 }

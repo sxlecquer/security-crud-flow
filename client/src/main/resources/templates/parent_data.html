@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Parent data</title>
+    <style>
+        h3 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 12px;
+        }
+
+        input[type=text], input[type=tel] {
+            height: 17px;
+            background-color: whitesmoke;
+            border: 1px solid royalblue;
+            border-radius: 3px;
+            cursor: text;
+        }
+
+        input[type=tel]::placeholder {
+            font-size: 11px;
+            color: lightslategray;
+        }
+
+        input[type=submit] {
+            margin-top: 10px;
+            align-content: center;
+            height: 27px;
+            width: 55px;
+            background-color: royalblue;
+            color: white;
+            font-size: 10px;
+            border-radius: 3px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .save {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h3>Parent Data</h3>
+    <hr>
+
+    <form th:method="patch" th:action="@{/parent-data}" th:object="${parentInformation}">
+        <table>
+            <tr>
+                <td><label for="p_first" th:for="${#ids.next('p_firstName')}">First Name:</label></td>
+            </tr>
+            <tr>
+                <td><input type="text" th:field="*{parentFirst}" id="p_first" /></td>
+            </tr>
+            <tr>
+                <td style="color: red" th:if="${#fields.hasErrors('parentFirst')}" th:errors="*{parentFirst}"></td>
+            </tr>
+
+            <tr>
+                <td style="line-height: 5px">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td><label for="p_last" th:for="${#ids.next('p_lastName')}">Last Name:</label></td>
+            </tr>
+            <tr>
+                <td><input type="text" th:field="*{parentLast}" id="p_last" /></td>
+            </tr>
+            <tr>
+                <td style="color: red" th:if="${#fields.hasErrors('parentLast')}" th:errors="*{parentLast}"></td>
+            </tr>
+
+            <tr>
+                <td style="line-height: 5px">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td><label for="p_phone" th:for="${#ids.next('p_phoneNumber')}">Phone Number:</label></td>
+            </tr>
+            <tr>
+                <td><input type="tel"  th:field="*{parentMobile}" id="p_phone" placeholder="+48-321-654-987" /></td>
+            </tr>
+            <tr>
+                <td style="color: red" th:if="${#fields.hasErrors('parentMobile')}" th:errors="*{parentMobile}"></td>
+            </tr>
+        </table>
+
+        <div class="save">
+            <input type="submit" value="Save"/>
+        </div>
+    </form>
+</body>
+</html>

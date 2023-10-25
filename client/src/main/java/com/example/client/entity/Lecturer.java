@@ -21,13 +21,7 @@ public class Lecturer extends User {
     private Long lecturerId;
     private String firstName;
     private String lastName;
-    @Getter(AccessLevel.NONE)
     private String email;
     private String password;
     private String role = "ADMIN";
-
-    @Override
-    public String getEmail() {
-        return email;
-    }
 }

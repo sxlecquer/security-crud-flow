@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <style>
+        h3 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 12px;
+        }
+
+        input[type=text] {
+            height: 17px;
+            background-color: whitesmoke;
+            border: 1px solid royalblue;
+            border-radius: 3px;
+            cursor: text;
+        }
+
+        input[type=submit] {
+            margin-top: 10px;
+            align-content: center;
+            height: 27px;
+            width: 55px;
+            background-color: royalblue;
+            color: white;
+            font-size: 10px;
+            border-radius: 3px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .save {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h3>My profile</h3>
+    <hr>
+
+    <form th:method="patch" th:action="@{/profile}" th:object="${basicInformation}">
+        <table>
+            <tr>
+                <td><label for="first" th:for="${#ids.next('firstName')}">First Name:</label></td>
+            </tr>
+            <tr>
+                <td><input type="text" th:field="*{firstName}" id="first" /></td>
+            </tr>
+            <tr>
+                <td style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></td>
+            </tr>
+
+            <tr><td style="line-height: 5px">&nbsp;</td></tr>
+
+            <tr>
+                <td><label for="last" th:for="${#ids.next('lastName')}">Last Name:</label></td>
+            </tr>
+            <tr>
+                <td><input type="text" th:field="*{lastName}" id="last" /></td>
+            </tr>
+            <tr>
+                <td style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></td>
+            </tr>
+
+            <tr><td style="line-height: 5px">&nbsp;</td></tr>
+
+            <tr>
+                <td><label for="email" th:for="${#ids.next('email')}">Email:</label></td>
+            </tr>
+            <tr>
+                <td><input type="text" th:field="*{email}" id="email" th:readonly="*{!role.equals('USER')}"
+                           th:style="*{!role.equals('USER')} ? 'cursor: not-allowed'" th:onfocus="*{!role.equals('USER')} ? 'this.blur()'"/></td>
+            </tr>
+            <tr>
+                <td style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
+            </tr>
+
+            <tr><td style="line-height: 0">&nbsp;</td></tr>
+
+            <tr>
+                <td style="word-spacing: 38px">
+                    <span th:if="*{role.equals('USER')}">
+                        <a th:href="@{/parent-data}" style="font-size: 11px; word-spacing: initial">Parent data</a>
+                    </span>
+                    <a th:href="@{/change-password}" style="font-size: 11px; word-spacing: initial">Change password</a>
+                </td>
+            </tr>
+        </table>
+
+        <div class="save">
+            <input type="submit" value="Save"/>
+        </div>
+    </form>
+</body>
+</html>

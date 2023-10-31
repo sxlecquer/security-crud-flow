@@ -31,9 +31,8 @@ import java.util.UUID;
 @SessionAttributes({"studentEmail", "verifyToken", "userEmail", "currentUser"})
 public class UniversityController {
     // TODO:
-    //  fix in profile:
-    //      add profile ref on home page,
-    //      implement proper email sending :)
+    //  add profile ref on home page,
+    //  implement proper email sending :)
     //  realize:
     //      mappings for each entity role,
     //      auth-server and login using OAuth2.0....

@@ -28,6 +28,9 @@ public class Curator extends User {
     private String password;
     private String role = "MODERATOR";
 
-    @OneToMany(mappedBy = "curator")
+    @OneToMany(
+            mappedBy = "curator",
+            fetch = FetchType.EAGER
+    )
     private List<Student> students = new ArrayList<>();
 }

@@ -1,6 +1,20 @@
 server:
   port: 8080
 
+session:
+  key: S0MekEy321
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security:
+#          TRACE
+#    com:
+#      example:
+#        client:
+#          DEBUG
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/universitydb
@@ -15,3 +29,26 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id:
+            client-secret:
+            scope:
+              - user:email
+              - read:user
+          google:
+            client-id:
+            client-secret:
+            scope:
+              - openid
+              - email
+              - profile
+#  session:
+#    store-type: jdbc
+#    timeout: 5m
+#    jdbc:
+#      initialize-schema: always

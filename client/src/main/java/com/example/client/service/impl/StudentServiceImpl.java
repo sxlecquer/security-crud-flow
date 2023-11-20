@@ -64,7 +64,13 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void saveVerificationToken(Student student, String token) {
-        VerificationToken verificationToken = new VerificationToken(student, token);
+        VerificationToken verificationToken = verificationTokenRepository.findByStudent(student);
+        if(verificationToken == null) {
+            verificationToken = new VerificationToken(student, token);
+        } else {
+            verificationToken.setToken(token);
+            verificationToken.setExpirationTime(verificationToken.calculateExpirationTime());
+        }
         verificationTokenRepository.save(verificationToken);
     }
 
@@ -141,6 +147,11 @@ public class StudentServiceImpl implements StudentService {
         student.getParent().setFirstName(parentInformationModel.getParentFirst());
         student.getParent().setLastName(parentInformationModel.getParentLast());
         student.getParent().setPhoneNumber(parentInformationModel.getParentMobile());
+        studentRepository.save(student);
+    }
+
+    @Override
+    public void save(Student student) {
         studentRepository.save(student);
     }
 }

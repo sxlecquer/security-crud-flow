@@ -1,6 +1,5 @@
 package com.example.client.service.impl;
 
-import com.example.client.entity.Curator;
 import com.example.client.entity.Lecturer;
 import com.example.client.model.BasicInformationModel;
 import com.example.client.repository.LecturerRepository;

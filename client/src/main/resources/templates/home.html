@@ -2,11 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>University</title>
-    <style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style th:inline="text">
+        body {
+            background: url([[@{/images/university.jpg}]]) no-repeat center center fixed;
+            background-size: cover;
+        }
+
         h3 {
             text-align: center;
             text-transform: uppercase;
+            margin-top: 9px;
         }
 
         a {
@@ -16,26 +24,42 @@
 
         .staff {
             text-align: center;
-            width: 50%;
-            margin: auto;
-            font-size: 16px;
-            border: 2px dashed dodgerblue;
-            padding: 10px;
+            width: 70%;
+            font-size: 18px;
+            background-color: dimgray;
+            padding: 20px;
+            margin: 30px auto auto;
+            border-radius: 10px;
+            color: ghostwhite;
         }
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand" style="font-size: 18px" th:text="'Hi, ' + ${username}"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html" th:href="@{/profile}">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Sign out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <h3 th:text="#{home.welcome}">Welcome to our University Home Page!</h3>
-    <hr style="size: 6px">
     <div class="staff" th:if="${needForStaff}">Our university will hire a person for the position of curator.<br>
         If this is interesting for you, and you have all the necessary skills, please contact us:<br>
-        <a href="mailto:admission@univ.com">admission@univ.com</a>
+        <a style="color: ghostwhite; font-size: 18px" href="mailto:admission@univ.com">admission@univ.com</a>
     </div>
-    <br>
-    <a href="register.html" th:href="@{/register}">Register</a>
-    <br>
-    <a href="login.html" th:href="@{/login}">Log in</a>
-    <br>
-    <a href="profile.html" th:href="@{/profile}">My profile</a>
 </body>
 </html>

@@ -36,4 +36,6 @@ public interface StudentService {
     void saveStudentChanges(Student student, BasicInformationModel basicInformationModel);
 
     void saveParentChanges(Student student, ParentInformationModel parentInformationModel);
+
+    void save(Student student);
 }

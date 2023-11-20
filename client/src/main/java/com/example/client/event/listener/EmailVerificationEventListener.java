@@ -23,7 +23,6 @@ public class EmailVerificationEventListener implements ApplicationListener<Email
         Random random = new Random();
         String token = String.format(Locale.ROOT, "%06d", random.nextInt(1000000));
         studentService.saveVerificationToken(student, token);
-//        String url = event.getApplicationUrl() + "/verifyEmail?token=" + token;
         log.info("Verification code to verify your email:\n{}", token);
     }
 }

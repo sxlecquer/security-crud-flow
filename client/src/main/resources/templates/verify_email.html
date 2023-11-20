@@ -77,7 +77,7 @@
     <!--/*@thymesVar id="verificationToken" type="com.example.client.model.VerificationTokenModel"*/-->
     <!--/*@thymesVar id="studentEmail" type="java.lang.String"*/-->
     <!--/*@thymesVar id="verifyToken" type="java.lang.String"*/-->
-    <form th:method="post" th:action="@{/verify-email}" th:object="${verificationToken}">
+    <form th:method="post" th:action="@{/register/verify-email}" th:object="${verificationToken}">
         <div class="email">
             <img class="email-img" src="../static/images/email.png" th:src="@{/images/email.png}" alt="email sent"
                  title="email">
@@ -87,7 +87,7 @@
                 <br>
                 <br>
                 If an email doesn't arrive soon,<br>look in your spam folder or have us to
-                <a th:href="@{/resend-verification-code(email=${studentEmail}, token=${verifyToken})}">send it again</a>.
+                <a th:href="@{/register/resend-verification-code(email=${studentEmail}, token=${verifyToken})}">send it again</a>.
             </div>
         </div>
         <table>
@@ -95,7 +95,7 @@
                 <td><label for="token" th:for="${#ids.next('userToken')}">Verification code:</label></td>
             </tr>
             <tr>
-                <td><input type="text" th:field="*{userToken}" id="token"/></td>
+                <td><input type="text" th:field="*{userToken}" id="token" autofocus /></td>
             </tr>
         </table>
         <div class="error">

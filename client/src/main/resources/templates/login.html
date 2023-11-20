@@ -2,84 +2,130 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
-        h3 {
-            text-align: center;
-            text-transform: uppercase;
+        .login-img {
+            margin-top: 20px;
+            margin-bottom: 13px;
+            width: 170px;
+            height: 170px;
         }
 
-        table {
-            margin-left: auto;
+        .google-img, .github-img {
+            width: 33px;
+            height: 33px
+        }
+
+        .text-error {
+            text-align: center;
             margin-right: auto;
-            font-size: 12px;
-        }
-
-        input[type=text], input[type=password] {
-            height: 17px;
-            background-color: whitesmoke;
-            border: 1px solid royalblue;
+            margin-left: auto;
+            margin-bottom: 10px;
+            color: darkred;
+            font-size: 15px;
+            border: 1px solid brown;
             border-radius: 3px;
-            cursor: text;
+            width: 350px;
+            background-color: lightcoral;
+            padding: 7px;
         }
 
-        input[type=submit] {
-            margin-top: 10px;
-            align-content: center;
-            height: 27px;
-            width: 55px;
-            background-color: royalblue;
-            color: white;
-            font-size: 10px;
+        .text-success {
+            text-align: center;
+            margin-right: auto;
+            margin-left: auto;
+            margin-bottom: 10px;
+            color: green;
+            font-size: 15px;
+            border: 1px solid mediumseagreen;
             border-radius: 3px;
-            text-align: center;
-            border: none;
-            cursor: pointer;
-        }
-
-        .login {
-            text-align: center;
+            width: 350px;
+            background-color: palegreen;
+            padding: 7px;
         }
 
         .password {
-            word-spacing: 40px;
+            word-spacing: 145px;
+            text-align: left;
+            padding-bottom: 7px;
+        }
+
+        .submit {
+            text-align: left;
+            padding-top: 15px;
+        }
+
+        .or {
+            font-size: 13px;
+            padding: 0 8px;
+            color: darkgray;
         }
     </style>
 </head>
 <body>
-    <h3>Log in to your account</h3>
-    <hr>
-
-    <form th:method="post" th:action="@{/login}" th:object="${user}">
-        <table>
-            <tr>
-                <td><label for="email" th:for="${#ids.next('email')}">Email:</label></td>
-            </tr>
-            <tr>
-                <td><input type="text" th:field="*{email}" id="email"/></td>
-            </tr>
-            <tr>
-                <td style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
-            </tr>
-
-            <tr><td style="line-height: 5px">&nbsp;</td></tr>
-
-            <tr>
-                <td class="password">
-                    <label for="password" th:for="${#ids.next('password')}">Password:</label>
-                    <a style="font-size: 10px; word-spacing: initial" th:href="@{/reset-password}">Forgot password?</a>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="password" th:field="*{password}" id="password"/></td>
-            </tr>
-            <tr>
-                <td style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
-            </tr>
-        </table>
-        <div class="login">
-            <input type="submit" value="Log in"/>
+    <div class="container-fluid text-center">
+        <div>
+            <img class="login-img" src="../static/images/login.png" th:src="@{/images/login.png}" alt="login" title="sign in">
         </div>
-    </form>
+        <form th:action="@{/login}" method="post" th:object="${emailModel}"
+              style="max-width: 350px; margin: 0 auto;">
+
+            <div th:if="${param.error}">
+                <p class="text-error">Incorrect email address or password</p>
+            </div>
+
+            <div th:if="${param.logout}">
+                <p class="text-success">You have been signed out</p>
+            </div>
+
+            <div class="border border-secondary p-3 rounded">
+                <p>SIGN IN TO YOUR ACCOUNT</p>
+                <hr>
+                <p style="text-align: left">
+                    <label style="padding-bottom: 7px" for="email" th:for="${#ids.next('email')}">Email:</label>
+                    <input type="email" th:field="*{email}" id="email" name="email" class="form-control" required autofocus/>
+                </p>
+                <div class="password">
+                    <label for="password" th:for="${#ids.next('password')}">Password:</label>
+                    <a style="font-size: 12px; word-spacing: initial" th:href="@{/login/reset-password}">Forgot password?</a>
+                </div>
+                <input type="password" id="password" name="password" class="form-control" required />
+                <div class="submit">
+                    <label for="remember-me"></label>
+                    <input type="checkbox" id="remember-me" name="remember-me" />&nbsp;Remember me
+                    <span style="padding-left: 111px">
+                        <input type="submit" value="Sign in" class="btn btn-primary" />
+                    </span>
+                </div>
+
+                <div style="display: flex; align-items: center; margin-top: 4px">
+                    <hr style="flex: 1;">
+                    <div class="or">OR</div>
+                    <hr style="flex: 1;">
+                </div>
+                <div class="container mt-0">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a style="background-color: whitesmoke; border: 1px solid lightgray" th:href="@{/oauth2/authorization/google}" class="btn">
+                                <img class="google-img" src="../static/images/google.png" th:src="@{/images/google.png}" alt="google icon" title="Google">
+                                <span style="font-size: 15px; padding-left: 5px">Google</span>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a style="background-color: whitesmoke; border: 1px solid lightgray" th:href="@{/oauth2/authorization/github}" class="btn">
+                                <img class="github-img" src="../static/images/github.png" th:src="@{/images/github.png}" alt="github icon" title="Github">
+                                <span style="font-size: 15px; padding-left: 5px">GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div style="font-size: 15px; padding-top: 17px">
+                    Don't have an account? <a th:href="@{/register}">Sign up</a>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

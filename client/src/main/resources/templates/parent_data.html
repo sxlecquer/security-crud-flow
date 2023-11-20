@@ -51,7 +51,7 @@
     <h3>Parent Data</h3>
     <hr>
 
-    <form th:method="patch" th:action="@{/parent-data}" th:object="${parentInformation}">
+    <form th:method="patch" th:action="@{/profile/parent-data}" th:object="${parentInformation}">
         <table>
             <tr>
                 <td><label for="p_first" th:for="${#ids.next('p_firstName')}">First Name:</label></td>

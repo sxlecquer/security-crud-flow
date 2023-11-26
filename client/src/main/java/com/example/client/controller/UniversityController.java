@@ -29,6 +29,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -38,7 +40,6 @@ import java.util.UUID;
 @SessionAttributes({"studentEmail", "verifyToken", "userEmail", "currentUser"})
 public class UniversityController {
     // TODO:
-    //  fix mappings to work correct(make currentUser initialized when app restarts),
     //  create mappings for each entity role,
     //  set up web security,
     //  delete tokens from db when app starts ???
@@ -64,64 +65,19 @@ public class UniversityController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    private User currentUser;
+    private static final Map<Authentication, User> USER_MAP = new HashMap<>();
+
+    @GetMapping("/")
+    public String homePage() {
+        return "redirect:/home";
+    }
 
     @GetMapping("/home")
     public String homePage(Model model) {
-//        lecturerService.fillLecturerTable();
-//        curatorService.fillCuratorTable();
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof OAuth2User user) {
-            if (user.getAttribute("given_name") != null) {
-                model.addAttribute("username", user.getAttribute("given_name"));
-            } else if (user.getAttribute("name") != null) {
-                model.addAttribute("username", user.getAttribute("name"));
-            } else {
-                model.addAttribute("username", user.getAttribute("login"));
-            }
-            String email = user.getAttribute("email") != null ? user.getAttribute("email")
-                    : user.getAttribute("login") + "@github.com";
-            currentUser = studentService.findByEmail(email);
-        } else if(principal instanceof org.springframework.security.core.userdetails.User temp) {
-            String email = temp.getUsername();
-            currentUser = studentService.findByEmail(email);
-            if (currentUser == null) {
-                currentUser = curatorService.findByEmail(email);
-                if (currentUser == null) {
-                    currentUser = lecturerService.findByEmail(email);
-                }
-            }
-            model.addAttribute("username", currentUser.getFirstName());
-        }
+        User user = getUser();
+        if(user == null) user = initUser();
+        model.addAttribute("username", user.getFirstName());
         return "home";
-    }
-
-    @GetMapping("/login/process")
-    public String processLogin(RedirectAttributes redirectAttributes) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof OAuth2User user) {
-            String email = user.getAttribute("email") != null ? user.getAttribute("email")
-                    : user.getAttribute("login") + "@github.com";
-            currentUser = studentService.findByEmail(email);
-        } else if(principal instanceof org.springframework.security.core.userdetails.User temp) {
-            String email = temp.getUsername();
-            currentUser = studentService.findByEmail(email);
-            if (currentUser == null) {
-                currentUser = curatorService.findByEmail(email);
-                if (currentUser == null) {
-                    currentUser = lecturerService.findByEmail(email);
-                }
-            } else {
-                Student student = (Student) currentUser;
-                if(!student.isEnabled()) {
-                    publisher.publishEvent(new EmailVerificationEvent(student));
-                    redirectAttributes.addFlashAttribute("studentEmail", student.getEmail());
-                    redirectAttributes.addFlashAttribute("verifyToken", studentService.findVerificationTokenByStudent(student).getToken());
-                    return "redirect:/register/verify-email";
-                }
-            }
-        }
-        return "redirect:/home";
     }
 
     @GetMapping("/register")
@@ -214,7 +170,6 @@ public class UniversityController {
                         @RequestParam(value = "email", required = false) String email,
                         @ModelAttribute("verifyToken") String token,
                         RedirectAttributes redirectAttributes) {
-//        studentService.deleteById(66);
         model.addAttribute("email", email);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication == null || authentication instanceof AnonymousAuthenticationToken) {
@@ -231,13 +186,26 @@ public class UniversityController {
         return "redirect:/home";
     }
 
+    @GetMapping("/login/process")
+    public String processLogin(RedirectAttributes redirectAttributes) {
+        User user = initUser();
+        if(user instanceof Student student && !student.isEnabled()) {
+            publisher.publishEvent(new EmailVerificationEvent(student));
+            redirectAttributes.addFlashAttribute("studentEmail", student.getEmail());
+            redirectAttributes.addFlashAttribute("verifyToken", studentService.findVerificationTokenByStudent(student).getToken());
+            return "redirect:/register/verify-email";
+        }
+        return "redirect:/home";
+    }
+
     @GetMapping("/login/reset-password")
     public String resetPassword(@ModelAttribute("emailModel") EmailModel emailModel,
                                 final HttpServletRequest httpServletRequest,
                                 Model model) {
-        if(currentUser != null) {
-            emailModel.setEmail(currentUser.getEmail());
-            String token = generatePasswordTokenAndSendMail(currentUser, httpServletRequest);
+        User user;
+        if((user = initUser()) != null) {
+            emailModel.setEmail(user.getEmail());
+            String token = generatePasswordTokenAndSendMail(user, httpServletRequest);
             model.addAttribute("passwordToken", token);
             model.addAttribute("linkSent", true);
         }
@@ -295,8 +263,6 @@ public class UniversityController {
     @GetMapping("/login/save-password")
     public String savePassword(@RequestParam(value = "token", required = false) String token,
                                RedirectAttributes redirectAttributes) {
-        if(currentUser == null)
-            return "redirect:/home";
         TokenState response = userService.validatePasswordToken(token);
         if(response == TokenState.WRONG) {
             return "password_token/wrong";
@@ -341,12 +307,12 @@ public class UniversityController {
             return "new_password";
         }
         userService.changePassword(user, resetPasswordModel.getNewPassword());
-        currentUser = user;
         return "success_change_password";
     }
 
     @GetMapping("/change-password")
     public String changePassword(@ModelAttribute("changePasswordModel") ChangePasswordModel changePasswordModel) {
+        if(getUser() == null) initUser();
         return "change_password";
     }
 
@@ -363,22 +329,25 @@ public class UniversityController {
         if(bindingResult.hasErrors()) {
             return "change_password";
         }
-        if(userService.findUserByEmailAndPassword(currentUser.getEmail(), changePasswordModel.getOldPassword()) == null) {
+        User user = getUser();
+        if(userService.findUserByEmailAndPassword(user.getEmail(), changePasswordModel.getOldPassword()) == null) {
             FieldError fieldError = new FieldError("changePasswordModel", "oldPassword",
                     changePasswordModel.getOldPassword(), false, null, null, "Old password is incorrect");
             bindingResult.addError(fieldError);
             return "change_password";
         }
-        userService.changePassword(currentUser, changePasswordModel.getNewPassword());
+        userService.changePassword(user, changePasswordModel.getNewPassword());
         return "success_change_password";
     }
 
     @GetMapping("/profile")
     public String showProfile(@ModelAttribute("basicInformation") BasicInformationModel basicInformationModel) {
-        basicInformationModel.setFirstName(currentUser.getFirstName());
-        basicInformationModel.setLastName(currentUser.getLastName());
-        basicInformationModel.setEmail(currentUser.getEmail());
-        basicInformationModel.setRole(currentUser.getRole());
+        User user = getUser();
+        if(user == null) user = initUser();
+        basicInformationModel.setFirstName(user.getFirstName());
+        basicInformationModel.setLastName(user.getLastName());
+        basicInformationModel.setEmail(user.getEmail());
+        basicInformationModel.setRole(user.getRole());
         return "profile";
     }
 
@@ -386,18 +355,19 @@ public class UniversityController {
     public String showProfile(@Valid @ModelAttribute("basicInformation") BasicInformationModel basicInformationModel,
                               BindingResult bindingResult,
                               RedirectAttributes redirectAttributes) {
-        basicInformationModel.setRole(currentUser.getRole());
+        User user = getUser();
+        basicInformationModel.setRole(user.getRole());
         if(bindingResult.hasErrors()) {
             return "profile";
         }
         Student tempStudent = new Student();
-        tempStudent.setEmail(currentUser.getEmail());
-        userService.saveUserChanges(currentUser, basicInformationModel);
-        if(!tempStudent.getEmail().equals(currentUser.getEmail())) {
-            userDetailsService.updateRole(currentUser.getEmail(), "USER_NOT_VERIFIED");
-            publisher.publishEvent(new EmailVerificationEvent((Student) currentUser));
-            redirectAttributes.addFlashAttribute("studentEmail", currentUser.getEmail());
-            redirectAttributes.addFlashAttribute("verifyToken", studentService.findVerificationTokenByStudent((Student) currentUser).getToken());
+        tempStudent.setEmail(user.getEmail());
+        userService.saveUserChanges(user, basicInformationModel);
+        if(!tempStudent.getEmail().equals(user.getEmail())) {
+            userDetailsService.updateRole(user.getEmail(), "USER_NOT_VERIFIED");
+            publisher.publishEvent(new EmailVerificationEvent((Student) user));
+            redirectAttributes.addFlashAttribute("studentEmail", user.getEmail());
+            redirectAttributes.addFlashAttribute("verifyToken", studentService.findVerificationTokenByStudent((Student) user).getToken());
             return "redirect:/register/verify-email";
         }
         return "success_change_profile";
@@ -405,7 +375,9 @@ public class UniversityController {
 
     @GetMapping("/profile/parent-data")
     public String showParentData(@ModelAttribute("parentInformation") ParentInformationModel parentInformationModel) {
-        Student currentStudent = (Student) currentUser;
+        User user = getUser();
+        if(user == null) user = initUser();
+        Student currentStudent = (Student) user;
         parentInformationModel.setParentFirst(currentStudent.getParent().getFirstName());
         parentInformationModel.setParentLast(currentStudent.getParent().getLastName());
         parentInformationModel.setParentMobile(currentStudent.getParent().getPhoneNumber());
@@ -418,7 +390,7 @@ public class UniversityController {
         if(bindingResult.hasErrors()) {
             return "parent_data";
         }
-        studentService.saveParentChanges((Student) currentUser, parentInformationModel);
+        studentService.saveParentChanges((Student) getUser(), parentInformationModel);
         return "success_change_profile";
     }
 
@@ -476,5 +448,30 @@ public class UniversityController {
         userService.savePasswordToken(user, token);
         sendResetPasswordMail(applicationUrl(request), token);
         return token;
+    }
+
+    private User initUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        if (principal instanceof OAuth2User user) {
+            String email = user.getAttribute("email") != null ? user.getAttribute("email")
+                    : user.getAttribute("login") + "@github.com";
+            USER_MAP.put(authentication, studentService.findByEmail(email));
+        } else if(principal instanceof org.springframework.security.core.userdetails.User temp) {
+            String email = temp.getUsername();
+            User user = studentService.findByEmail(email);
+            if (user == null) {
+                user = curatorService.findByEmail(email);
+                if (user == null) {
+                    user = lecturerService.findByEmail(email);
+                }
+            }
+            USER_MAP.put(authentication, user);
+        }
+        return USER_MAP.get(authentication);
+    }
+
+    private User getUser() {
+        return USER_MAP.get(SecurityContextHolder.getContext().getAuthentication());
     }
 }

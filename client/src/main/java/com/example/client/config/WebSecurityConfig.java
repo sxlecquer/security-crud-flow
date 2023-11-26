@@ -50,11 +50,6 @@ public class WebSecurityConfig {
                         .permitAll())
                 .oauth2Login(oauth2Login -> oauth2Login
                         .loginPage("/login"))
-                /*.sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                        .invalidSessionUrl("/login?logout")
-                        .maximumSessions(1)
-                        .maxSessionsPreventsLogin(false))*/
                 .rememberMe(rememberMe -> rememberMe
                         .tokenRepository(persistentTokenRepository())
                         .key(sessionKey)
@@ -72,39 +67,4 @@ public class WebSecurityConfig {
         jdbcTokenRepository.setDataSource(dataSource);
         return jdbcTokenRepository;
     }
-
-    /*@Bean
-    public ClientRegistrationRepository clientRegistrationRepository() {
-        return new InMemoryClientRegistrationRepository(this.googleClientRegistration(), this.githubClientRegistration());
-    }*/
-
-    /*private ClientRegistration googleClientRegistration() {
-        return CommonOAuth2Provider.GOOGLE
-                .getBuilder("google")
-                .clientId("948355728137-ad9k5aguqka54f1796cudbvst64p8dgu.apps.googleusercontent.com")
-                .clientSecret("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")
-                .build();
-    }*/
-
-    /*private ClientRegistration githubClientRegistration() {
-        return CommonOAuth2Provider.GITHUB
-                .getBuilder("github")
-                .clientId("e715d1bd2388a137413a")
-                .clientSecret("c018620125b740207c83b27ee3f4af72deeb9ee6")
-                .scope("user:email")
-                .build();
-        return ClientRegistration.withRegistrationId("oidc-client")
-                .clientId("oidc-client")
-                .clientSecret("secret")
-                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUri("{baseUrl}/login/oauth2/code/oidc-client")
-                .scope("openid", "profile")
-                .authorizationUri("http://auth-server:9000/oauth2/authorize")
-                .tokenUri("http://auth-server:9000/oauth2/token")
-                .jwkSetUri("http://auth-server:9000/oauth2/jwks")
-                .issuerUri("http://auth-server:9000")
-                .clientName("OIDC-Client")
-                .build();
-    }*/
 }

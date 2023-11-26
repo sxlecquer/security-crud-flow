@@ -4,35 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fc62264-a8e9-4faf-b1c2-d879091c441b" name="Changes" comment="Creating OAuth2.0 authorization server module&#10;&#10;*Realizing CustomUserDetailsService class&#10;*Adding configuration in application.yml">
+    <list default="true" id="0fc62264-a8e9-4faf-b1c2-d879091c441b" name="Changes" comment="Realizing application security part&#10;&#10;*Editing the login page using Bootstrap:&#10;    - Realizing &quot;Remember me&quot; functionality using persistent token repository&#10;    - Realizing &quot;Login with OAuth2.0(Google or GitHub)&quot; functionality&#10;    - Processing ?error and ?logout params&#10;    - Removing /login post mapping&#10;*Adding security configuration in WebSecurityConfig class&#10;*Editing home page using Bootstrap:&#10;    - Adding a navigation bar or a drop-down list(for smaller screens) with logout and &quot;my profile&quot; functions&#10;    - Adding a background image and some other interface changes&#10;*Forcing users to verify their email:&#10;    - Redirecting users with not verified email to /verify-email after login, changing email in profile or registration&#10;*Adding /login/process get mapping in UniversityController(used in WebSecurityConfig)&#10;*Changing application mappings, e.g. /reset-password -&gt; /login/reset-password, /verify-email -&gt; /register/verify-email...">
       <change afterPath="$PROJECT_DIR$/authorization-server/src/main/java/com/example/oauthserver/config/AuthorizationServerConfig.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/authorization-server/src/main/java/com/example/oauthserver/config/DefaultSecurityConfig.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/authorization-server/src/main/java/com/example/oauthserver/service/CustomAuthenticationProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299/storage_v2/_src_/database/universitydb.jIu4XA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299/storage_v2/_src_/database/universitydb.jIu4XA/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/authorization-server/src/main/java/com/example/oauthserver/AuthorizationServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-server/src/main/java/com/example/oauthserver/AuthorizationServerApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/config/WebSecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/controller/UniversityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/controller/UniversityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Curator.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Curator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/event/listener/EmailVerificationEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/event/listener/EmailVerificationEventListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/CuratorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/CuratorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/LecturerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/LecturerServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/StudentServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/change_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/change_password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/new_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/new_password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/parent_data.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/parent_data.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/reset_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/reset_password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/verify_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/verify_email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/password_token/expired.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/password_token/expired.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/password_token/wrong.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/password_token/wrong.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +36,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="wip" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -184,7 +168,12 @@
       <workItem from="1700161728717" duration="18460000" />
       <workItem from="1700259492217" duration="13511000" />
       <workItem from="1700357349159" duration="21000" />
-      <workItem from="1700429488105" duration="10763000" />
+      <workItem from="1700429488105" duration="11835000" />
+      <workItem from="1700517766844" duration="5920000" />
+      <workItem from="1700605500552" duration="7162000" />
+      <workItem from="1700689870475" duration="8214000" />
+      <workItem from="1700765023128" duration="13263000" />
+      <workItem from="1700946268340" duration="11553000" />
     </task>
     <task id="LOCAL-00001" summary="Taking some steps to implement login functionality&#10;&#10;*Mappings: /login(login.html)&#10;*Adding UserModel with email and password&#10;*Improving code clarity and readability">
       <created>1694304613099</created>
@@ -228,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698792441774</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Realizing application security part&#10;&#10;*Editing the login page using Bootstrap:&#10;    - Realizing &quot;Remember me&quot; functionality using persistent token repository&#10;    - Realizing &quot;Login with OAuth2.0(Google or GitHub)&quot; functionality&#10;    - Processing ?error and ?logout params&#10;    - Removing /login post mapping&#10;*Adding security configuration in WebSecurityConfig class&#10;*Editing home page using Bootstrap:&#10;    - Adding a navigation bar or a drop-down list(for smaller screens) with logout and &quot;my profile&quot; functions&#10;    - Adding a background image and some other interface changes&#10;*Forcing users to verify their email:&#10;    - Redirecting users with not verified email to /verify-email after login, changing email in profile or registration&#10;*Adding /login/process get mapping in UniversityController(used in WebSecurityConfig)&#10;*Changing application mappings, e.g. /reset-password -&gt; /login/reset-password, /verify-email -&gt; /register/verify-email...">
+      <created>1700440515406</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1700440515406</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,6 +259,7 @@
     <MESSAGE value="Commit to amend (check TODO)" />
     <MESSAGE value="Realizing &quot;My profile&quot; functionality&#10;&#10;*Mappings: /profile(profile.html), /parent-data(parent_data.html)&#10;*Adding success_change_profile.html&#10;*Adding &quot;Change password&quot;(for all users) and &quot;Parent data&quot;(for student entity) links in /profile&#10;*Adding &quot;Forgot password?&quot; feature in /change-password&#10;*Renaming RegistrationCompleteEvent and RegistrationCompleteEventListener to EmailVerificationEvent and EmailVerificationEventListener respectively" />
     <MESSAGE value="Creating OAuth2.0 authorization server module&#10;&#10;*Realizing CustomUserDetailsService class&#10;*Adding configuration in application.yml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating OAuth2.0 authorization server module&#10;&#10;*Realizing CustomUserDetailsService class&#10;*Adding configuration in application.yml" />
+    <MESSAGE value="Realizing application security part&#10;&#10;*Editing the login page using Bootstrap:&#10;    - Realizing &quot;Remember me&quot; functionality using persistent token repository&#10;    - Realizing &quot;Login with OAuth2.0(Google or GitHub)&quot; functionality&#10;    - Processing ?error and ?logout params&#10;    - Removing /login post mapping&#10;*Adding security configuration in WebSecurityConfig class&#10;*Editing home page using Bootstrap:&#10;    - Adding a navigation bar or a drop-down list(for smaller screens) with logout and &quot;my profile&quot; functions&#10;    - Adding a background image and some other interface changes&#10;*Forcing users to verify their email:&#10;    - Redirecting users with not verified email to /verify-email after login, changing email in profile or registration&#10;*Adding /login/process get mapping in UniversityController(used in WebSecurityConfig)&#10;*Changing application mappings, e.g. /reset-password -&gt; /login/reset-password, /verify-email -&gt; /register/verify-email..." />
+    <option name="LAST_COMMIT_MESSAGE" value="Realizing application security part&#10;&#10;*Editing the login page using Bootstrap:&#10;    - Realizing &quot;Remember me&quot; functionality using persistent token repository&#10;    - Realizing &quot;Login with OAuth2.0(Google or GitHub)&quot; functionality&#10;    - Processing ?error and ?logout params&#10;    - Removing /login post mapping&#10;*Adding security configuration in WebSecurityConfig class&#10;*Editing home page using Bootstrap:&#10;    - Adding a navigation bar or a drop-down list(for smaller screens) with logout and &quot;my profile&quot; functions&#10;    - Adding a background image and some other interface changes&#10;*Forcing users to verify their email:&#10;    - Redirecting users with not verified email to /verify-email after login, changing email in profile or registration&#10;*Adding /login/process get mapping in UniversityController(used in WebSecurityConfig)&#10;*Changing application mappings, e.g. /reset-password -&gt; /login/reset-password, /verify-email -&gt; /register/verify-email..." />
   </component>
 </project>

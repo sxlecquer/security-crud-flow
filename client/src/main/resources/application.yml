@@ -47,8 +47,3 @@ spring:
               - openid
               - email
               - profile
-#  session:
-#    store-type: jdbc
-#    timeout: 5m
-#    jdbc:
-#      initialize-schema: always

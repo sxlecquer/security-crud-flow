@@ -10,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -48,7 +47,6 @@ public class CuratorServiceImpl implements CuratorService {
         for(Curator curator : findAll()) {
             if(curator.getStudents().size() < STUDENT_LIMIT) {
                 curator.getStudents().add(student);
-//                curatorRepository.save(curator);
                 return curator;
             }
         }
@@ -88,6 +86,11 @@ public class CuratorServiceImpl implements CuratorService {
     public Curator findById(int id) {
         Optional<Curator> curator = curatorRepository.findById((long) id);
         return curator.orElse(null);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        curatorRepository.deleteById((long) id);
     }
 
     @Override

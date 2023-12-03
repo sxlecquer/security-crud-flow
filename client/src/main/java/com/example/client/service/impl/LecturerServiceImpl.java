@@ -9,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -32,7 +31,7 @@ public class LecturerServiceImpl implements LecturerService {
 
     @Override
     public void fillLecturerTable() {
-        Lecturer lecturer1 = new Lecturer();
+        /*Lecturer lecturer1 = new Lecturer();
         lecturer1.setFirstName("Kimberly");
         lecturer1.setLastName("Harris");
         lecturer1.setEmail(lecturer1.getFirstName().toLowerCase(Locale.ROOT) + "." + lecturer1.getLastName().toLowerCase(Locale.ROOT) + "@univ.lec.com");
@@ -62,7 +61,7 @@ public class LecturerServiceImpl implements LecturerService {
         lecturer5.setEmail(lecturer5.getFirstName().toLowerCase(Locale.ROOT) + "." + lecturer5.getLastName().toLowerCase(Locale.ROOT) + "@univ.lec.com");
         lecturer5.setPassword(passwordEncoder.encode("Campbell123"));
 
-        lecturerRepository.saveAll(List.of(lecturer1, lecturer2, lecturer3, lecturer4, lecturer5));
+        lecturerRepository.saveAll(List.of(lecturer1, lecturer2, lecturer3, lecturer4, lecturer5));*/
     }
 
     @Override

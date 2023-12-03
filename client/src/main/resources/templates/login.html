@@ -85,13 +85,13 @@
                 <hr>
                 <p style="text-align: left">
                     <label style="padding-bottom: 7px" for="email" th:for="${#ids.next('email')}">Email:</label>
-                    <input type="email" th:field="*{email}" id="email" name="email" class="form-control" required autofocus/>
+                    <input type="email" th:field="*{email}" id="email" name="email" class="form-control border border-secondary-subtle" required autofocus/>
                 </p>
                 <div class="password">
                     <label for="password" th:for="${#ids.next('password')}">Password:</label>
                     <a style="font-size: 12px; word-spacing: initial" th:href="@{/login/reset-password}">Forgot password?</a>
                 </div>
-                <input type="password" id="password" name="password" class="form-control" required />
+                <input type="password" id="password" name="password" class="form-control border border-secondary-subtle" required />
                 <div class="submit">
                     <label for="remember-me"></label>
                     <input type="checkbox" id="remember-me" name="remember-me" />&nbsp;Remember me

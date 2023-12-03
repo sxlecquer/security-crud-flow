@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lecturer</title>
+    <style>
+        h3 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        input[type=submit] {
+            margin-top: 15px;
+            align-content: center;
+            height: 27px;
+            width: 55px;
+            background-color: brown;
+            color: white;
+            font-size: 10px;
+            border-radius: 3px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .info {
+            padding-top: 10px;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            line-height: 21px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Lecturer Information</h3>
+    <hr>
+
+    <div class="info">
+        <table>
+            <tr>
+                <td style="color: gray; font-size: 14px; line-height: 20px"><i>Basic information:</i></td>
+            </tr>
+            <tr>
+                <td style="padding-left: 27px" th:text="${lecturer.getFirstName() + ' ' + lecturer.getLastName()}"></td>
+            </tr>
+            <tr>
+                <td style="padding-left: 27px"><a th:href="@{mailto:__${lecturer.getEmail()}__}" th:text="${lecturer.getEmail()}"></a></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lecturers list</title>
+    <style>
+        h3 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        ol {
+            font-size: 16px;
+            list-style-position: inside;
+        }
+
+        .lecturers {
+            display: flex;
+            justify-content: center;
+            margin: 0 50px 0 0;
+            line-height: 23px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Lecturers list</h3>
+    <hr>
+
+    <div class="lecturers">
+        <ol>
+            <li th:each="lecturer : ${lecturers}">
+                <a th:href="@{lecturers/{id}(id=${lecturer.getLecturerId()})}"
+                   th:text="${lecturer.getFirstName() + ' ' + lecturer.getLastName()}"></a>
+            </li>
+        </ol>
+    </div>
+</body>
+</html>

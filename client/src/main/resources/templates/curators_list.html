@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Curators list</title>
+    <style>
+        h3 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        ol {
+            font-size: 16px;
+            list-style-position: inside;
+        }
+
+        .curators {
+            display: flex;
+            justify-content: center;
+            margin: 0 50px 0 0;
+            line-height: 23px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Curators list</h3>
+    <hr>
+
+    <div class="curators">
+        <ol>
+            <li th:each="curator : ${curators}">
+                <a th:href="@{curators/{id}(id=${curator.getCuratorId()})}"
+                   th:text="${curator.getFirstName() + ' ' + curator.getLastName()}"></a>
+            </li>
+        </ol>
+    </div>
+</body>
+</html>

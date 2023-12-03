@@ -37,10 +37,10 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeHttpRequest ->
                         authorizeHttpRequest
-//                                .requestMatchers("**").permitAll())
-                                .requestMatchers("/home").hasRole("USER")
+                                .requestMatchers("/students", "/curators/**", "/lecturers/**").hasRole("USER")
+                                .requestMatchers("/students/**").hasAnyRole("MODERATOR", "ADMIN")
                                 .requestMatchers("/register/verify-email").hasRole("USER_NOT_VERIFIED")
-                                .requestMatchers("/images/**", "/login/**", "/register/**").permitAll()
+                                .requestMatchers("/home", "/images/**", "/login/**", "/register/**").permitAll()
                                 .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")

@@ -80,7 +80,6 @@ public class StudentServiceImpl implements StudentService {
         if(verificationToken == null)
             return TokenState.WRONG;
         if(verificationToken.getExpirationTime().getTime() <= new Date().getTime()) {
-//            verificationTokenRepository.delete(verificationToken);
             return TokenState.EXPIRED;
         }
         Student student = verificationToken.getStudent();
@@ -110,8 +109,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void deleteById(int i) {
-        studentRepository.deleteById((long) i);
+    public void deleteById(int id) {
+        studentRepository.deleteById((long) id);
     }
 
     @Override

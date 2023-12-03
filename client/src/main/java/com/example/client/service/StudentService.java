@@ -1,7 +1,6 @@
 package com.example.client.service;
 
 import com.example.client.entity.Student;
-import com.example.client.entity.User;
 import com.example.client.entity.VerificationToken;
 import com.example.client.model.BasicInformationModel;
 import com.example.client.model.ParentInformationModel;
@@ -25,7 +24,7 @@ public interface StudentService {
 
     VerificationToken findVerificationTokenByStudent(Student student);
 
-    void deleteById(int i);
+    void deleteById(int id);
 
     Student findByEmail(String email);
 

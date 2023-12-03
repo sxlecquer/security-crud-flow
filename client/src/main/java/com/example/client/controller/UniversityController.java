@@ -40,9 +40,6 @@ import java.util.UUID;
 @SessionAttributes({"studentEmail", "verifyToken", "userEmail", "currentUser"})
 public class UniversityController {
     // TODO:
-    //  create mappings for each entity role,
-    //  set up web security,
-    //  delete tokens from db when app starts ???
     //  implement proper email sending :)
     @Autowired
     private UserService userService;
@@ -76,7 +73,7 @@ public class UniversityController {
     public String homePage(Model model) {
         User user = getUser();
         if(user == null) user = initUser();
-        model.addAttribute("username", user.getFirstName());
+        model.addAttribute("username", user != null ? user.getFirstName() : null);
         return "home";
     }
 
@@ -392,6 +389,57 @@ public class UniversityController {
         }
         studentService.saveParentChanges((Student) getUser(), parentInformationModel);
         return "success_change_profile";
+    }
+
+    @GetMapping("/students")
+    public String showAllStudents(Model model) {
+        model.addAttribute("students", studentService.findAll());
+        return "students_list";
+    }
+
+    @GetMapping("/students/{id}")
+    public String showStudent(@PathVariable("id") int id, Model model) {
+        Student student = studentService.findById(id);
+        model.addAttribute("student", student);
+        return "student_info";
+    }
+
+    @DeleteMapping("/students/{id}")
+    public String deleteStudent(@PathVariable("id") int id) {
+        studentService.deleteById(id);
+        return "redirect:/students";
+    }
+
+    @GetMapping("/curators")
+    public String showAllCurators(Model model) {
+        model.addAttribute("curators", curatorService.findAll());
+        return "curators_list";
+    }
+
+    @GetMapping("/curators/{id}")
+    public String showCurator(@PathVariable("id") int id, Model model) {
+        Curator curator = curatorService.findById(id);
+        model.addAttribute("curator", curator);
+        return "curator_info";
+    }
+
+    @DeleteMapping("/curators/{id}")
+    public String deleteCurator(@PathVariable("id") int id) {
+        curatorService.deleteById(id);
+        return "redirect:/curators";
+    }
+
+    @GetMapping("/lecturers")
+    public String showAllLecturers(Model model) {
+        model.addAttribute("lecturers", lecturerService.findAll());
+        return "lecturers_list";
+    }
+
+    @GetMapping("/lecturers/{id}")
+    public String showLecturer(@PathVariable("id") int id, Model model) {
+        Lecturer lecturer = lecturerService.findById(id);
+        model.addAttribute("lecturer", lecturer);
+        return "lecturer_info";
     }
 
     // ---------------Model attributes---------------

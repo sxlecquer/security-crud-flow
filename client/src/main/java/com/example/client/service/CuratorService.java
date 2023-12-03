@@ -23,4 +23,6 @@ public interface CuratorService {
     void changePassword(Curator curator, String newPassword);
 
     void saveCuratorChanges(Curator curator, BasicInformationModel basicInformationModel);
+
+    void deleteById(int id);
 }

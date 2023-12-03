@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,22 +32,34 @@
             border-radius: 10px;
             color: ghostwhite;
         }
+
+        .btn {
+            width: 180px;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <span class="navbar-brand" style="font-size: 18px" th:text="'Hi, ' + ${username}"></span>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <span sec:authorize="isAuthenticated()" class="navbar-brand" style="font-size: 18px" th:text="'Hi, ' + ${username}"></span>
+            <div class="ms-auto">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon" ></span>
+                </button>
+            </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link" href="login.html" th:href="@{/login}">Sign In</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link" href="register.html" th:href="@{/register}">Sign Up</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="profile.html" th:href="@{/profile}">My Profile</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
                         <a class="nav-link" href="/logout">Sign out</a>
                     </li>
                 </ul>
@@ -60,6 +72,11 @@
     <div class="staff" th:if="${needForStaff}">Our university will hire a person for the position of curator.<br>
         If this is interesting for you, and you have all the necessary skills, please contact us:<br>
         <a style="color: ghostwhite; font-size: 18px" href="mailto:admission@univ.com">admission@univ.com</a>
+    </div>
+    <div class="d-flex flex-column align-items-center mt-4">
+        <a class="btn btn-primary btn-lg btn-block mb-3" th:href="@{/students}">Our students</a>
+        <a class="btn btn-primary btn-lg btn-block mb-3" th:href="@{/curators}">Our curators</a>
+        <a class="btn btn-primary btn-lg btn-block" th:href="@{/lecturers}">Our lecturers</a>
     </div>
 </body>
 </html>

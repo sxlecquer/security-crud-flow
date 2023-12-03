@@ -5,18 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0fc62264-a8e9-4faf-b1c2-d879091c441b" name="Changes" comment="Realizing application security part&#10;&#10;*Editing the login page using Bootstrap:&#10;    - Realizing &quot;Remember me&quot; functionality using persistent token repository&#10;    - Realizing &quot;Login with OAuth2.0(Google or GitHub)&quot; functionality&#10;    - Processing ?error and ?logout params&#10;    - Removing /login post mapping&#10;*Adding security configuration in WebSecurityConfig class&#10;*Editing home page using Bootstrap:&#10;    - Adding a navigation bar or a drop-down list(for smaller screens) with logout and &quot;my profile&quot; functions&#10;    - Adding a background image and some other interface changes&#10;*Forcing users to verify their email:&#10;    - Redirecting users with not verified email to /verify-email after login, changing email in profile or registration&#10;*Adding /login/process get mapping in UniversityController(used in WebSecurityConfig)&#10;*Changing application mappings, e.g. /reset-password -&gt; /login/reset-password, /verify-email -&gt; /register/verify-email...">
-      <change afterPath="$PROJECT_DIR$/authorization-server/src/main/java/com/example/oauthserver/config/AuthorizationServerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-server/src/main/java/com/example/oauthserver/config/DefaultSecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authorization-server/src/main/java/com/example/oauthserver/service/CustomAuthenticationProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/templates/curator_info.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/templates/lecturer_info.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/templates/lecturers_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization-server/src/main/java/com/example/oauthserver/AuthorizationServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorization-server/src/main/java/com/example/oauthserver/AuthorizationServerApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/config/WebConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/config/WebSecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/controller/UniversityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/controller/UniversityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/password_token/expired.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/password_token/expired.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/password_token/wrong.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/password_token/wrong.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Curator.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Curator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/VerificationTokenModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/VerificationTokenModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/CuratorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/CuratorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/CuratorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/CuratorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/LecturerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/LecturerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/StudentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/new_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/new_password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +36,8 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -110,6 +118,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Spring Boot.AuthorizationServerApplication" />
+      <item itemvalue="Spring Boot.ClientApplication" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SpringBeansView">
@@ -174,6 +186,13 @@
       <workItem from="1700689870475" duration="8214000" />
       <workItem from="1700765023128" duration="13263000" />
       <workItem from="1700946268340" duration="11553000" />
+      <workItem from="1700965120147" duration="1527000" />
+      <workItem from="1701025184936" duration="6274000" />
+      <workItem from="1701114682175" duration="4765000" />
+      <workItem from="1701293052122" duration="7937000" />
+      <workItem from="1701372998304" duration="11997000" />
+      <workItem from="1701558143690" duration="9735000" />
+      <workItem from="1701617088836" duration="14915000" />
     </task>
     <task id="LOCAL-00001" summary="Taking some steps to implement login functionality&#10;&#10;*Mappings: /login(login.html)&#10;*Adding UserModel with email and password&#10;*Improving code clarity and readability">
       <created>1694304613099</created>

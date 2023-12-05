@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserService {
         if(passwordToken == null) {
             return TokenState.WRONG;
         } else if(passwordToken.getExpirationTime().getTime() <= new Date().getTime()) {
-//            passwordTokenRepository.delete(passwordToken);
             return TokenState.EXPIRED;
         }
         return TokenState.VALID;

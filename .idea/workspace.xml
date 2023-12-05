@@ -4,27 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fc62264-a8e9-4faf-b1c2-d879091c441b" name="Changes" comment="Realizing application security part&#10;&#10;*Editing the login page using Bootstrap:&#10;    - Realizing &quot;Remember me&quot; functionality using persistent token repository&#10;    - Realizing &quot;Login with OAuth2.0(Google or GitHub)&quot; functionality&#10;    - Processing ?error and ?logout params&#10;    - Removing /login post mapping&#10;*Adding security configuration in WebSecurityConfig class&#10;*Editing home page using Bootstrap:&#10;    - Adding a navigation bar or a drop-down list(for smaller screens) with logout and &quot;my profile&quot; functions&#10;    - Adding a background image and some other interface changes&#10;*Forcing users to verify their email:&#10;    - Redirecting users with not verified email to /verify-email after login, changing email in profile or registration&#10;*Adding /login/process get mapping in UniversityController(used in WebSecurityConfig)&#10;*Changing application mappings, e.g. /reset-password -&gt; /login/reset-password, /verify-email -&gt; /register/verify-email...">
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/templates/curator_info.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/templates/lecturer_info.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/templates/lecturers_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cd4276a8-14e0-46b1-a9b5-d0664f575299.xml" afterDir="false" />
+    <list default="true" id="0fc62264-a8e9-4faf-b1c2-d879091c441b" name="Changes" comment="Creating mappings for university entities&#10;&#10;*Creating the following mappings:&#10;    - /students (get, students_list.html), /students/{id} (get, student_info.html), /students/{id} (delete)&#10;    - /curators (get, curators_list.html), /curators/{id} (get, curator_info.html), /curators/{id} (delete)&#10;    - /lecturers (get, lecturers_list.html), /lecturers/{id} (get, lecturer_info.html)&#10;*Setting up web security configuration for 'USER', 'MODERATOR', 'ADMIN' and allowing access to the /home mapping for anonymous users also&#10;*Getting rid of some comments in the code&#10;NOTE: When a curator is deleted, all of his students are also deleted.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-server/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-server/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-server/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-server/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-server/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-server/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-server/src/main/java/com/example/oauthserver/AuthorizationServerApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-server/src/main/java/com/example/oauthserver/service/CustomUserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-server/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization-server/src/test/java/com/example/oauthserver/AuthorizationServerApplicationTests.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/config/WebSecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/controller/UniversityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/controller/UniversityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Curator.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/entity/Curator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/VerificationTokenModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/model/VerificationTokenModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/CuratorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/CuratorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/CuratorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/CuratorServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/LecturerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/LecturerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/event/listener/EmailVerificationEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/event/listener/EmailVerificationEventListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/StudentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/new_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/new_password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +35,9 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
+        <option value="package-info" />
       </list>
     </option>
   </component>
@@ -61,6 +61,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2TXTatXlpzEsLcdH2fZX0n2JNA2" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -103,14 +106,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ClientApplication">
-    <configuration name="AuthorizationServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="authorization-server" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.oauthserver.AuthorizationServerApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="ClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="client" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.client.ClientApplication" />
@@ -118,10 +114,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Spring Boot.AuthorizationServerApplication" />
-      <item itemvalue="Spring Boot.ClientApplication" />
-    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SpringBeansView">
@@ -193,6 +185,7 @@
       <workItem from="1701372998304" duration="11997000" />
       <workItem from="1701558143690" duration="9735000" />
       <workItem from="1701617088836" duration="14915000" />
+      <workItem from="1701795969521" duration="5078000" />
     </task>
     <task id="LOCAL-00001" summary="Taking some steps to implement login functionality&#10;&#10;*Mappings: /login(login.html)&#10;*Adding UserModel with email and password&#10;*Improving code clarity and readability">
       <created>1694304613099</created>

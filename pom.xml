@@ -21,7 +21,6 @@
 
   <modules>
     <module>client</module>
-    <module>authorization-server</module>
   </modules>
 
   <dependencies>

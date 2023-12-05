@@ -9,6 +9,7 @@ import com.example.client.service.LecturerService;
 import com.example.client.service.StudentService;
 import com.example.client.service.UserService;
 import com.example.client.service.impl.CustomUserDetailsService;
+import com.example.client.service.impl.EmailSenderService;
 import com.example.client.token.TokenState;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,8 +40,6 @@ import java.util.UUID;
 @ControllerAdvice
 @SessionAttributes({"studentEmail", "verifyToken", "userEmail", "currentUser"})
 public class UniversityController {
-    // TODO:
-    //  implement proper email sending :)
     @Autowired
     private UserService userService;
 
@@ -61,6 +60,9 @@ public class UniversityController {
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
+
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     private static final Map<Authentication, User> USER_MAP = new HashMap<>();
 
@@ -252,7 +254,7 @@ public class UniversityController {
         String newToken = userService.sendNewPasswordToken(oldToken);
         model.addAttribute("passwordToken", newToken);
         if(!newToken.isEmpty())
-            sendResetPasswordMail(applicationUrl(httpServletRequest), newToken);
+            sendResetPasswordMail(emailModel.getEmail(), applicationUrl(httpServletRequest), newToken);
         model.addAttribute("linkSent", !newToken.isEmpty());
         return "reset_password";
     }
@@ -470,8 +472,9 @@ public class UniversityController {
     }
 
     // ---------------Private methods---------------
-    private void sendResetPasswordMail(String applicationUrl, String token) {
+    private void sendResetPasswordMail(String email, String applicationUrl, String token) {
         String url = applicationUrl + "/login/save-password?token=" + token;
+        emailSenderService.sendEmail(email, "Reset password link", "Click the link to reset your password:\n" + url);
         log.info("Click the link to reset your password: {}", url);
     }
 
@@ -494,7 +497,7 @@ public class UniversityController {
     private String generatePasswordTokenAndSendMail(User user, HttpServletRequest request) {
         String token = UUID.randomUUID().toString();
         userService.savePasswordToken(user, token);
-        sendResetPasswordMail(applicationUrl(request), token);
+        sendResetPasswordMail(user.getEmail(), applicationUrl(request), token);
         return token;
     }
 

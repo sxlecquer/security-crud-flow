@@ -22,14 +22,21 @@ import java.util.*;
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepository studentRepository;
+
     @Autowired
     private CuratorService curatorService;
+
     @Autowired
     private LecturerService lecturerService;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     private VerificationTokenRepository verificationTokenRepository;
+
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     @Override
     public Student register(StudentModel studentModel) {
@@ -96,6 +103,7 @@ public class StudentServiceImpl implements StudentService {
             verificationToken.setToken(newToken);
             verificationToken.setExpirationTime(verificationToken.calculateExpirationTime());
             verificationTokenRepository.save(verificationToken);
+            emailSenderService.sendEmail(verificationToken.getStudent().getEmail(), "Verification code", "Verification code to verify your email:\n" + newToken);
             log.info("Verification code to verify your email:\n{}", newToken);
         } else {
             log.warn("Can't resend verification code because there is no old token ({}) in verification token repository", oldToken);

@@ -40,7 +40,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/students", "/curators/**", "/lecturers/**").hasRole("USER")
                                 .requestMatchers("/students/**").hasAnyRole("MODERATOR", "ADMIN")
                                 .requestMatchers("/register/verify-email").hasRole("USER_NOT_VERIFIED")
-                                .requestMatchers("/home", "/images/**", "/login/**", "/register/**").permitAll()
+                                .requestMatchers("/", "/home", "/images/**", "/login/**", "/register/**").permitAll()
                                 .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")

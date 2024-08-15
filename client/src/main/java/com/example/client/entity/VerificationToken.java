@@ -3,6 +3,8 @@ package com.example.client.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -24,9 +26,9 @@ public class VerificationToken {
     @JoinColumn(
             name = "student_id",
             referencedColumnName = "studentId",
-            nullable = false,
-            foreignKey = @ForeignKey(name = "FK_STUDENT_VERIFY_TOKEN")
+            nullable = false
     )
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Student student;
 
     public VerificationToken(Student student, String token) {

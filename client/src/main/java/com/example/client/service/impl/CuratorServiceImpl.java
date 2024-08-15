@@ -5,11 +5,15 @@ import com.example.client.entity.Student;
 import com.example.client.model.BasicInformationModel;
 import com.example.client.repository.CuratorRepository;
 import com.example.client.service.CuratorService;
+import com.example.client.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -28,6 +32,10 @@ public class CuratorServiceImpl implements CuratorService {
 
     @Autowired
     private CuratorRepository curatorRepository;
+
+    @Lazy
+    @Autowired
+    private StudentService studentService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -55,26 +63,31 @@ public class CuratorServiceImpl implements CuratorService {
 
     @Override
     public void fillCuratorTable() {
-        /*Curator curator1 = new Curator();
+        Curator curator1 = new Curator();
         curator1.setFirstName("Shelly");
         curator1.setLastName("Smith");
         curator1.setEmail(curator1.getFirstName().toLowerCase(Locale.ROOT) + "." + curator1.getLastName().toLowerCase(Locale.ROOT) + "@univ.cur.com");
-        curator1.setPassword(passwordEncoder.encode("Smith123"));
-        curatorRepository.save(curator1);
+        curator1.setPassword(passwordEncoder.encode(curator1.getLastName() + "123"));
 
         Curator curator2 = new Curator();
         curator2.setFirstName("Donald");
         curator2.setLastName("Flores");
         curator2.setEmail(curator2.getFirstName().toLowerCase(Locale.ROOT) + "." + curator2.getLastName().toLowerCase(Locale.ROOT) + "@univ.cur.com");
-        curator2.setPassword(passwordEncoder.encode("Flores123"));
-        curatorRepository.save(curator2);
+        curator2.setPassword(passwordEncoder.encode(curator2.getLastName() + "123"));
 
         Curator curator3 = new Curator();
         curator3.setFirstName("Jennifer");
         curator3.setLastName("White");
         curator3.setEmail(curator3.getFirstName().toLowerCase(Locale.ROOT) + "." + curator3.getLastName().toLowerCase(Locale.ROOT) + "@univ.cur.com");
-        curator3.setPassword(passwordEncoder.encode("White123"));
-        curatorRepository.save(curator3);*/
+        curator3.setPassword(passwordEncoder.encode(curator3.getLastName() + "123"));
+
+        Curator curator4 = new Curator();
+        curator4.setFirstName("Sandra");
+        curator4.setLastName("Scott");
+        curator4.setEmail(curator4.getFirstName().toLowerCase(Locale.ROOT) + "." + curator4.getLastName().toLowerCase(Locale.ROOT) + "@univ.cur.com");
+        curator4.setPassword(passwordEncoder.encode(curator4.getLastName() + "123"));
+
+        curatorRepository.saveAll(List.of(curator1, curator2, curator3, curator4));
     }
 
     @Override
@@ -89,8 +102,14 @@ public class CuratorServiceImpl implements CuratorService {
     }
 
     @Override
+    @Transactional
     public void deleteById(int id) {
-        curatorRepository.deleteById((long) id);
+        Curator curator = curatorRepository.findById((long) id).orElse(null);
+        if(curator != null) {
+            curator.getStudents().forEach(s ->
+                    studentService.deleteById(Math.toIntExact(s.getStudentId())));
+            curatorRepository.deleteById(id);
+        }
     }
 
     @Override

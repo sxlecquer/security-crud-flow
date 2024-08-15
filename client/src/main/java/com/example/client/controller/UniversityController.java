@@ -447,7 +447,7 @@ public class UniversityController {
     // ---------------Model attributes---------------
     @ModelAttribute("needForStaff")
     public boolean isNeedForStaff() {
-        return studentService.findAll().size() >= curatorService.STUDENT_LIMIT * curatorService.findAll().size();
+        return studentService.findAll().size() >= CuratorService.STUDENT_LIMIT * curatorService.findAll().size();
     }
 
     // ---------------Session attributes---------------

@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -117,8 +118,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @Transactional
     public void deleteById(int id) {
-        studentRepository.deleteById((long) id);
+        Student student = studentRepository.findById((long) id).orElse(null);
+        if(student != null) {
+            student.setParent(null);
+            studentRepository.deleteById(id);
+        }
     }
 
     @Override

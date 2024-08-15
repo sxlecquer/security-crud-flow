@@ -19,6 +19,7 @@ public class PasswordToken {
     private Long tokenId;
     private String token;
     private Date expirationTime;
+
     @JoinColumn(
             name = "user_and_id",
             nullable = false,

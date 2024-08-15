@@ -24,14 +24,17 @@ public class Student extends User {
     private Long studentId;
     private String firstName;
     private String lastName;
+
+    @Column(unique = true)
     private String email;
+
     private String password;
     private String role = "USER";
     private boolean enabled = false;
 
     @OneToOne(
             cascade = CascadeType.ALL,
-            optional = false
+            orphanRemoval = true
     )
     @JoinColumn(
             name = "parent_id",
@@ -62,7 +65,8 @@ public class Student extends User {
 
     @OneToOne(
             mappedBy = "student",
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     private VerificationToken verificationToken;
 }

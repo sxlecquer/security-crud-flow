@@ -1,793 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="universitydb@localhost">
-  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.39">
-    <root id="1">
-      <DateStyle>dmy</DateStyle>
-      <ServerVersion>15.1</ServerVersion>
-      <StartupTime>1699973484</StartupTime>
-      <TimeZones>true ACDT
-true ACSST
-false ACST
-false ACT
-false ACWST
-true ADT
-true AEDT
-true AESST
-false AEST
-false AFT
-true AKDT
-false AKST
-true ALMST
-false ALMT
-false AMST
-false AMT
-false ANAST
-false ANAT
-false ARST
-false ART
-false AST
-true AWSST
-false AWST
-true AZOST
-false AZOT
-false AZST
-false AZT
-false Africa/Abidjan
-false Africa/Accra
-false Africa/Addis_Ababa
-false Africa/Algiers
-false Africa/Asmara
-false Africa/Asmera
-false Africa/Bamako
-false Africa/Bangui
-false Africa/Banjul
-false Africa/Bissau
-false Africa/Blantyre
-false Africa/Brazzaville
-false Africa/Bujumbura
-false Africa/Cairo
-false Africa/Casablanca
-true Africa/Ceuta
-false Africa/Conakry
-false Africa/Dakar
-false Africa/Dar_es_Salaam
-false Africa/Djibouti
-false Africa/Douala
-false Africa/El_Aaiun
-false Africa/Freetown
-false Africa/Gaborone
-false Africa/Harare
-false Africa/Johannesburg
-false Africa/Juba
-false Africa/Kampala
-false Africa/Khartoum
-false Africa/Kigali
-false Africa/Kinshasa
-false Africa/Lagos
-false Africa/Libreville
-false Africa/Lome
-false Africa/Luanda
-false Africa/Lubumbashi
-false Africa/Lusaka
-false Africa/Malabo
-false Africa/Maputo
-false Africa/Maseru
-false Africa/Mbabane
-false Africa/Mogadishu
-false Africa/Monrovia
-false Africa/Nairobi
-false Africa/Ndjamena
-false Africa/Niamey
-false Africa/Nouakchott
-false Africa/Ouagadougou
-false Africa/Porto-Novo
-false Africa/Sao_Tome
-false Africa/Timbuktu
-false Africa/Tripoli
-false Africa/Tunis
-false Africa/Windhoek
-true America/Adak
-true America/Anchorage
-false America/Anguilla
-false America/Antigua
-false America/Araguaina
-false America/Argentina/Buenos_Aires
-false America/Argentina/Catamarca
-false America/Argentina/ComodRivadavia
-false America/Argentina/Cordoba
-false America/Argentina/Jujuy
-false America/Argentina/La_Rioja
-false America/Argentina/Mendoza
-false America/Argentina/Rio_Gallegos
-false America/Argentina/Salta
-false America/Argentina/San_Juan
-false America/Argentina/San_Luis
-false America/Argentina/Tucuman
-false America/Argentina/Ushuaia
-false America/Aruba
-false America/Asuncion
-false America/Atikokan
-true America/Atka
-false America/Bahia
-false America/Bahia_Banderas
-false America/Barbados
-false America/Belem
-false America/Belize
-false America/Blanc-Sablon
-false America/Boa_Vista
-false America/Bogota
-true America/Boise
-false America/Buenos_Aires
-true America/Cambridge_Bay
-false America/Campo_Grande
-false America/Cancun
-false America/Caracas
-false America/Catamarca
-false America/Cayenne
-false America/Cayman
-true America/Chicago
-false America/Chihuahua
-false America/Coral_Harbour
-false America/Cordoba
-false America/Costa_Rica
-false America/Creston
-false America/Cuiaba
-false America/Curacao
-false America/Danmarkshavn
-false America/Dawson
-false America/Dawson_Creek
-true America/Denver
-true America/Detroit
-false America/Dominica
-true America/Edmonton
-false America/Eirunepe
-false America/El_Salvador
-true America/Ensenada
-false America/Fort_Nelson
-true America/Fort_Wayne
-false America/Fortaleza
-true America/Glace_Bay
-true America/Godthab
-true America/Goose_Bay
-true America/Grand_Turk
-false America/Grenada
-false America/Guadeloupe
-false America/Guatemala
-false America/Guayaquil
-false America/Guyana
-true America/Halifax
-true America/Havana
-false America/Hermosillo
-true America/Indiana/Indianapolis
-true America/Indiana/Knox
-true America/Indiana/Marengo
-true America/Indiana/Petersburg
-true America/Indiana/Tell_City
-true America/Indiana/Vevay
-true America/Indiana/Vincennes
-true America/Indiana/Winamac
-true America/Indianapolis
-true America/Inuvik
-true America/Iqaluit
-false America/Jamaica
-false America/Jujuy
-true America/Juneau
-true America/Kentucky/Louisville
-true America/Kentucky/Monticello
-true America/Knox_IN
-false America/Kralendijk
-false America/La_Paz
-false America/Lima
-true America/Los_Angeles
-true America/Louisville
-false America/Lower_Princes
-false America/Maceio
-false America/Managua
-false America/Manaus
-false America/Marigot
-false America/Martinique
-true America/Matamoros
-false America/Mazatlan
-false America/Mendoza
-true America/Menominee
-false America/Merida
-true America/Metlakatla
-false America/Mexico_City
-true America/Miquelon
-true America/Moncton
-false America/Monterrey
-false America/Montevideo
-true America/Montreal
-false America/Montserrat
-true America/Nassau
-true America/New_York
-true America/Nipigon
-true America/Nome
-false America/Noronha
-true America/North_Dakota/Beulah
-true America/North_Dakota/Center
-true America/North_Dakota/New_Salem
-true America/Nuuk
-false America/Ojinaga
-false America/Panama
-true America/Pangnirtung
-false America/Paramaribo
-false America/Phoenix
-true America/Port-au-Prince
-false America/Port_of_Spain
-false America/Porto_Acre
-false America/Porto_Velho
-false America/Puerto_Rico
-false America/Punta_Arenas
-true America/Rainy_River
-true America/Rankin_Inlet
-false America/Recife
-false America/Regina
-true America/Resolute
-false America/Rio_Branco
-false America/Rosario
-true America/Santa_Isabel
-false America/Santarem
-true America/Santiago
-false America/Santo_Domingo
-false America/Sao_Paulo
-true America/Scoresbysund
-true America/Shiprock
-true America/Sitka
-false America/St_Barthelemy
-true America/St_Johns
-false America/St_Kitts
-false America/St_Lucia
-false America/St_Thomas
-false America/St_Vincent
-false America/Swift_Current
-false America/Tegucigalpa
-true America/Thule
-true America/Thunder_Bay
-true America/Tijuana
-true America/Toronto
-false America/Tortola
-true America/Vancouver
-false America/Virgin
-false America/Whitehorse
-true America/Winnipeg
-true America/Yakutat
-true America/Yellowknife
-false Antarctica/Casey
-false Antarctica/Davis
-false Antarctica/DumontDUrville
-false Antarctica/Macquarie
-false Antarctica/Mawson
-false Antarctica/McMurdo
-false Antarctica/Palmer
-false Antarctica/Rothera
-false Antarctica/South_Pole
-false Antarctica/Syowa
-true Antarctica/Troll
-false Antarctica/Vostok
-true Arctic/Longyearbyen
-false Asia/Aden
-false Asia/Almaty
-false Asia/Amman
-false Asia/Anadyr
-false Asia/Aqtau
-false Asia/Aqtobe
-false Asia/Ashgabat
-false Asia/Ashkhabad
-false Asia/Atyrau
-false Asia/Baghdad
-false Asia/Bahrain
-false Asia/Baku
-false Asia/Bangkok
-false Asia/Barnaul
-true Asia/Beirut
-false Asia/Bishkek
-false Asia/Brunei
-false Asia/Calcutta
-false Asia/Chita
-false Asia/Choibalsan
-false Asia/Chongqing
-false Asia/Chungking
-false Asia/Colombo
-false Asia/Dacca
-false Asia/Damascus
-false Asia/Dhaka
-false Asia/Dili
-false Asia/Dubai
-false Asia/Dushanbe
-true Asia/Famagusta
-true Asia/Gaza
-false Asia/Harbin
-true Asia/Hebron
-false Asia/Ho_Chi_Minh
-false Asia/Hong_Kong
-false Asia/Hovd
-false Asia/Irkutsk
-false Asia/Istanbul
-false Asia/Jakarta
-false Asia/Jayapura
-true Asia/Jerusalem
-false Asia/Kabul
-false Asia/Kamchatka
-false Asia/Karachi
-false Asia/Kashgar
-false Asia/Kathmandu
-false Asia/Katmandu
-false Asia/Khandyga
-false Asia/Kolkata
-false Asia/Krasnoyarsk
-false Asia/Kuala_Lumpur
-false Asia/Kuching
-false Asia/Kuwait
-false Asia/Macao
-false Asia/Macau
-false Asia/Magadan
-false Asia/Makassar
-false Asia/Manila
-false Asia/Muscat
-true Asia/Nicosia
-false Asia/Novokuznetsk
-false Asia/Novosibirsk
-false Asia/Omsk
-false Asia/Oral
-false Asia/Phnom_Penh
-false Asia/Pontianak
-false Asia/Pyongyang
-false Asia/Qatar
-false Asia/Qostanay
-false Asia/Qyzylorda
-false Asia/Rangoon
-false Asia/Riyadh
-false Asia/Saigon
-false Asia/Sakhalin
-false Asia/Samarkand
-false Asia/Seoul
-false Asia/Shanghai
-false Asia/Singapore
-false Asia/Srednekolymsk
-false Asia/Taipei
-false Asia/Tashkent
-false Asia/Tbilisi
-false Asia/Tehran
-true Asia/Tel_Aviv
-false Asia/Thimbu
-false Asia/Thimphu
-false Asia/Tokyo
-false Asia/Tomsk
-false Asia/Ujung_Pandang
-false Asia/Ulaanbaatar
-false Asia/Ulan_Bator
-false Asia/Urumqi
-false Asia/Ust-Nera
-false Asia/Vientiane
-false Asia/Vladivostok
-false Asia/Yakutsk
-false Asia/Yangon
-false Asia/Yekaterinburg
-false Asia/Yerevan
-true Atlantic/Azores
-true Atlantic/Bermuda
-true Atlantic/Canary
-false Atlantic/Cape_Verde
-true Atlantic/Faeroe
-true Atlantic/Faroe
-true Atlantic/Jan_Mayen
-true Atlantic/Madeira
-false Atlantic/Reykjavik
-false Atlantic/South_Georgia
-false Atlantic/St_Helena
-false Atlantic/Stanley
-false Australia/ACT
-false Australia/Adelaide
-false Australia/Brisbane
-false Australia/Broken_Hill
-false Australia/Canberra
-false Australia/Currie
-false Australia/Darwin
-false Australia/Eucla
-false Australia/Hobart
-false Australia/LHI
-false Australia/Lindeman
-false Australia/Lord_Howe
-false Australia/Melbourne
-false Australia/NSW
-false Australia/North
-false Australia/Perth
-false Australia/Queensland
-false Australia/South
-false Australia/Sydney
-false Australia/Tasmania
-false Australia/Victoria
-false Australia/West
-false Australia/Yancowinna
-true BDST
-false BDT
-false BNT
-false BORT
-false BOT
-false BRA
-true BRST
-false BRT
-true BST
-false BTT
-false Brazil/Acre
-false Brazil/DeNoronha
-false Brazil/East
-false Brazil/West
-true CADT
-false CAST
-false CCT
-true CDT
-true CEST
-false CET
-true CETDST
-true CHADT
-false CHAST
-false CHUT
-false CKT
-true CLST
-true CLT
-false COT
-false CST
-true CST6CDT
-false CXT
-true Canada/Atlantic
-true Canada/Central
-true Canada/Eastern
-true Canada/Mountain
-true Canada/Newfoundland
-true Canada/Pacific
-false Canada/Saskatchewan
-false Canada/Yukon
-true Chile/Continental
-true Chile/EasterIsland
-true Cuba
-false DAVT
-false DDUT
-true EASST
-true EAST
-false EAT
-true EDT
-true EEST
-false EET
-true EETDST
-true EGST
-false EGT
-false EST
-true EST5EDT
-false Egypt
-false Eire
-false Etc/GMT
-false Etc/GMT+0
-false Etc/GMT+1
-false Etc/GMT+10
-false Etc/GMT+11
-false Etc/GMT+12
-false Etc/GMT+2
-false Etc/GMT+3
-false Etc/GMT+4
-false Etc/GMT+5
-false Etc/GMT+6
-false Etc/GMT+7
-false Etc/GMT+8
-false Etc/GMT+9
-false Etc/GMT-0
-false Etc/GMT-1
-false Etc/GMT-10
-false Etc/GMT-11
-false Etc/GMT-12
-false Etc/GMT-13
-false Etc/GMT-14
-false Etc/GMT-2
-false Etc/GMT-3
-false Etc/GMT-4
-false Etc/GMT-5
-false Etc/GMT-6
-false Etc/GMT-7
-false Etc/GMT-8
-false Etc/GMT-9
-false Etc/GMT0
-false Etc/Greenwich
-false Etc/UCT
-false Etc/UTC
-false Etc/Universal
-false Etc/Zulu
-true Europe/Amsterdam
-true Europe/Andorra
-false Europe/Astrakhan
-true Europe/Athens
-true Europe/Belfast
-true Europe/Belgrade
-true Europe/Berlin
-true Europe/Bratislava
-true Europe/Brussels
-true Europe/Bucharest
-true Europe/Budapest
-true Europe/Busingen
-true Europe/Chisinau
-true Europe/Copenhagen
-false Europe/Dublin
-true Europe/Gibraltar
-true Europe/Guernsey
-true Europe/Helsinki
-true Europe/Isle_of_Man
-false Europe/Istanbul
-true Europe/Jersey
-false Europe/Kaliningrad
-true Europe/Kiev
-false Europe/Kirov
-true Europe/Kyiv
-true Europe/Lisbon
-true Europe/Ljubljana
-true Europe/London
-true Europe/Luxembourg
-true Europe/Madrid
-true Europe/Malta
-true Europe/Mariehamn
-false Europe/Minsk
-true Europe/Monaco
-false Europe/Moscow
-true Europe/Nicosia
-true Europe/Oslo
-true Europe/Paris
-true Europe/Podgorica
-true Europe/Prague
-true Europe/Riga
-true Europe/Rome
-false Europe/Samara
-true Europe/San_Marino
-true Europe/Sarajevo
-false Europe/Saratov
-false Europe/Simferopol
-true Europe/Skopje
-true Europe/Sofia
-true Europe/Stockholm
-true Europe/Tallinn
-true Europe/Tirane
-true Europe/Tiraspol
-false Europe/Ulyanovsk
-true Europe/Uzhgorod
-true Europe/Vaduz
-true Europe/Vatican
-true Europe/Vienna
-true Europe/Vilnius
-false Europe/Volgograd
-true Europe/Warsaw
-true Europe/Zagreb
-true Europe/Zaporozhye
-true Europe/Zurich
-false FET
-true FJST
-false FJT
-false FKST
-false FKT
-true FNST
-false FNT
-false Factory
-false GALT
-false GAMT
-true GB
-true GB-Eire
-false GEST
-false GET
-false GFT
-false GILT
-false GMT
-false GMT+0
-false GMT-0
-false GMT0
-false GYT
-false Greenwich
-false HKT
-false HST
-false Hongkong
-false ICT
-true IDT
-false IOT
-false IRKST
-false IRKT
-false IRT
-false IST
-false Iceland
-false Indian/Antananarivo
-false Indian/Chagos
-false Indian/Christmas
-false Indian/Cocos
-false Indian/Comoro
-false Indian/Kerguelen
-false Indian/Mahe
-false Indian/Maldives
-false Indian/Mauritius
-false Indian/Mayotte
-false Indian/Reunion
-false Iran
-true Israel
-false JAYT
-false JST
-false Jamaica
-false Japan
-true KDT
-true KGST
-false KGT
-false KOST
-false KRAST
-false KRAT
-false KST
-false Kwajalein
-false LHDT
-false LHST
-false LIGT
-false LINT
-false LKT
-false Libya
-false MAGST
-false MAGT
-false MART
-false MAWT
-true MDT
-true MEST
-true MESZ
-true MET
-true METDST
-false MEZ
-false MHT
-false MMT
-false MPT
-true MSD
-false MSK
-false MST
-true MST7MDT
-true MUST
-false MUT
-false MVT
-false MYT
-true Mexico/BajaNorte
-false Mexico/BajaSur
-false Mexico/General
-true NDT
-false NFT
-false NOVST
-false NOVT
-false NPT
-false NST
-false NUT
-false NZ
-false NZ-CHAT
-true NZDT
-false NZST
-false NZT
-true Navajo
-false OMSST
-false OMST
-true PDT
-false PET
-false PETST
-false PETT
-false PGT
-false PHOT
-false PHT
-true PKST
-false PKT
-true PMDT
-false PMST
-false PONT
-false PRC
-false PST
-true PST8PDT
-false PWT
-true PYST
-false PYT
-false Pacific/Apia
-false Pacific/Auckland
-false Pacific/Bougainville
-false Pacific/Chatham
-false Pacific/Chuuk
-true Pacific/Easter
-false Pacific/Efate
-false Pacific/Enderbury
-false Pacific/Fakaofo
-false Pacific/Fiji
-false Pacific/Funafuti
-false Pacific/Galapagos
-false Pacific/Gambier
-false Pacific/Guadalcanal
-false Pacific/Guam
-false Pacific/Honolulu
-false Pacific/Johnston
-false Pacific/Kanton
-false Pacific/Kiritimati
-false Pacific/Kosrae
-false Pacific/Kwajalein
-false Pacific/Majuro
-false Pacific/Marquesas
-false Pacific/Midway
-false Pacific/Nauru
-false Pacific/Niue
-false Pacific/Norfolk
-false Pacific/Noumea
-false Pacific/Pago_Pago
-false Pacific/Palau
-false Pacific/Pitcairn
-false Pacific/Pohnpei
-false Pacific/Ponape
-false Pacific/Port_Moresby
-false Pacific/Rarotonga
-false Pacific/Saipan
-false Pacific/Samoa
-false Pacific/Tahiti
-false Pacific/Tarawa
-false Pacific/Tongatapu
-false Pacific/Truk
-false Pacific/Wake
-false Pacific/Wallis
-false Pacific/Yap
-true Poland
-true Portugal
-false RET
-false ROC
-false ROK
-true SADT
-false SAST
-false SCT
-false SGT
-false Singapore
-false TAHT
-false TFT
-false TJT
-false TKT
-false TMT
-false TOT
-false TRUT
-false TVT
-false Turkey
-false UCT
-true ULAST
-false ULAT
-true US/Alaska
-true US/Aleutian
-false US/Arizona
-true US/Central
-true US/East-Indiana
-true US/Eastern
-false US/Hawaii
-true US/Indiana-Starke
-true US/Michigan
-true US/Mountain
-true US/Pacific
-false US/Samoa
-false UT
-false UTC
-true UYST
-false UYT
-true UZST
-false UZT
-false Universal
-false VET
-false VLAST
-false VLAT
-false VOLT
-false VUT
-false W-SU
-true WADT
-false WAKT
-false WAST
-false WAT
-true WDT
-true WET
-true WETDST
-false WFT
-true WGST
-false WGT
-false XJT
-false YAKST
-false YAKT
-false YAPT
-true YEKST
-false YEKT
-false Z
-false Zulu
-</TimeZones>
-    </root>
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
+    <root id="1"/>
     <database id="2" parent="1" name="universitydb">
       <Current>1</Current>
       <Grants>11||10|C|G
@@ -801,9 +15,6 @@ false Zulu
 13183||10|U|G</Grants>
       <IntrospectionStateNumber>2693</IntrospectionStateNumber>
       <ObjectId>16541</ObjectId>
-      <Relations>sequence|table|16599|16600|1
-sequence|table|16651|16652|1
-</Relations>
       <OwnerName>postgres</OwnerName>
     </database>
     <database id="3" parent="1" name="postgres">
@@ -4246,45 +3457,59 @@ sequence|table|16651|16652|1
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
     <sequence id="269" parent="268" name="curator_seq">
-      <DataType>bigint|0s</DataType>
       <ObjectId>16573</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
       <StateNumber>1215</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <sequence id="270" parent="268" name="lecturer_seq">
-      <DataType>bigint|0s</DataType>
       <ObjectId>16574</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
       <StateNumber>1216</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <sequence id="271" parent="268" name="parent_seq">
-      <DataType>bigint|0s</DataType>
       <ObjectId>16575</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
       <StateNumber>1217</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="272" parent="268" name="student_seq">
-      <DataType>bigint|0s</DataType>
-      <ObjectId>16576</ObjectId>
-      <StateNumber>1218</StateNumber>
-      <OwnerName>postgres</OwnerName>
-    </sequence>
-    <sequence id="273" parent="268" name="user_seq">
-      <DataType>bigint|0s</DataType>
-      <ObjectId>16650</ObjectId>
-      <StateNumber>1409</StateNumber>
-      <OwnerName>postgres</OwnerName>
-    </sequence>
-    <sequence id="274" parent="268" name="password_token_token_id_seq">
-      <DataType>bigint|0s</DataType>
+    <sequence id="272" parent="268" name="password_token_token_id_seq">
       <ObjectId>16651</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
       <StateNumber>1433</StateNumber>
+      <StoredType>bigint|0s</StoredType>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <sequence id="273" parent="268" name="student_seq">
+      <ObjectId>16576</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>1218</StateNumber>
+      <StoredType>bigint|0s</StoredType>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <sequence id="274" parent="268" name="user_seq">
+      <ObjectId>16650</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>1409</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <sequence id="275" parent="268" name="verification_token_token_id_seq">
-      <DataType>bigint|0s</DataType>
       <ObjectId>16599</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
       <StateNumber>1228</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <table id="276" parent="268" name="curator">
@@ -4348,40 +3573,40 @@ sequence|table|16651|16652|1
       <OwnerName>postgres</OwnerName>
     </table>
     <column id="286" parent="276" name="curator_id">
-      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1208</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
     <column id="287" parent="276" name="email">
-      <DataType>varchar(255)|0s</DataType>
       <Position>2</Position>
       <StateNumber>1208</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="288" parent="276" name="first_name">
-      <DataType>varchar(255)|0s</DataType>
       <Position>3</Position>
       <StateNumber>1399</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="289" parent="276" name="last_name">
-      <DataType>varchar(255)|0s</DataType>
       <Position>4</Position>
       <StateNumber>1400</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="290" parent="276" name="password">
-      <DataType>varchar(255)|0s</DataType>
       <Position>5</Position>
       <StateNumber>1208</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="291" parent="276" name="role">
-      <DataType>varchar(255)|0s</DataType>
       <Position>6</Position>
       <StateNumber>1208</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <index id="292" parent="276" name="curator_pkey">
@@ -4394,7 +3619,6 @@ sequence|table|16651|16652|1
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="293" parent="276" name="curator_pkey">
-      <ColNames>curator_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16548</ObjectId>
       <Primary>1</Primary>
@@ -4402,40 +3626,40 @@ sequence|table|16651|16652|1
       <UnderlyingIndexId>16547</UnderlyingIndexId>
     </key>
     <column id="294" parent="277" name="lecturer_id">
-      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1209</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
     <column id="295" parent="277" name="email">
-      <DataType>varchar(255)|0s</DataType>
       <Position>2</Position>
       <StateNumber>1209</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="296" parent="277" name="first_name">
-      <DataType>varchar(255)|0s</DataType>
       <Position>3</Position>
       <StateNumber>1402</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="297" parent="277" name="last_name">
-      <DataType>varchar(255)|0s</DataType>
       <Position>4</Position>
       <StateNumber>1403</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="298" parent="277" name="password">
-      <DataType>varchar(255)|0s</DataType>
       <Position>5</Position>
       <StateNumber>1209</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="299" parent="277" name="role">
-      <DataType>varchar(255)|0s</DataType>
       <Position>6</Position>
       <StateNumber>1209</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <index id="300" parent="277" name="lecturer_pkey">
@@ -4448,7 +3672,6 @@ sequence|table|16651|16652|1
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="301" parent="277" name="lecturer_pkey">
-      <ColNames>lecturer_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16555</ObjectId>
       <Primary>1</Primary>
@@ -4456,28 +3679,28 @@ sequence|table|16651|16652|1
       <UnderlyingIndexId>16554</UnderlyingIndexId>
     </key>
     <column id="302" parent="278" name="parent_id">
-      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1210</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
     <column id="303" parent="278" name="first_name">
-      <DataType>varchar(255)|0s</DataType>
       <Position>2</Position>
       <StateNumber>1225</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="304" parent="278" name="last_name">
-      <DataType>varchar(255)|0s</DataType>
       <Position>3</Position>
       <StateNumber>1226</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="305" parent="278" name="phone">
-      <DataType>varchar(255)|0s</DataType>
       <Position>4</Position>
       <StateNumber>1210</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <index id="306" parent="278" name="parent_pkey">
@@ -4490,7 +3713,6 @@ sequence|table|16651|16652|1
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="307" parent="278" name="parent_pkey">
-      <ColNames>parent_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16560</ObjectId>
       <Primary>1</Primary>
@@ -4498,29 +3720,30 @@ sequence|table|16651|16652|1
       <UnderlyingIndexId>16559</UnderlyingIndexId>
     </key>
     <column id="308" parent="279" name="token_id">
-      <DataType>bigint|0s</DataType>
       <DefaultExpression>nextval(&apos;password_token_token_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1433</StateNumber>
+      <StoredType>bigint|0s</StoredType>
+      <SequenceId>16651</SequenceId>
       <TypeId>20</TypeId>
     </column>
     <column id="309" parent="279" name="expiration_time">
-      <DataType>timestamp(6)|0s</DataType>
       <Position>2</Position>
       <StateNumber>2690</StateNumber>
+      <StoredType>timestamp(6)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
     <column id="310" parent="279" name="token">
-      <DataType>varchar(255)|0s</DataType>
       <Position>3</Position>
       <StateNumber>1433</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="311" parent="279" name="user_and_id">
-      <DataType>varchar(255)|0s</DataType>
       <Position>4</Position>
       <StateNumber>1433</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <index id="312" parent="279" name="password_token_pkey">
@@ -4533,7 +3756,6 @@ sequence|table|16651|16652|1
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="313" parent="279" name="password_token_pkey">
-      <ColNames>token_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16659</ObjectId>
       <Primary>1</Primary>
@@ -4541,31 +3763,31 @@ sequence|table|16651|16652|1
       <UnderlyingIndexId>16658</UnderlyingIndexId>
     </key>
     <column id="314" parent="280" name="username">
-      <DataType>varchar(64)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>2692</StateNumber>
+      <StoredType>varchar(64)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="315" parent="280" name="series">
-      <DataType>varchar(64)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>2692</StateNumber>
+      <StoredType>varchar(64)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="316" parent="280" name="token">
-      <DataType>varchar(64)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>2692</StateNumber>
+      <StoredType>varchar(64)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="317" parent="280" name="last_used">
-      <DataType>timestamp|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>2692</StateNumber>
+      <StoredType>timestamp|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
     <index id="318" parent="280" name="persistent_logins_pkey">
@@ -4581,7 +3803,6 @@ sequence|table|16651|16652|1
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
     <key id="319" parent="280" name="persistent_logins_pkey">
-      <ColNames>series</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16690</ObjectId>
       <Primary>1</Primary>
@@ -4589,51 +3810,51 @@ sequence|table|16651|16652|1
       <UnderlyingIndexId>16689</UnderlyingIndexId>
     </key>
     <column id="320" parent="281" name="primary_id">
-      <DataType>char(36)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>2339</StateNumber>
+      <StoredType>char(36)|0s</StoredType>
       <TypeId>1042</TypeId>
     </column>
     <column id="321" parent="281" name="session_id">
-      <DataType>char(36)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>2339</StateNumber>
+      <StoredType>char(36)|0s</StoredType>
       <TypeId>1042</TypeId>
     </column>
     <column id="322" parent="281" name="creation_time">
-      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>2339</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
     <column id="323" parent="281" name="last_access_time">
-      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>2339</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
     <column id="324" parent="281" name="max_inactive_interval">
-      <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>2339</StateNumber>
+      <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
     <column id="325" parent="281" name="expiry_time">
-      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StateNumber>2339</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
     <column id="326" parent="281" name="principal_name">
-      <DataType>varchar(100)|0s</DataType>
       <Position>7</Position>
       <StateNumber>2339</StateNumber>
+      <StoredType>varchar(100)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <index id="327" parent="281" name="spring_session_pk">
@@ -4673,41 +3894,38 @@ sequence|table|16651|16652|1
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
     <key id="331" parent="281" name="spring_session_pk">
-      <ColNames>primary_id</ColNames>
       <ObjectId>16664</ObjectId>
       <Primary>1</Primary>
       <StateNumber>2339</StateNumber>
       <UnderlyingIndexId>16663</UnderlyingIndexId>
     </key>
     <column id="332" parent="282" name="session_primary_id">
-      <DataType>char(36)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>2343</StateNumber>
+      <StoredType>char(36)|0s</StoredType>
       <TypeId>1042</TypeId>
     </column>
     <column id="333" parent="282" name="attribute_name">
-      <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>2343</StateNumber>
+      <StoredType>varchar(200)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="334" parent="282" name="attribute_bytes">
-      <DataType>bytea|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>2343</StateNumber>
+      <StoredType>bytea|0s</StoredType>
       <TypeId>17</TypeId>
     </column>
     <foreign-key id="335" parent="282" name="spring_session_attributes_fk">
       <ColNames>session_primary_id</ColNames>
       <ObjectId>16675</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <RefColNames>primary_id</RefColNames>
-      <RefColPositions>1</RefColPositions>
-      <RefKeyName>spring_session_pk</RefKeyName>
       <StateNumber>2343</StateNumber>
+      <RefKeyName>spring_session_pk</RefKeyName>
       <RefTableId>16660</RefTableId>
       <RefTableName>spring_session</RefTableName>
       <RefTableKind>table</RefTableKind>
@@ -4728,78 +3946,74 @@ default</CollationNames>
 pg_catalog</CollationParentNames>
     </index>
     <key id="337" parent="282" name="spring_session_attributes_pk">
-      <ColNames>session_primary_id
-attribute_name</ColNames>
       <ObjectId>16674</ObjectId>
       <Primary>1</Primary>
       <StateNumber>2343</StateNumber>
       <UnderlyingIndexId>16673</UnderlyingIndexId>
     </key>
     <column id="338" parent="283" name="student_id">
-      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1211</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
     <column id="339" parent="283" name="email">
-      <DataType>varchar(255)|0s</DataType>
       <Position>2</Position>
       <StateNumber>1211</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="340" parent="283" name="enabled">
-      <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>1211</StateNumber>
+      <StoredType>boolean|0s</StoredType>
       <TypeId>16</TypeId>
     </column>
     <column id="341" parent="283" name="first_name">
-      <DataType>varchar(255)|0s</DataType>
       <Position>4</Position>
       <StateNumber>1406</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="342" parent="283" name="last_name">
-      <DataType>varchar(255)|0s</DataType>
       <Position>5</Position>
       <StateNumber>1407</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="343" parent="283" name="password">
-      <DataType>varchar(255)|0s</DataType>
       <Position>6</Position>
       <StateNumber>1211</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="344" parent="283" name="role">
-      <DataType>varchar(255)|0s</DataType>
       <Position>7</Position>
       <StateNumber>1211</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="345" parent="283" name="curator_id">
-      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>8</Position>
       <StateNumber>1211</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
     <column id="346" parent="283" name="parent_id">
-      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>9</Position>
       <StateNumber>1211</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
     <foreign-key id="347" parent="283" name="fk556wfw0c4qvfduky9wntb3vwb">
       <ColNames>curator_id</ColNames>
       <ObjectId>16577</ObjectId>
-      <RefColNames>curator_id</RefColNames>
-      <RefColPositions>1</RefColPositions>
-      <RefKeyName>curator_pkey</RefKeyName>
       <StateNumber>1219</StateNumber>
+      <RefKeyName>curator_pkey</RefKeyName>
       <RefTableId>16542</RefTableId>
       <RefTableName>curator</RefTableName>
       <RefTableKind>table</RefTableKind>
@@ -4807,10 +4021,8 @@ attribute_name</ColNames>
     <foreign-key id="348" parent="283" name="fkqqq09m02bgrk47qoe6fs3ht4w">
       <ColNames>parent_id</ColNames>
       <ObjectId>16582</ObjectId>
-      <RefColNames>parent_id</RefColNames>
-      <RefColPositions>1</RefColPositions>
-      <RefKeyName>parent_pkey</RefKeyName>
       <StateNumber>1220</StateNumber>
+      <RefKeyName>parent_pkey</RefKeyName>
       <RefTableId>16556</RefTableId>
       <RefTableName>parent</RefTableName>
       <RefTableKind>table</RefTableKind>
@@ -4832,7 +4044,6 @@ attribute_name</ColNames>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="351" parent="283" name="student_pkey">
-      <ColNames>student_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16567</ObjectId>
       <Primary>1</Primary>
@@ -4840,32 +4051,29 @@ attribute_name</ColNames>
       <UnderlyingIndexId>16566</UnderlyingIndexId>
     </key>
     <key id="352" parent="283" name="uk_t8mss9fjap10ygwoo7buqlrmy">
-      <ColNames>parent_id</ColNames>
       <ObjectId>16572</ObjectId>
       <StateNumber>1214</StateNumber>
       <UnderlyingIndexId>16571</UnderlyingIndexId>
     </key>
     <column id="353" parent="284" name="student_id">
-      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1212</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
     <column id="354" parent="284" name="lecturer_id">
-      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1212</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
     <foreign-key id="355" parent="284" name="fkr39g232maq7qm4k6xgr7t39c4">
       <ColNames>student_id</ColNames>
       <ObjectId>16592</ObjectId>
-      <RefColNames>student_id</RefColNames>
-      <RefColPositions>1</RefColPositions>
-      <RefKeyName>student_pkey</RefKeyName>
       <StateNumber>1222</StateNumber>
+      <RefKeyName>student_pkey</RefKeyName>
       <RefTableId>16561</RefTableId>
       <RefTableName>student</RefTableName>
       <RefTableKind>table</RefTableKind>
@@ -4873,48 +4081,45 @@ attribute_name</ColNames>
     <foreign-key id="356" parent="284" name="fkhp3vse6jxmr2s4m6ikx44knmg">
       <ColNames>lecturer_id</ColNames>
       <ObjectId>16587</ObjectId>
-      <RefColNames>lecturer_id</RefColNames>
-      <RefColPositions>1</RefColPositions>
-      <RefKeyName>lecturer_pkey</RefKeyName>
       <StateNumber>1221</StateNumber>
+      <RefKeyName>lecturer_pkey</RefKeyName>
       <RefTableId>16549</RefTableId>
       <RefTableName>lecturer</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
     <column id="357" parent="285" name="token_id">
-      <DataType>bigint|0s</DataType>
       <DefaultExpression>nextval(&apos;verification_token_token_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1228</StateNumber>
+      <StoredType>bigint|0s</StoredType>
+      <SequenceId>16599</SequenceId>
       <TypeId>20</TypeId>
     </column>
     <column id="358" parent="285" name="expiration_time">
-      <DataType>timestamp(6)|0s</DataType>
       <Position>2</Position>
       <StateNumber>2691</StateNumber>
+      <StoredType>timestamp(6)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
     <column id="359" parent="285" name="token">
-      <DataType>varchar(255)|0s</DataType>
       <Position>3</Position>
       <StateNumber>1228</StateNumber>
+      <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="360" parent="285" name="student_id">
-      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>1228</StateNumber>
+      <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
     <foreign-key id="361" parent="285" name="fk_student_verify_token">
       <ColNames>student_id</ColNames>
       <ObjectId>16608</ObjectId>
-      <RefColNames>student_id</RefColNames>
-      <RefColPositions>1</RefColPositions>
-      <RefKeyName>student_pkey</RefKeyName>
       <StateNumber>1231</StateNumber>
+      <RefKeyName>student_pkey</RefKeyName>
       <RefTableId>16561</RefTableId>
       <RefTableName>student</RefTableName>
       <RefTableKind>table</RefTableKind>
@@ -4936,7 +4141,6 @@ attribute_name</ColNames>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="364" parent="285" name="verification_token_pkey">
-      <ColNames>token_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16605</ObjectId>
       <Primary>1</Primary>
@@ -4944,7 +4148,6 @@ attribute_name</ColNames>
       <UnderlyingIndexId>16604</UnderlyingIndexId>
     </key>
     <key id="365" parent="285" name="uk_gd4f6qhb7hn0vvmufdjg2scrp">
-      <ColNames>student_id</ColNames>
       <ObjectId>16607</ObjectId>
       <StateNumber>1230</StateNumber>
       <UnderlyingIndexId>16606</UnderlyingIndexId>

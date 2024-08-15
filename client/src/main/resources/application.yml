@@ -1,23 +1,9 @@
 server:
   port: 8080
 
-session:
-  key: S0MekEy321
-
-#logging:
-#  level:
-#    org:
-#      springframework:
-#        security:
-#          TRACE
-#    com:
-#      example:
-#        client:
-#          DEBUG
-
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/universitydb
+    url: jdbc:postgresql://localhost:5432/university_db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -58,3 +44,6 @@ spring:
           auth: true
           starttls:
             enable: true
+  sql:
+    init:
+      mode: always

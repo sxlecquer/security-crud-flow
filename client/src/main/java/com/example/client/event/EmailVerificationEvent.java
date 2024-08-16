@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationEvent;
 @Setter
 public class EmailVerificationEvent extends ApplicationEvent {
     private Student student;
+
     public EmailVerificationEvent(Student student) {
         super(student);
         this.student = student;

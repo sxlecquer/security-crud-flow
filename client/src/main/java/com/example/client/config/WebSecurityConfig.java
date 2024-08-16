@@ -1,7 +1,6 @@
 package com.example.client.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,11 +18,7 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfig {
     @Autowired
-    @SuppressWarnings("all")
     private DataSource dataSource;
-
-    @Value("${session.key}")
-    private String sessionKey;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -33,7 +28,6 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeHttpRequest ->
                         authorizeHttpRequest
@@ -52,8 +46,7 @@ public class WebSecurityConfig {
                         .loginPage("/login"))
                 .rememberMe(rememberMe -> rememberMe
                         .tokenRepository(persistentTokenRepository())
-                        .key(sessionKey)
-                        .tokenValiditySeconds(300))
+                        .tokenValiditySeconds(60 * 60 * 24 * 7))
                 .logout(logout -> logout
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true));

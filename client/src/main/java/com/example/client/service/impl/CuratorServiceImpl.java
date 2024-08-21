@@ -5,9 +5,7 @@ import com.example.client.entity.Student;
 import com.example.client.model.BasicInformationModel;
 import com.example.client.repository.CuratorRepository;
 import com.example.client.service.CuratorService;
-import com.example.client.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class CuratorServiceImpl implements CuratorService {
-    /*private static final List<String> FIRST_NAMES = List.of("Linda", "Kimberly", "Laura", "Richard", "Mark", "Michael", "Margaret",
+    private static final List<String> FIRST_NAMES = List.of("Linda", "Kimberly", "Laura", "Richard", "Mark", "Michael", "Margaret",
             "George", "Nancy", "Anthony", "William", "Sharon", "Jennifer", "Donna", "Barbara", "Patricia", "Joseph", "Daniel",
             "Kevin", "Karen", "Ronald", "Edward", "Elizabeth", "Thomas", "Michelle", "Alfred", "Deborah", "David", "James",
             "Sandra", "Mary", "Christopher", "Jessie", "Jeff", "Donald", "Shelly", "John", "Helen", "Bill", "Sarah", "Charles",
@@ -28,14 +27,10 @@ public class CuratorServiceImpl implements CuratorService {
             "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore", "Jackson",
             "Martin", "Lee", "Perez", "Thompson", "White", "Harris", "Sanchez", "Clark", "Ramirez", "Lewis", "Robinson", "Walker",
             "Young", "Allen", "King", "Wright", "Scott", "Torres", "Nguyen", "Hill", "Flores", "Green", "Adams", "Nelson",
-            "Baker", "Hall", "Rivera", "Campbell", "Mitchell", "Carter", "Roberts");*/
+            "Baker", "Hall", "Rivera", "Campbell", "Mitchell", "Carter", "Roberts");
 
     @Autowired
     private CuratorRepository curatorRepository;
-
-    @Lazy
-    @Autowired
-    private StudentService studentService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -106,8 +101,11 @@ public class CuratorServiceImpl implements CuratorService {
     public void deleteById(int id) {
         Curator curator = curatorRepository.findById((long) id).orElse(null);
         if(curator != null) {
-            curator.getStudents().forEach(s ->
-                    studentService.deleteById(Math.toIntExact(s.getStudentId())));
+            List<Student> students = curator.getStudents();
+            Curator hired = hireCurator(students);
+            students.forEach(student -> student.setCurator(hired));
+            curator.setStudents(null);
+            curatorRepository.save(hired);
             curatorRepository.deleteById(id);
         }
     }
@@ -123,5 +121,18 @@ public class CuratorServiceImpl implements CuratorService {
         curator.setFirstName(basicInformationModel.getFirstName());
         curator.setLastName(basicInformationModel.getLastName());
         curatorRepository.save(curator);
+    }
+
+    private Curator hireCurator(List<Student> students) {
+        Random random = new Random();
+        String firstName = FIRST_NAMES.get(random.nextInt(FIRST_NAMES.size()));
+        String lastName = LAST_NAMES.get(random.nextInt(LAST_NAMES.size()));
+        Curator curator = new Curator();
+        curator.setFirstName(firstName);
+        curator.setLastName(lastName);
+        curator.setEmail(firstName.toLowerCase(Locale.ROOT) + "." + lastName.toLowerCase(Locale.ROOT) + "@univ.cur.com");
+        curator.setPassword(passwordEncoder.encode(lastName + "123"));
+        curator.setStudents(students);
+        return curator;
     }
 }

@@ -31,7 +31,7 @@ public class Curator extends User {
     @OneToMany(
             mappedBy = "curator",
             fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
+            cascade = {CascadeType.PERSIST, CascadeType.REFRESH}
     )
     private List<Student> students = new ArrayList<>();
 }

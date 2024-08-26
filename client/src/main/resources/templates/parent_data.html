@@ -18,7 +18,7 @@
         input[type=text], input[type=tel] {
             height: 17px;
             background-color: whitesmoke;
-            border: 1px solid royalblue;
+            border: 1px solid darkviolet;
             border-radius: 3px;
             cursor: text;
         }
@@ -33,13 +33,20 @@
             align-content: center;
             height: 27px;
             width: 55px;
-            background-color: royalblue;
             color: white;
             font-size: 10px;
             border-radius: 3px;
             text-align: center;
             border: none;
             cursor: pointer;
+        }
+
+        #save-btn {
+            background-color: darkviolet;
+        }
+
+        #back-btn {
+            background-color: royalblue;
         }
 
         .save {
@@ -93,8 +100,12 @@
         </table>
 
         <div class="save">
-            <input type="submit" value="Save"/>
+            <input type="submit" value="Save" id="save-btn"/>
         </div>
+    </form>
+
+    <form th:method="get" th:action="@{/profile}" style="text-align: center; margin-bottom: 30px">
+        <input type="submit" value="Back" id="back-btn"/>
     </form>
 </body>
 </html>

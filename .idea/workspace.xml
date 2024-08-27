@@ -4,17 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fc62264-a8e9-4faf-b1c2-d879091c441b" name="Changes" comment="Edit curator deletion logic&#10;&#10;When a curator is deleted, their students are not deleted. Instead, a new curator is &quot;hired&quot; and these students are assigned to him/her.">
+    <list default="true" id="0fc62264-a8e9-4faf-b1c2-d879091c441b" name="Changes" comment="Add navigation buttons">
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/exception/BadTokenException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/exception/UserNotFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/controller/UniversityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/controller/UniversityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/CuratorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/CuratorRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/repository/StudentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/CuratorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/CuratorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/LecturerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/LecturerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/CuratorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/CuratorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/LecturerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/LecturerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/StudentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/example/client/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/curator_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/curator_info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/curators_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/curators_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/lecturer_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/lecturer_info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/lecturers_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/lecturers_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/parent_data.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/parent_data.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/student_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/student_info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/templates/students_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/templates/students_list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +32,9 @@
         <option value="Interface" />
         <option value="Enum" />
         <option value="HTML File" />
-        <option value="Class" />
         <option value="package-info" />
+        <option value="Exception" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -130,6 +136,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.client.exception" />
       <recent name="com.example.client.model" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -259,7 +266,8 @@
       <workItem from="1723755717566" duration="6062000" />
       <workItem from="1723767061815" duration="446000" />
       <workItem from="1724265610374" duration="12353000" />
-      <workItem from="1724617171499" duration="14692000" />
+      <workItem from="1724617171499" duration="15141000" />
+      <workItem from="1724686761733" duration="20638000" />
     </task>
     <task id="LOCAL-00001" summary="Taking some steps to implement login functionality&#10;&#10;*Mappings: /login(login.html)&#10;*Adding UserModel with email and password&#10;*Improving code clarity and readability">
       <created>1694304613099</created>
@@ -339,7 +347,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724277379487</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add navigation buttons">
+      <option name="closed" value="true" />
+      <created>1724632342314</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1724632342314</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,6 +394,7 @@
     <MESSAGE value="Realizing email sending feature&#10;&#10;*Adding a spring-mail configuration to application.yml&#10;*Adding EmailSenderService class which sends emails&#10;*Deleting an authorization-server module due to uselessness" />
     <MESSAGE value="Adding small changes in WebSecurityConfig&#10;&#10;*Adding &quot;/&quot; mapping to public('permitAll') mappings" />
     <MESSAGE value="Edit curator deletion logic&#10;&#10;When a curator is deleted, their students are not deleted. Instead, a new curator is &quot;hired&quot; and these students are assigned to him/her." />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit curator deletion logic&#10;&#10;When a curator is deleted, their students are not deleted. Instead, a new curator is &quot;hired&quot; and these students are assigned to him/her." />
+    <MESSAGE value="Add navigation buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add navigation buttons" />
   </component>
 </project>

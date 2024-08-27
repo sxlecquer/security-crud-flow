@@ -14,7 +14,7 @@ public interface LecturerService {
 
     Lecturer findByEmail(String email);
 
-    Lecturer findById(int id);
+    Lecturer findById(Long id);
 
     void changePassword(Lecturer lecturer, String newPassword);
 

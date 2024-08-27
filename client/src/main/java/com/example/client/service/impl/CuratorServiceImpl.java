@@ -2,6 +2,8 @@ package com.example.client.service.impl;
 
 import com.example.client.entity.Curator;
 import com.example.client.entity.Student;
+import com.example.client.exception.InternalServerException;
+import com.example.client.exception.UserNotFoundException;
 import com.example.client.model.BasicInformationModel;
 import com.example.client.repository.CuratorRepository;
 import com.example.client.service.CuratorService;
@@ -12,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -53,7 +54,7 @@ public class CuratorServiceImpl implements CuratorService {
                 return curator;
             }
         }
-        return null;
+        throw new InternalServerException("Oops, something went wrong. Try again...");
     }
 
     @Override
@@ -91,15 +92,15 @@ public class CuratorServiceImpl implements CuratorService {
     }
 
     @Override
-    public Curator findById(int id) {
-        Optional<Curator> curator = curatorRepository.findById((long) id);
-        return curator.orElse(null);
+    public Curator findById(Long id) {
+        return curatorRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Curator not found by id: " + id));
     }
 
     @Override
     @Transactional
-    public void deleteById(int id) {
-        Curator curator = curatorRepository.findById((long) id).orElse(null);
+    public void deleteById(Long id) {
+        Curator curator = curatorRepository.findById(id).orElse(null);
         if(curator != null) {
             List<Student> students = curator.getStudents();
             Curator hired = hireCurator(students);

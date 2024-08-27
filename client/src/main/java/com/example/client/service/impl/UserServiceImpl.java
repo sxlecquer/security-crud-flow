@@ -1,6 +1,8 @@
 package com.example.client.service.impl;
 
 import com.example.client.entity.*;
+import com.example.client.exception.BadTokenException;
+import com.example.client.exception.InternalServerException;
 import com.example.client.model.BasicInformationModel;
 import com.example.client.repository.PasswordTokenRepository;
 import com.example.client.service.CuratorService;
@@ -59,10 +61,10 @@ public class UserServiceImpl implements UserService {
             passwordToken.setToken(newToken);
             passwordToken.setExpirationTime(passwordToken.calculateExpirationTime());
             passwordTokenRepository.save(passwordToken);
-        } else {
-            log.warn("Can't resend password token because there is no old token ({}) in password token repository", oldToken);
+            return newToken;
         }
-        return passwordToken != null ? passwordToken.getToken() : "";
+        log.warn("Can't resend password token because there is no old token ({}) in password token repository", oldToken);
+        throw new BadTokenException("Previous password token is incorrect");
     }
 
     @Override
@@ -86,12 +88,12 @@ public class UserServiceImpl implements UserService {
         String userAndId = passwordToken.getUserAndId();
         String[] array = userAndId.split(" ");
         String user = array[0];
-        int id = Integer.parseInt(array[1]);
+        long id = Long.parseLong(array[1]);
         return switch(user) {
             case "Student" -> studentService.findById(id);
             case "Curator" -> curatorService.findById(id);
             case "Lecturer" -> lecturerService.findById(id);
-            default -> null;
+            default -> throw new InternalServerException("Oops, something went wrong. Try again...");
         };
     }
 

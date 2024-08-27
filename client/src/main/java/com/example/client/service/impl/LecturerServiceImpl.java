@@ -1,6 +1,7 @@
 package com.example.client.service.impl;
 
 import com.example.client.entity.Lecturer;
+import com.example.client.exception.UserNotFoundException;
 import com.example.client.model.BasicInformationModel;
 import com.example.client.repository.LecturerRepository;
 import com.example.client.service.LecturerService;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 @Service
 public class LecturerServiceImpl implements LecturerService {
@@ -71,9 +71,9 @@ public class LecturerServiceImpl implements LecturerService {
     }
 
     @Override
-    public Lecturer findById(int id) {
-        Optional<Lecturer> lecturer = lecturerRepository.findById((long) id);
-        return lecturer.orElse(null);
+    public Lecturer findById(Long id) {
+        return lecturerRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Lecturer not found by id: " + id));
     }
 
     @Override

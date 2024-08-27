@@ -253,9 +253,8 @@ public class UniversityController {
         }
         String newToken = userService.sendNewPasswordToken(oldToken);
         model.addAttribute("passwordToken", newToken);
-        if(!newToken.isEmpty())
-            sendResetPasswordMail(emailModel.getEmail(), applicationUrl(httpServletRequest), newToken);
-        model.addAttribute("linkSent", !newToken.isEmpty());
+        sendResetPasswordMail(emailModel.getEmail(), applicationUrl(httpServletRequest), newToken);
+        model.addAttribute("linkSent", true);
         return "reset_password";
     }
 
@@ -400,14 +399,14 @@ public class UniversityController {
     }
 
     @GetMapping("/students/{id}")
-    public String showStudent(@PathVariable("id") int id, Model model) {
+    public String showStudent(@PathVariable("id") Long id, Model model) {
         Student student = studentService.findById(id);
         model.addAttribute("student", student);
         return "student_info";
     }
 
     @DeleteMapping("/students/{id}")
-    public String deleteStudent(@PathVariable("id") int id) {
+    public String deleteStudent(@PathVariable("id") Long id) {
         studentService.deleteById(id);
         return "redirect:/students";
     }
@@ -419,14 +418,14 @@ public class UniversityController {
     }
 
     @GetMapping("/curators/{id}")
-    public String showCurator(@PathVariable("id") int id, Model model) {
+    public String showCurator(@PathVariable("id") Long id, Model model) {
         Curator curator = curatorService.findById(id);
         model.addAttribute("curator", curator);
         return "curator_info";
     }
 
     @DeleteMapping("/curators/{id}")
-    public String deleteCurator(@PathVariable("id") int id) {
+    public String deleteCurator(@PathVariable("id") Long id) {
         curatorService.deleteById(id);
         return "redirect:/curators";
     }
@@ -438,7 +437,7 @@ public class UniversityController {
     }
 
     @GetMapping("/lecturers/{id}")
-    public String showLecturer(@PathVariable("id") int id, Model model) {
+    public String showLecturer(@PathVariable("id") Long id, Model model) {
         Lecturer lecturer = lecturerService.findById(id);
         model.addAttribute("lecturer", lecturer);
         return "lecturer_info";

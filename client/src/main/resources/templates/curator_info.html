@@ -14,13 +14,20 @@
             align-content: center;
             height: 27px;
             width: 55px;
-            background-color: brown;
             color: white;
             font-size: 10px;
             border-radius: 3px;
             text-align: center;
             border: none;
             cursor: pointer;
+        }
+
+        #delete-btn {
+            background-color: brown;
+        }
+
+        #back-btn {
+            background-color: royalblue;
         }
 
         .info {
@@ -61,10 +68,13 @@
                        th:text="${student.getFirstName() + ' ' + student.getLastName()}"></a>
                 </td>
             </tr>
-            <tr sec:authorize="hasRole('ADMIN')">
+            <tr>
                 <td>
-                    <form th:method="delete" th:action="@{/curators/{id}(id=${curator.getCuratorId()})}" style="text-align: center">
-                        <input type="submit" value="Delete"/>
+                    <form sec:authorize="hasRole('ADMIN')" th:method="delete" th:action="@{/curators/{id}(id=${curator.getCuratorId()})}" style="text-align: center">
+                        <input type="submit" value="Delete" id="delete-btn"/>
+                    </form>
+                    <form th:method="get" th:action="@{/curators}" style="text-align: center; margin-bottom: 30px">
+                        <input type="submit" value="Back" id="back-btn"/>
                     </form>
                 </td>
             </tr>

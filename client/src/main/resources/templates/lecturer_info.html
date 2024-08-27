@@ -14,13 +14,16 @@
             align-content: center;
             height: 27px;
             width: 55px;
-            background-color: brown;
             color: white;
             font-size: 10px;
             border-radius: 3px;
             text-align: center;
             border: none;
             cursor: pointer;
+        }
+
+        #back-btn {
+            background-color: royalblue;
         }
 
         .info {
@@ -47,6 +50,13 @@
             </tr>
             <tr>
                 <td style="padding-left: 27px"><a th:href="@{mailto:__${lecturer.getEmail()}__}" th:text="${lecturer.getEmail()}"></a></td>
+            </tr>
+            <tr>
+                <td>
+                    <form th:method="get" th:action="@{/lecturers}" style="text-align: center; margin-bottom: 30px">
+                        <input type="submit" value="Back" id="back-btn"/>
+                    </form>
+                </td>
             </tr>
         </table>
     </div>

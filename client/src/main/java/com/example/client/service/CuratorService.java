@@ -19,11 +19,11 @@ public interface CuratorService {
 
     Curator findByEmail(String email);
 
-    Curator findById(int id);
+    Curator findById(Long id);
 
     void changePassword(Curator curator, String newPassword);
 
     void saveCuratorChanges(Curator curator, BasicInformationModel basicInformationModel);
 
-    void deleteById(int id);
+    void deleteById(Long id);
 }

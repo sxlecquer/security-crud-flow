@@ -24,11 +24,11 @@ public interface StudentService {
 
     VerificationToken findVerificationTokenByStudent(Student student);
 
-    void deleteById(int id);
+    void deleteById(Long id);
 
     Student findByEmail(String email);
 
-    Student findById(int id);
+    Student findById(Long id);
 
     void changePassword(Student student, String newPassword);
 

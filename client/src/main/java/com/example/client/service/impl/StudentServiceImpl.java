@@ -1,6 +1,8 @@
 package com.example.client.service.impl;
 
 import com.example.client.entity.*;
+import com.example.client.exception.BadTokenException;
+import com.example.client.exception.UserNotFoundException;
 import com.example.client.model.BasicInformationModel;
 import com.example.client.model.ParentInformationModel;
 import com.example.client.model.StudentModel;
@@ -106,10 +108,10 @@ public class StudentServiceImpl implements StudentService {
             verificationTokenRepository.save(verificationToken);
             emailSenderService.sendEmail(verificationToken.getStudent().getEmail(), "Verification code", "Verification code to verify your email:\n" + newToken);
             log.info("Verification code to verify your email:\n{}", newToken);
-        } else {
-            log.warn("Can't resend verification code because there is no old token ({}) in verification token repository", oldToken);
+            return newToken;
         }
-        return verificationToken != null ? verificationToken.getToken() : "";
+        log.warn("Can't resend verification code because there is no old token ({}) in verification token repository", oldToken);
+        throw new BadTokenException("Previous verification code is incorrect");
     }
 
     @Override
@@ -119,8 +121,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public void deleteById(int id) {
-        Student student = studentRepository.findById((long) id).orElse(null);
+    public void deleteById(Long id) {
+        Student student = studentRepository.findById(id).orElse(null);
         if(student != null) {
             student.setParent(null);
             studentRepository.deleteById(id);
@@ -133,9 +135,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student findById(int id) {
-        Optional<Student> student = studentRepository.findById((long) id);
-        return student.orElse(null);
+    public Student findById(Long id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Student not found by id: " + id));
     }
 
     @Override

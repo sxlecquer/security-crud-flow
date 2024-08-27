@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,5 +17,5 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     @Modifying
     @Query("delete from Student s where s.studentId = :id")
-    void deleteById(@Param("id") Integer id);
+    void deleteById(@Param("id") @NonNull Long id);
 }

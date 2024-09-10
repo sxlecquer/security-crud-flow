@@ -10,11 +10,12 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>client</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>client</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
+		<spring-cloud-aws-version>3.2.0-M1</spring-cloud-aws-version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -74,9 +75,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>io.awspring.cloud</groupId>
+			<artifactId>spring-cloud-aws-starter-secrets-manager</artifactId>
+			<version>${spring-cloud-aws-version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
+		<finalName>security-crud-flow-client</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

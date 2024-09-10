@@ -1,0 +1,8 @@
+spring:
+  config:
+    import: aws-secretsmanager:security-crud-flow-db-secret;security-crud-flow-api-keys
+  datasource:
+    url: jdbc:postgresql://${host}:${port}/${dbname}
+    username: ${username}
+    password: ${password}
+    driver-class-name: org.postgresql.Driver

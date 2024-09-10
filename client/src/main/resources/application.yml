@@ -2,11 +2,8 @@ server:
   port: 8080
 
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/university_db
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
+  profiles:
+    active: dev
   jpa:
     show-sql: true
     hibernate:
@@ -15,20 +12,24 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+  cloud:
+    aws:
+      region:
+        static: eu-central-1
 
   security:
     oauth2:
       client:
         registration:
           github:
-            client-id:
-            client-secret:
+            client-id: ${github.client-id}
+            client-secret: ${github.client-secret}
             scope:
               - user:email
               - read:user
           google:
-            client-id:
-            client-secret:
+            client-id: ${google.client-id}
+            client-secret: ${google.client-secret}
             scope:
               - openid
               - email
@@ -36,8 +37,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username:
-    password:
+    username: ${mail.username}
+    password: ${mail.password}
     properties:
       mail:
         smtp:
@@ -47,3 +48,21 @@ spring:
   sql:
     init:
       mode: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  server:
+    port: 9000
+  info:
+    env:
+      enabled: true
+
+info:
+  application:
+    name: security-crud-flow
+    description: The project represents a university system in which the user has a certain role.
+    author: Yan Samokar
+    version: '@project.version@'

@@ -7,7 +7,7 @@ import com.example.client.model.BasicInformationModel;
 import java.util.List;
 
 public interface CuratorService {
-    int STUDENT_LIMIT = 5;
+    int STUDENT_LIMIT = 10;
 
     String findPasswordByEmail(String email);
 

@@ -5,7 +5,6 @@ spring:
   profiles:
     active: dev
   jpa:
-    show-sql: true
     hibernate:
       ddl-auto: update
   mvc:
@@ -66,3 +65,7 @@ info:
     description: The project represents a university system in which the user has a certain role.
     author: Yan Samokar
     version: '@project.version@'
+
+logging:
+  level:
+    com.example.client: DEBUG

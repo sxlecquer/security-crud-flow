@@ -1,6 +1,7 @@
 package com.example.client.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,6 +21,9 @@ public class WebSecurityConfig {
     @Autowired
     private DataSource dataSource;
 
+    @Value("${management.server.port}")
+    private int actuatorPort;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(11);
@@ -35,6 +39,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/students/**").hasAnyRole("MODERATOR", "ADMIN")
                                 .requestMatchers("/register/verify-email").hasRole("USER_NOT_VERIFIED")
                                 .requestMatchers("/", "/home", "/images/**", "/login/**", "/register/**").permitAll()
+                                .requestMatchers(req -> req.getLocalPort() == actuatorPort).permitAll()
                                 .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")

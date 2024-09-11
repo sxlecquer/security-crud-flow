@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -54,14 +55,14 @@ public class GitHubOAuth2UserService extends DefaultOAuth2UserService {
                     .append("\n");
         }
         log.debug("\nOAuth 2.0 token attributes received for GitHub user with id {}:\n{}", userData.get("id"), stringBuilder);
-        String firstName = userData.getOrDefault("name", userData.get("login")).toString();
-        String lastName = userData.getOrDefault("html_url", "github user").toString();
+        String firstName = Optional.ofNullable(userData.get("name")).orElse(userData.get("login")).toString();
+        String lastName = Optional.ofNullable(userData.get("html_url")).orElse("github user").toString();
         String[] username = firstName.split(" ", 2);
         if(username.length > 1) {
             firstName = username[0];
             lastName = username[1];
         }
-        String email = userData.get("email") != null ? oAuth2User.getAttribute("email") : oAuth2User.getAttribute("login") + "@github.com";
+        String email = Optional.ofNullable(userData.get("email")).orElse(userData.get("login") + "@github.com").toString();
         return new StudentModel(firstName, lastName, email, "Dummy123", "Dummy123",
                 "github user", lastName, "github user");
     }

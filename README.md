@@ -1,55 +1,76 @@
 
-# Security CRUD Flow
+# 🚀 Security CRUD Flow
+**Check out the live application here: [ec2-3-70-53-252.eu-central-1.compute.amazonaws.com](http://ec2-3-70-53-252.eu-central-1.compute.amazonaws.com:8080/home)**
 
-The project implements a university system in which the user has a certain role:
-- Lecturer - 'ADMIN'
-- Curator - 'MODERATOR'
-- Student - 'USER'
+<table>
+  <tr>
+    <td width="70%">
+      <b>Security CRUD Flow</b> is a university management system that provides role-based access control. Users can be assigned one of these roles:<br><br>
+  
+  - **Lecturer** (`ADMIN`)
+  - **Curator** (`MODERATOR`)
+  - **Student** (`USER`)
+  
+  Depending on the user's role, different functionalities and access rights are available.<br>
+  For example, lecturers can manage curators and students, while curators have the ability to manage students.<br>
+    </td>
 
-Depending on the role, the user has access to different mappings. For example, admin can delete user or moderator accounts.
+  <td width="40%">
+    <p align="center">
+      <img src="https://github.com/user-attachments/assets/7ce84171-03d5-4bc0-9acf-7ad5441f77f8" width="270" height="270">
+    </p>
+  </td>
+  </tr>
+</table>
 
+## Features
 
-## Application Mappings
+- ***OAuth2 Login***: Allows login with Google or GitHub accounts.
+- ***Email Verification***: Ensures users validate their email address upon registration.
+- ***Remember Me***: Enables persistent login sessions.
+- ***Multi-user Access***: Supports concurrent access by multiple users.
+- ***Internationalization***: Change the home page language using the request parameter *?lang=*** (e.g. *?lang=pl*).
 
-### Home page
+## Application endpoints
+
+#### Home page
 
 ```java
 GET /home  
 ```
+Initializes the user session or retrieves the user if already present in the authentication map.
 
-> Initializes the user or gets him if it is already present in the authentication map.
+---
 
-# 
-
-### Sign up
+#### Sign up
 
 ```java
 POST /register
 ```
-> Validates user input, saves it to the database and sends a verification code to email.
+Validates user input, saves it to the database, and sends a verification code to the provided email.
 
-# 
+---
 
-### Email verififcation
+#### Email verification
 
 ```java
 POST /register/verify-email
 ```
-> Validates user verification code and updates user role to USER.
+Validates the email verification code and updates the user's role to `USER`.
 
 > [!NOTE]
-> This mapping is available only to users with USER_NOT_VERIFIED role.
+> Available only to users with `USER_NOT_VERIFIED` role.
 
 # 
 
 ```java
 GET /register/resend-verification-code
 ```
-> Resends the verification code to the user via email.
+Resends the verification code to the user via email.
 
-# 
+---
 
-### Login
+#### Login
 
 ```java
 GET /login
@@ -57,17 +78,16 @@ GET /login
 
 | Parameter | Required | Description                                   |
 | :-------- | :------- | :---------------------------------------------|
-| `email`   | `false`  | user's email when redirected from sign up page|
+| `email`   | `false`  | User's email when redirected from sign up page|
 
-> Validates the user's credentials and redirects to the email verification page if the user is not verified.  
+Validates user credentials and redirects to the email verification page if the user is not yet verified.
 
 # 
 
 ```java
 POST /login/reset-password
 ```
-
-> Sends a password reset token to email.
+Sends a password reset token to the user's email.
 
 # 
 
@@ -75,73 +95,72 @@ POST /login/reset-password
 GET /login/resend-password-token
 ```
 
-| Parameter | Required | Description|
-| :-------- | :------- | :--------  |
-| `token`   | `true`   | old token  |
+| Parameter | Required | Description                  |
+| :-------- | :------- | :--------------------------  |
+| `token`   | `true`   | The old token for resending  |
 
-> Resends the password reset token to the user via email.
+Resends the password reset token to the user via email.
 
 # 
 
 ```java
 PATCH /login/save-password
 ```
+Allows the user to set a new password. A link with this endpoint is sent to the user's email with a password token.
 
-> Allows the user to set a new password. The link with this mapping is sent to the user's email with a password token.
+---
 
-### Profile
+#### Profile
 
 ```java
 GET /profile
 ```
-
-> Displays user profile.
+Displays the user's profile.
 
 # 
 
 ```java
 PATCH /profile
 ```
-
-> Allows the user to change profile information and redirects to the email verification page if the email address has been changed.
+Allows the user to change their profile information. Redirects to email verification if the email address has been changed.
 
 #
 
 ```java
 GET /profile/parent-data
 ```
-
-> Displays information about the user's parents.
+Displays information about the user's parents.
 
 > [!NOTE]
-> This mapping is available to students only.
+> Available only to students.
 
 #
 
 ```java
 PATCH /profile/parent-data
 ```
-
-> Allows the user to change parent information.
+Allows the user to change parent information.
 
 > [!NOTE]
-> This mapping is available to students only.
+> Available only to students.
 
-### Common
+---
+
+#### Change password
 
 ```java
 PATCH /change-password
 ```
+Validates the old password and allows the user to set a new one.
 
-> Validates the old password and allows the user to set a new password.
+---
 
-### Student
+#### Student management
 
 ```java
 GET /students
 ```
-
-> Displays all students.
+Displays a list of all students.
 
 #
 
@@ -149,14 +168,14 @@ GET /students
 GET /students/{id}
 ```
 
-| Parameter | Required | Description             |
-| :-------- | :------- | :--------               |
-| `id`      | `true`   | id of student to fetch  |
+| Parameter | Required | Description                 |
+| :-------- | :------- | :-------------------------  |
+| `id`      | `true`   | ID of the student to fetch  |
 
-> Displays the student by id.
+Displays the student by ID.
 
 > [!NOTE]
-> This mapping is not available to students.
+> Not available to students.
 
 #
 
@@ -164,22 +183,23 @@ GET /students/{id}
 DELETE /students/{id}
 ```
 
-| Parameter | Required | Description              |
-| :-------- | :------- | :--------                |
-| `id`      | `true`   | id of student to delete  |
+| Parameter | Required | Description                  |
+| :-------- | :------- | :--------------------------  |
+| `id`      | `true`   | ID of the student to delete  |
 
-> Deletes the student by id.
+Deletes the student by ID.
 
 > [!NOTE]
-> This mapping is available to lecturers only.
+> Available only to lecturers.
 
-### Curator
+---
+
+#### Curator management
 
 ```java
 GET /curators
 ```
-
-> Displays all curators.
+Displays a list of all curators.
 
 #
 
@@ -187,11 +207,11 @@ GET /curators
 GET /curators/{id}
 ```
 
-| Parameter | Required | Description             |
-| :-------- | :------- | :--------               |
-| `id`      | `true`   | id of curator to fetch  |
+| Parameter | Required | Description                 |
+| :-------- | :------- | :-------------------------  |
+| `id`      | `true`   | ID of the curator to fetch  |
 
-> Displays the curator by id.
+Displays the curator by ID.
 
 #
 
@@ -199,23 +219,23 @@ GET /curators/{id}
 DELETE /curators/{id}
 ```
 
-| Parameter | Required | Description              |
-| :-------- | :------- | :--------                |
-| `id`      | `true`   | id of curator to delete  |
+| Parameter | Required | Description                  |
+| :-------- | :------- | :--------------------------  |
+| `id`      | `true`   | ID of the curator to delete  |
 
-> Deletes the curator by id.
+Deletes the curator by ID and “hires” a new curator by assigning all associated students of the deleted curator to the new one.
 
-> [!NOTE]
-> By deleting a curator, you delete all students associated with him.  
-> This mapping is available to lecturers only.
+> [!NOTE]  
+> Available only to lecturers.
 
-### Lecturer
+---
+
+#### Lecturer management
 
 ```java
 GET /lecturers
 ```
-
-> Displays all lecturers.
+Displays a list of all lecturers.
 
 #
 
@@ -223,88 +243,10 @@ GET /lecturers
 GET /lecturers/{id}
 ```
 
-| Parameter | Required | Description              |
-| :-------- | :------- | :--------                |
-| `id`      | `true`   | id of lecturer to fetch  |
+| Parameter | Required | Description                  |
+| :-------- | :------- | :--------------------------  |
+| `id`      | `true`   | ID of the lecturer to fetch  |
 
-> Displays the lecturer by id.
+Displays the lecturer by ID.
 
-## Features
-
-- Email verification after registration
-- Log in with Google or GitHub
-- "Remember me" feature
-- Concurrent multi-user access to the application
-- Change the home page language using the request param ***?lang=***** (e.g. ***?lang=pl***)
-
-## Run Locally
-
-Clone the project
-
-```bash
-git clone https://github.com/sxlecquer/security-crud-flow.git
-```
-
-Open the cloned project in the IDE and go to `resources/application.yml` in client module.  
-1. Configure connection to your database:
-```yaml
-datasource:
-  url: // link to the database
-  username: // your username
-  password: // your password
-  driver-class-name: // database driver name
-```
-
-2. Provide OAuth2.0 client-id and client-secret from your GitHub and Google accounts in security section:
-```yaml
-security:
-  oauth2:
-    client:
-      registration:
-        github:
-          client-id: // your generated github client id
-          client-secret: // and client secret
-          scope:
-            - user:email
-            - read:user
-        google:
-          client-id: // your generated google client id
-          client-secret: // and client secret
-          scope:
-            - openid
-            - email
-            - profile
-```
-&nbsp;&nbsp;&nbsp;&nbsp;How to do this for [Google](https://support.google.com/cloud/answer/6158849?hl=en#:~:text=Go%20to%20the%20Google%20Cloud%20Platform%20Console%20Credentials%20page.,to%20add%20a%20new%20secret.)
-and [GitHub](https://docs.github.com/en/rest/authentication/authenticating-to-the-rest-api?apiVersion=2022-11-28#using-basic-authentication).
-> [!IMPORTANT]
-> If you skip this step, login using OAuth2.0 will not work.
-3. Provide your email credentials from which you want to send emails to users with password reset links or email verification codes:
-```yaml
-mail:
-  host: smtp.gmail.com
-  port: 587
-  username: // your email
-  password: // your password
-  properties:
-    mail:
-      smtp:
-        auth: true
-        starttls:
-          enable: true
-```
-
-4. Go to `service/impl/CuratorServiceImpl` and comment out code in `fillCuratorTable()` method.  
-Add `curatorService.fillCuratorTable()` to one of methods that are allowed for any user, e.g. in `homePage()` method:
-```java
-@GetMapping("/")
-public String homePage() {
-    curatorService.fillCuratorTable(); // add this line
-    return "redirect:/home";
-}
-```
-&nbsp;&nbsp;&nbsp;&nbsp;The same you can do for `service/impl/LecturerServiceImpl` and its `fillLecturerTable()` method.  
-&nbsp;&nbsp;&nbsp;&nbsp;Now you can run the program, go to the browser and type [http://localhost:8080/](http://localhost:8080/).  
-&nbsp;&nbsp;&nbsp;&nbsp;After that, new records appear in the `curator` and `lecturer` tables of the database.  
-
-#### So now you can fully test this application. <br> Enjoy!!! 😋
+#

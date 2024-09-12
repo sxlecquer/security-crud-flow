@@ -4,20 +4,20 @@
 
 <table>
   <tr>
-    <td width="70%">
+    <td>
       <b>Security CRUD Flow</b> is a university management system that provides role-based access control. Users can be assigned one of these roles:<br><br>
   
   - **Lecturer** (`ADMIN`)
   - **Curator** (`MODERATOR`)
   - **Student** (`USER`)
   
-  Depending on the user's role, different functionalities and access rights are available.<br>
+  Depending on the user's role, different functionalities and access rights are available.
   For example, lecturers can manage curators and students, while curators have the ability to manage students.<br>
     </td>
 
   <td width="40%">
     <p align="center">
-      <img src="https://github.com/user-attachments/assets/7ce84171-03d5-4bc0-9acf-7ad5441f77f8" width="270" height="270">
+      <img src="https://github.com/user-attachments/assets/7ce84171-03d5-4bc0-9acf-7ad5441f77f8" width="280" height="280">
     </p>
   </td>
   </tr>
